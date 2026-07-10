@@ -74,6 +74,11 @@ CAPACITY_PRESETS = {
     "small": dict(d_model=256, n_heads=4, n_layers=3),
     "med":   dict(d_model=384, n_heads=6, n_layers=3),
     "large": dict(d_model=448, n_heads=8, n_layers=4),
+    # capacity-span extension (direction 013 follow-up, 2026-07-08): ~25M / ~50M
+    # params at the study's default vocab (V=256) and seq_len (128) — exact
+    # counts verified via count_params() in run_20260708_capacity_xl.py.
+    "xl":    dict(d_model=640, n_heads=8, n_layers=6),
+    "xxl":   dict(d_model=768, n_heads=8, n_layers=8),
 }
 
 

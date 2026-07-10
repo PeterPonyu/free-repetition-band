@@ -14,5 +14,13 @@ scratch (GPU recommended): `python experiments/<study>/run_*.py`. Runs are seede
 numpy. All inputs are synthetic and fully specified in the code, except large
 standard datasets (MNIST / WikiText) which are not bundled.
 
+## Family/optimizer/capacity extensions (v1.5, 2026-07)
+- `experiments/repeated_data/run_20260708_pcfg.py` + `experiments/results/repeated_data_pcfg/` (54 runs):
+  PCFG corpus family sweep (R_free=20 at all three capacities).
+- `experiments/repeated_data/run_20260708_muon_rfree.py` + `experiments/results/repeated_data_muon/` (36 runs):
+  Muon optimizer-swap arm.
+- `experiments/repeated_data/run_20260708_capacity_xl.py` + `experiments/results/repeated_data_capxl/` (44 runs):
+  xl (29.9M) / xxl (57.1M) capacity extension to a ~23x span; `model.py` gains the xl/xxl presets.
+
 ## License
 Code: MIT (`LICENSE`). Result logs: CC BY 4.0. See `CITATION.cff`.
