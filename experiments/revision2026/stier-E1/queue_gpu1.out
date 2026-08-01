@@ -1,0 +1,107 @@
+=== C-G3 START 2026-07-17T14:18:15+08:00
+done d128_l2_h4_none_s100_adamw sanity_max_dev=0.00e+00 (2s)
+done d128_l2_h4_none_s100_muon sanity_max_dev=0.00e+00 (1s)
+done d128_l2_h4_none_s101_adamw sanity_max_dev=0.00e+00 (1s)
+done d128_l2_h4_none_s101_muon sanity_max_dev=0.00e+00 (1s)
+done d128_l2_h4_none_s102_adamw sanity_max_dev=0.00e+00 (1s)
+done d128_l2_h4_none_s102_muon sanity_max_dev=0.00e+00 (1s)
+done d128_l2_h4_none_s103_adamw sanity_max_dev=0.00e+00 (1s)
+done d128_l2_h4_none_s103_muon sanity_max_dev=0.00e+00 (1s)
+done d128_l2_h4_none_s104_adamw sanity_max_dev=0.00e+00 (1s)
+done d128_l2_h4_none_s104_muon sanity_max_dev=0.00e+00 (1s)
+done d128_l2_h4_none_s105_adamw sanity_max_dev=0.00e+00 (1s)
+done d128_l2_h4_none_s105_muon sanity_max_dev=0.00e+00 (1s)
+done d128_l2_h4_none_s106_adamw sanity_max_dev=0.00e+00 (1s)
+done d128_l2_h4_none_s106_muon sanity_max_dev=0.00e+00 (1s)
+done d128_l2_h4_none_s107_adamw sanity_max_dev=0.00e+00 (1s)
+done d128_l2_h4_none_s107_muon sanity_max_dev=0.00e+00 (1s)
+=== C-G3 END rc=0 2026-07-17T14:18:39+08:00
+== C-G3 mean-ablation verdict (final ckpt, median over seeds) ==
+ adamw: none  d=[+0.52, +0.53, +0.51, +0.49] fit=+0.94
+      attn: d=[+0.00, +0.00, +0.00, +0.00] Δd4=+0.492 Δd1-3=+0.523 sel=-0.030 fit=+0.00
+       mlp: d=[+0.57, +0.30, +0.12, +0.04] Δd4=+0.450 Δd1-3=+0.194 sel=+0.256 fit=+0.51
+   attn_l0: d=[+0.00, -0.00, -0.00, +0.00] Δd4=+0.488 Δd1-3=+0.524 sel=-0.036 fit=-0.00
+   attn_l1: d=[+0.92, +0.02, +0.01, +0.00] Δd4=+0.489 Δd1-3=+0.210 sel=+0.279 fit=+0.50
+    mlp_l0: d=[+0.52, +0.31, +0.18, +0.02] Δd4=+0.468 Δd1-3=+0.187 sel=+0.281 fit=+0.54
+    mlp_l1: d=[+0.53, +0.48, +0.36, +0.06] Δd4=+0.433 Δd1-3=+0.064 sel=+0.369 fit=+0.75
+ muon: none  d=[+0.51, +0.52, +0.52, +0.36] fit=+0.95
+      attn: d=[+0.00, +0.00, +0.00, +0.00] Δd4=+0.361 Δd1-3=+0.514 sel=-0.153 fit=+0.00
+       mlp: d=[+0.57, +0.42, +0.14, +0.00] Δd4=+0.356 Δd1-3=+0.137 sel=+0.220 fit=+0.55
+   attn_l0: d=[+0.00, +0.00, -0.01, +0.00] Δd4=+0.358 Δd1-3=+0.515 sel=-0.156 fit=-0.01
+   attn_l1: d=[+0.72, +0.35, +0.02, +0.00] Δd4=+0.358 Δd1-3=+0.154 sel=+0.204 fit=+0.52
+    mlp_l0: d=[+0.51, +0.49, +0.20, +0.08] Δd4=+0.280 Δd1-3=+0.114 sel=+0.166 fit=+0.61
+    mlp_l1: d=[+0.59, +0.51, +0.44, +0.01] Δd4=+0.348 Δd1-3=+0.004 sel=+0.344 fit=+0.81
+wrote /root/autodl-tmp/dlr/cg3/results/cg3_verdict.json
+done fineweb_xl_E1_s51.jsonl val=1.1747 gap=+0.0172 (834s)
+[1/36] done fineweb_xl_E1_s51 (836s)
+done fineweb_xl_E2_s51.jsonl val=1.1559 gap=+0.0596 (836s)
+[2/36] done fineweb_xl_E2_s51 (839s)
+done fineweb_xl_E4_s51.jsonl val=1.1922 gap=+0.1566 (836s)
+[3/36] done fineweb_xl_E4_s51 (838s)
+done fineweb_xl_E6_s51.jsonl val=1.2030 gap=+0.3202 (837s)
+[4/36] done fineweb_xl_E6_s51 (839s)
+done fineweb_xl_E8_s51.jsonl val=1.2435 gap=+0.3987 (837s)
+[5/36] done fineweb_xl_E8_s51 (840s)
+done fineweb_xl_E10_s51.jsonl val=1.2999 gap=+0.5913 (839s)
+[6/36] done fineweb_xl_E10_s51 (841s)
+done fineweb_xl_E16_s51.jsonl val=1.6993 gap=+1.1808 (841s)
+[7/36] done fineweb_xl_E16_s51 (844s)
+done code_xl_E1_s51.jsonl val=0.8746 gap=-0.1355 (836s)
+[8/36] done code_xl_E1_s51 (838s)
+done code_xl_E2_s51.jsonl val=0.9671 gap=-0.0770 (835s)
+[9/36] done code_xl_E2_s51 (837s)
+done code_xl_E4_s51.jsonl val=1.0290 gap=+0.1324 (836s)
+[10/36] done code_xl_E4_s51 (839s)
+done code_xl_E10_s51.jsonl val=1.4699 gap=+0.5737 (839s)
+[11/36] done code_xl_E10_s51 (841s)
+done code_xl_E16_s51.jsonl val=2.2042 gap=+0.8286 (841s)
+[12/36] done code_xl_E16_s51 (843s)
+done fineweb_xxl_E1_s51.jsonl val=1.1211 gap=-0.0038 (3003s)
+[13/36] done fineweb_xxl_E1_s51 (3005s)
+done fineweb_xxl_E2_s51.jsonl val=1.1257 gap=+0.0520 (3004s)
+[14/36] done fineweb_xxl_E2_s51 (3007s)
+done fineweb_xxl_E4_s51.jsonl val=1.1496 gap=+0.1673 (3006s)
+[15/36] done fineweb_xxl_E4_s51 (3008s)
+done fineweb_xxl_E6_s51.jsonl val=1.1792 gap=+0.3126 (3005s)
+[16/36] done fineweb_xxl_E6_s51 (3008s)
+done fineweb_xxl_E8_s51.jsonl val=1.2177 gap=+0.4548 (3007s)
+[17/36] done fineweb_xxl_E8_s51 (3010s)
+done fineweb_xxl_E10_s51.jsonl val=1.2977 gap=+0.6779 (3009s)
+[18/36] done fineweb_xxl_E10_s51 (3011s)
+done fineweb_xxl_E16_s51.jsonl val=1.7383 gap=+1.2905 (3010s)
+[19/36] done fineweb_xxl_E16_s51 (3013s)
+done code_xxl_E1_s51.jsonl val=0.8917 gap=-0.0998 (3003s)
+[20/36] done code_xxl_E1_s51 (3005s)
+done code_xxl_E2_s51.jsonl val=0.9362 gap=-0.0695 (2998s)
+[21/36] done code_xxl_E2_s51 (3001s)
+done code_xxl_E4_s51.jsonl val=1.0115 gap=+0.1367 (3001s)
+[22/36] done code_xxl_E4_s51 (3004s)
+done code_xxl_E10_s51.jsonl val=1.5669 gap=+0.5097 (3006s)
+[23/36] done code_xxl_E10_s51 (3008s)
+done code_xxl_E16_s51.jsonl val=2.3739 gap=+0.8424 (3009s)
+[24/36] done code_xxl_E16_s51 (3011s)
+TRIMMED xxxl cell fineweb_E1_s51 (user decision: stop at 57M) — skipping
+[25/36] done fineweb_xxxl_E1_s51 (2s)
+TRIMMED xxxl cell fineweb_E2_s51 (user decision: stop at 57M) — skipping
+[26/36] done fineweb_xxxl_E2_s51 (2s)
+TRIMMED xxxl cell fineweb_E4_s51 (user decision: stop at 57M) — skipping
+[27/36] done fineweb_xxxl_E4_s51 (2s)
+TRIMMED xxxl cell fineweb_E6_s51 (user decision: stop at 57M) — skipping
+[28/36] done fineweb_xxxl_E6_s51 (2s)
+TRIMMED xxxl cell fineweb_E8_s51 (user decision: stop at 57M) — skipping
+[29/36] done fineweb_xxxl_E8_s51 (2s)
+TRIMMED xxxl cell fineweb_E10_s51 (user decision: stop at 57M) — skipping
+[30/36] done fineweb_xxxl_E10_s51 (2s)
+TRIMMED xxxl cell fineweb_E16_s51 (user decision: stop at 57M) — skipping
+[31/36] done fineweb_xxxl_E16_s51 (2s)
+TRIMMED xxxl cell code_E1_s51 (user decision: stop at 57M) — skipping
+[32/36] done code_xxxl_E1_s51 (2s)
+TRIMMED xxxl cell code_E2_s51 (user decision: stop at 57M) — skipping
+[33/36] done code_xxxl_E2_s51 (2s)
+TRIMMED xxxl cell code_E4_s51 (user decision: stop at 57M) — skipping
+[34/36] done code_xxxl_E4_s51 (2s)
+TRIMMED xxxl cell code_E10_s51 (user decision: stop at 57M) — skipping
+[35/36] done code_xxxl_E10_s51 (2s)
+TRIMMED xxxl cell code_E16_s51 (user decision: stop at 57M) — skipping
+[36/36] done code_xxxl_E16_s51 (2s)
+WORKER gpu1 DONE n_fail=0

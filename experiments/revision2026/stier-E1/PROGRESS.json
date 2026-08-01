@@ -1,0 +1,16 @@
+{
+ "campaign": "BOX4-STIER-E1+CG3",
+ "worker": "gpu1",
+ "block": "-",
+ "cell": "-",
+ "cell_idx": 36,
+ "cells_total": 36,
+ "done_se1": 48,
+ "total_se1": 72,
+ "done_cg3": 16,
+ "total_cg3": 16,
+ "status": "worker_done",
+ "ts": "2026-07-18T03:08:33",
+ "unix_ts": 1784315313.9660697,
+ "n_fail": 0
+}

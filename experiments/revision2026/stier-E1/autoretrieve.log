@@ -1,0 +1,34 @@
+autoretrieve start 2026-07-17T02:22:09-04:00 pid 3694030
+2026-07-17T02:22:10-04:00 RUNNING
+{ "campaign": "BOX4-STIER-E1+CG3", "worker": "gpu1", "block": "se1_xl", "cell": "fineweb_xl_E1_s51", "cell_idx": 1, "cells_total": 36, "done_se1": 0, "total_se1": 72, "done_cg3": 16, "total_cg3": 16, "status": "running", "ts": "2026-07-17T14:18:39", "unix_ts": 1784269119.3252451}
+2026-07-17T03:07:21-04:00 RUNNING
+{ "campaign": "BOX4-STIER-E1+CG3", "worker": "gpu1", "block": "se1_xl", "cell": "fineweb_xl_E6_s51", "cell_idx": 4, "cells_total": 36, "done_se1": 6, "total_se1": 72, "done_cg3": 16, "total_cg3": 16, "status": "running", "ts": "2026-07-17T15:00:32", "unix_ts": 1784271632.376076}
+2026-07-17T03:52:22-04:00 RUNNING
+{ "campaign": "BOX4-STIER-E1+CG3", "worker": "gpu1", "block": "se1_xl", "cell": "fineweb_xl_E16_s51", "cell_idx": 7, "cells_total": 36, "done_se1": 12, "total_se1": 72, "done_cg3": 16, "total_cg3": 16, "status": "running", "ts": "2026-07-17T15:42:32", "unix_ts": 1784274152.5998065}
+autoretrieve start 2026-07-17T04:16:58-04:00 pid 84460
+2026-07-17T04:16:59-04:00 RUNNING
+{ "campaign": "BOX4-STIER-E1+CG3", "worker": "gpu1", "block": "se1_xl", "cell": "code_xl_E2_s51", "cell_idx": 9, "cells_total": 36, "done_se1": 16, "total_se1": 72, "done_cg3": 16, "total_cg3": 16, "status": "running", "ts": "2026-07-17T16:10:34", "unix_ts": 1784275834.5072663}
+autoretrieve start 2026-07-17T04:18:08-04:00 pid 87992
+2026-07-17T04:18:09-04:00 RUNNING
+{ "campaign": "BOX4-STIER-E1+CG3", "worker": "gpu1", "block": "se1_xl", "cell": "code_xl_E2_s51", "cell_idx": 9, "cells_total": 36, "done_se1": 16, "total_se1": 72, "done_cg3": 16, "total_cg3": 16, "status": "running", "ts": "2026-07-17T16:10:34", "unix_ts": 1784275834.5072663}
+2026-07-17T05:03:09-04:00 RUNNING
+{ "campaign": "BOX4-STIER-E1+CG3", "worker": "gpu1", "block": "se1_xl", "cell": "code_xl_E16_s51", "cell_idx": 12, "cells_total": 36, "done_se1": 22, "total_se1": 72, "done_cg3": 16, "total_cg3": 16, "status": "running", "ts": "2026-07-17T16:52:31", "unix_ts": 1784278351.1324685}
+2026-07-17T05:48:10-04:00 RUNNING
+{ "campaign": "BOX4-STIER-E1+CG3", "worker": "gpu1", "block": "se1_xxl", "cell": "fineweb_xxl_E1_s51", "cell_idx": 13, "cells_total": 36, "done_se1": 24, "total_se1": 72, "done_cg3": 16, "total_cg3": 16, "status": "running", "ts": "2026-07-17T17:06:34", "unix_ts": 1784279194.590272}
+2026-07-17T06:33:10-04:00 RUNNING
+{ "campaign": "BOX4-STIER-E1+CG3", "worker": "gpu1", "block": "se1_xxl", "cell": "fineweb_xxl_E2_s51", "cell_idx": 14, "cells_total": 36, "done_se1": 26, "total_se1": 72, "done_cg3": 16, "total_cg3": 16, "status": "running", "ts": "2026-07-17T17:56:40", "unix_ts": 1784282200.0749502}
+autoretrieve start 2026-07-17T12:40:06-04:00 pid 2033303
+2026-07-17T12:40:07-04:00 RUNNING
+{ "campaign": "BOX4-STIER-E1+CG3", "worker": "gpu1", "block": "se1_xxl", "cell": "code_xxl_E4_s51", "cell_idx": 22, "cells_total": 36, "done_se1": 42, "total_se1": 72, "done_cg3": 16, "total_cg3": 16, "status": "running", "ts": "2026-07-18T00:37:43", "unix_ts": 1784306263.1845458}
+2026-07-17T13:25:09-04:00 RUNNING
+{ "campaign": "BOX4-STIER-E1+CG3", "worker": "gpu1", "block": "se1_xxl", "cell": "code_xxl_E4_s51", "cell_idx": 22, "cells_total": 36, "done_se1": 42, "total_se1": 72, "done_cg3": 16, "total_cg3": 16, "status": "running", "ts": "2026-07-18T00:37:43", "unix_ts": 1784306263.1845458}
+2026-07-17T14:10:09-04:00 RUNNING
+{ "campaign": "BOX4-STIER-E1+CG3", "worker": "gpu1", "block": "se1_xxl", "cell": "code_xxl_E10_s51", "cell_idx": 23, "cells_total": 36, "done_se1": 44, "total_se1": 72, "done_cg3": 16, "total_cg3": 16, "status": "running", "ts": "2026-07-18T01:27:47", "unix_ts": 1784309267.10474}
+2026-07-17T14:55:10-04:00 RUNNING
+{ "campaign": "BOX4-STIER-E1+CG3", "worker": "gpu1", "block": "se1_xxl", "cell": "code_xxl_E16_s51", "cell_idx": 24, "cells_total": 36, "done_se1": 46, "total_se1": 72, "done_cg3": 16, "total_cg3": 16, "status": "running", "ts": "2026-07-18T02:17:55", "unix_ts": 1784312275.1333222}
+2026-07-17T15:40:11-04:00 DONE
+{ "campaign": "BOX4-STIER-E1+CG3", "worker": "gpu1", "block": "-", "cell": "-", "cell_idx": 36, "cells_total": 36, "done_se1": 48, "total_se1": 72, "done_cg3": 16, "total_cg3": 16, "status": "worker_done", "ts": "2026-07-18T03:08:33", "unix_ts": 1784315313.9660697, "n_fail": 0}
+queues done — retrieving 2026-07-17T15:40:11-04:00
+retrieved (48 jsonls) — flag + shutdown 2026-07-17T15:40:13-04:00
+box shutdown command accepted 2026-07-17T15:40:14-04:00
+AUTORETRIEVE COMPLETE 2026-07-17T15:40:14-04:00

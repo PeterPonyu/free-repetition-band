@@ -1,0 +1,142 @@
+{
+ "observed": "8/9",
+ "uniform_rung_null": {
+  "p_per_cell_5rungs": 0.2,
+  "P_ge_8of9": 1.8944000000000014e-05,
+  "p_per_cell_3rungs": 0.3333333333333333,
+  "P_ge_8of9_3rungs": 0.0009653000050805259
+ },
+ "cliff_null": {
+  "p_per_cell": {
+   "small/low": 0.231,
+   "small/med": 0.301,
+   "small/high": 0.569,
+   "med/low": 0.569,
+   "med/med": 0.398,
+   "med/high": 0.569,
+   "large/low": 0.569,
+   "large/med": 0.398,
+   "large/high": 0.569
+  },
+  "P_ge_8of9": 0.00887467892352605
+ },
+ "per_cell": {
+  "small/low": {
+   "decay_onset": 20,
+   "onset_interval": [
+    10,
+    20
+   ],
+   "cliff_window": [
+    2,
+    40
+   ],
+   "cliff_grid_intervals": 4,
+   "p_coincide_cliff_null": 0.231
+  },
+  "small/med": {
+   "decay_onset": 20,
+   "onset_interval": [
+    10,
+    20
+   ],
+   "cliff_window": [
+    2,
+    20
+   ],
+   "cliff_grid_intervals": 3,
+   "p_coincide_cliff_null": 0.301
+  },
+  "small/high": {
+   "decay_onset": 10,
+   "onset_interval": [
+    4,
+    10
+   ],
+   "cliff_window": [
+    4,
+    20
+   ],
+   "cliff_grid_intervals": 2,
+   "p_coincide_cliff_null": 0.569
+  },
+  "med/low": {
+   "decay_onset": 10,
+   "onset_interval": [
+    4,
+    10
+   ],
+   "cliff_window": [
+    4,
+    20
+   ],
+   "cliff_grid_intervals": 2,
+   "p_coincide_cliff_null": 0.569
+  },
+  "med/med": {
+   "decay_onset": 10,
+   "onset_interval": [
+    4,
+    10
+   ],
+   "cliff_window": [
+    2,
+    20
+   ],
+   "cliff_grid_intervals": 3,
+   "p_coincide_cliff_null": 0.398
+  },
+  "med/high": {
+   "decay_onset": 10,
+   "onset_interval": [
+    4,
+    10
+   ],
+   "cliff_window": [
+    2,
+    10
+   ],
+   "cliff_grid_intervals": 2,
+   "p_coincide_cliff_null": 0.569
+  },
+  "large/low": {
+   "decay_onset": 10,
+   "onset_interval": [
+    4,
+    10
+   ],
+   "cliff_window": [
+    4,
+    20
+   ],
+   "cliff_grid_intervals": 2,
+   "p_coincide_cliff_null": 0.569
+  },
+  "large/med": {
+   "decay_onset": 10,
+   "onset_interval": [
+    4,
+    10
+   ],
+   "cliff_window": [
+    2,
+    20
+   ],
+   "cliff_grid_intervals": 3,
+   "p_coincide_cliff_null": 0.398
+  },
+  "large/high": {
+   "decay_onset": 10,
+   "onset_interval": [
+    4,
+    10
+   ],
+   "cliff_window": [
+    2,
+    10
+   ],
+   "cliff_grid_intervals": 2,
+   "p_coincide_cliff_null": 0.569
+  }
+ }
+}

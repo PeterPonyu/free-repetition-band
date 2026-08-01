@@ -1,0 +1,73 @@
+done fineweb_xl_E1_s50.jsonl val=1.1875 gap=+0.0071 (833s)
+[1/36] done fineweb_xl_E1_s50 (835s)
+done fineweb_xl_E2_s50.jsonl val=1.1702 gap=+0.0590 (834s)
+[2/36] done fineweb_xl_E2_s50 (836s)
+done fineweb_xl_E4_s50.jsonl val=1.1697 gap=+0.2020 (835s)
+[3/36] done fineweb_xl_E4_s50 (837s)
+done fineweb_xl_E6_s50.jsonl val=1.1997 gap=+0.2710 (836s)
+[4/36] done fineweb_xl_E6_s50 (838s)
+done fineweb_xl_E8_s50.jsonl val=1.2348 gap=+0.2822 (836s)
+[5/36] done fineweb_xl_E8_s50 (838s)
+done fineweb_xl_E10_s50.jsonl val=1.2961 gap=+0.6248 (837s)
+[6/36] done fineweb_xl_E10_s50 (840s)
+done fineweb_xl_E16_s50.jsonl val=1.5530 gap=+0.9154 (839s)
+[7/36] done fineweb_xl_E16_s50 (842s)
+done code_xl_E1_s50.jsonl val=0.8751 gap=-0.1360 (834s)
+[8/36] done code_xl_E1_s50 (836s)
+done code_xl_E2_s50.jsonl val=0.9640 gap=-0.0630 (834s)
+[9/36] done code_xl_E2_s50 (836s)
+done code_xl_E4_s50.jsonl val=1.0252 gap=+0.1589 (835s)
+[10/36] done code_xl_E4_s50 (837s)
+done code_xl_E10_s50.jsonl val=1.4889 gap=+0.5308 (838s)
+[11/36] done code_xl_E10_s50 (840s)
+done code_xl_E16_s50.jsonl val=2.1458 gap=+0.7788 (840s)
+[12/36] done code_xl_E16_s50 (842s)
+done fineweb_xxl_E1_s50.jsonl val=1.0899 gap=-0.0104 (2991s)
+[13/36] done fineweb_xxl_E1_s50 (2994s)
+done fineweb_xxl_E2_s50.jsonl val=1.1068 gap=+0.0475 (2992s)
+[14/36] done fineweb_xxl_E2_s50 (2994s)
+done fineweb_xxl_E4_s50.jsonl val=1.1282 gap=+0.1800 (2994s)
+[15/36] done fineweb_xxl_E4_s50 (2997s)
+done fineweb_xxl_E6_s50.jsonl val=1.1489 gap=+0.2754 (2994s)
+[16/36] done fineweb_xxl_E6_s50 (2997s)
+done fineweb_xxl_E8_s50.jsonl val=1.1881 gap=+0.3593 (2996s)
+[17/36] done fineweb_xxl_E8_s50 (2999s)
+done fineweb_xxl_E10_s50.jsonl val=1.2567 gap=+0.7183 (2999s)
+[18/36] done fineweb_xxl_E10_s50 (3002s)
+done fineweb_xxl_E16_s50.jsonl val=1.6289 gap=+1.2341 (2999s)
+[19/36] done fineweb_xxl_E16_s50 (3001s)
+done code_xxl_E1_s50.jsonl val=0.8842 gap=-0.0885 (2993s)
+[20/36] done code_xxl_E1_s50 (2995s)
+done code_xxl_E2_s50.jsonl val=0.9198 gap=+0.0021 (2992s)
+[21/36] done code_xxl_E2_s50 (2995s)
+done code_xxl_E4_s50.jsonl val=0.9922 gap=+0.1664 (2993s)
+[22/36] done code_xxl_E4_s50 (2995s)
+done code_xxl_E10_s50.jsonl val=1.5509 gap=+0.5049 (2996s)
+[23/36] done code_xxl_E10_s50 (2999s)
+done code_xxl_E16_s50.jsonl val=2.3420 gap=+0.8608 (3000s)
+[24/36] done code_xxl_E16_s50 (3002s)
+TRIMMED xxxl cell fineweb_E1_s50 (user decision: stop at 57M) — skipping
+[25/36] done fineweb_xxxl_E1_s50 (2s)
+TRIMMED xxxl cell fineweb_E2_s50 (user decision: stop at 57M) — skipping
+[26/36] done fineweb_xxxl_E2_s50 (2s)
+TRIMMED xxxl cell fineweb_E4_s50 (user decision: stop at 57M) — skipping
+[27/36] done fineweb_xxxl_E4_s50 (2s)
+TRIMMED xxxl cell fineweb_E6_s50 (user decision: stop at 57M) — skipping
+[28/36] done fineweb_xxxl_E6_s50 (2s)
+TRIMMED xxxl cell fineweb_E8_s50 (user decision: stop at 57M) — skipping
+[29/36] done fineweb_xxxl_E8_s50 (2s)
+TRIMMED xxxl cell fineweb_E10_s50 (user decision: stop at 57M) — skipping
+[30/36] done fineweb_xxxl_E10_s50 (2s)
+TRIMMED xxxl cell fineweb_E16_s50 (user decision: stop at 57M) — skipping
+[31/36] done fineweb_xxxl_E16_s50 (2s)
+TRIMMED xxxl cell code_E1_s50 (user decision: stop at 57M) — skipping
+[32/36] done code_xxxl_E1_s50 (2s)
+TRIMMED xxxl cell code_E2_s50 (user decision: stop at 57M) — skipping
+[33/36] done code_xxxl_E2_s50 (2s)
+TRIMMED xxxl cell code_E4_s50 (user decision: stop at 57M) — skipping
+[34/36] done code_xxxl_E4_s50 (2s)
+TRIMMED xxxl cell code_E10_s50 (user decision: stop at 57M) — skipping
+[35/36] done code_xxxl_E10_s50 (2s)
+TRIMMED xxxl cell code_E16_s50 (user decision: stop at 57M) — skipping
+[36/36] done code_xxxl_E16_s50 (2s)
+WORKER gpu0 DONE n_fail=0

@@ -1,0 +1,31 @@
+cell (cap/ent/plant)       grid                     R_free  decay   mem      order  mem_exp
+large/high/1               [1, 2, 4, 10, 20, 40]         4     10    10  coincides       10
+large/high/4               [1, 2, 4, 10, 20, 40]         4     10    10  coincides       40
+large/low/1                [1, 2, 4, 10, 20, 40]         4     10    20       lags       20
+large/low/4                [1, 2, 4, 10, 20, 40]         4     10    10  coincides       40
+large/med/1                [1, 2, 4, 10, 20, 40]         4     10    20       lags       20
+large/med/4                [1, 2, 4, 10, 20, 40]         4     10    10  coincides       40
+med/high/1                 [1, 2, 4, 10, 20, 40]         4     10    10  coincides       10
+med/high/4                 [1, 2, 4, 10, 20, 40]         4     10    10  coincides       40
+med/low/1                  [1, 2, 4, 10, 20, 40]         4     10    20       lags       20
+med/low/4                  [1, 2, 4, 10, 20, 40]         4     10    10  coincides       40
+med/med/1                  [1, 2, 4, 10, 20, 40]         4     10    20       lags       20
+med/med/4                  [1, 2, 4, 10, 20, 40]         4     10    10  coincides       40
+small/high/1               [1, 2, 4, 10, 20, 40]         4     10    20       lags       20
+small/high/4               [1, 2, 4, 10, 20, 40]         4     10    10  coincides       40
+small/low/1                [1, 2, 4, 10, 20, 40]         4     10    20       lags       20
+small/low/4                [1, 2, 4, 10, 20, 40]         4     10    10  coincides       40
+small/med/1                [1, 2, 4, 10, 20, 40]        10     20    20  coincides       20
+small/med/4                [1, 2, 4, 10, 20, 40]        10     20    20  coincides       80
+
+paired cells: 9   ordering inverted 4x -> 1x: 6/9
+order tally: {'r4:coincides': 9, 'r1:coincides': 3, 'r1:lags': 6}
+  large/high     4x: mem@10 vs decay@10 = coincides (exposure-corrected lags)   1x: mem@10 vs decay@10 = coincides
+  large/low      4x: mem@10 vs decay@10 = coincides (exposure-corrected lags)   1x: mem@20 vs decay@10 = lags  INVERTED
+  large/med      4x: mem@10 vs decay@10 = coincides (exposure-corrected lags)   1x: mem@20 vs decay@10 = lags  INVERTED
+  med/high       4x: mem@10 vs decay@10 = coincides (exposure-corrected lags)   1x: mem@10 vs decay@10 = coincides
+  med/low        4x: mem@10 vs decay@10 = coincides (exposure-corrected lags)   1x: mem@20 vs decay@10 = lags  INVERTED
+  med/med        4x: mem@10 vs decay@10 = coincides (exposure-corrected lags)   1x: mem@20 vs decay@10 = lags  INVERTED
+  small/high     4x: mem@10 vs decay@10 = coincides (exposure-corrected lags)   1x: mem@20 vs decay@10 = lags  INVERTED
+  small/low      4x: mem@10 vs decay@10 = coincides (exposure-corrected lags)   1x: mem@20 vs decay@10 = lags  INVERTED
+  small/med      4x: mem@20 vs decay@20 = coincides (exposure-corrected lags)   1x: mem@20 vs decay@20 = coincides

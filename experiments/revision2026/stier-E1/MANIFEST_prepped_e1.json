@@ -1,0 +1,228 @@
+{
+ "generated_utc": "2026-07-17T04:02:28Z",
+ "generator_script": "build_prepped.py (stored alongside)",
+ "box": "BOX-1 autodl-container-88634bace5-87b901af (CPU)",
+ "format": "torch.save 1-D uint8 byte tensor; loader torch.load(p).long(); VAL_BYTES=2000000 tail; doc sep b'\\n\\n'; files document-disjoint",
+ "sources": {
+  "tinystories": [
+   {
+    "file": "train-00000-of-00004-2d5a1467fff1081b.parquet",
+    "bytes": 248731111,
+    "sha256": "77cf780cebe52b6e83e3a2ac84bc56d8059363113e41d17a023f1d8b2ed0fc0b"
+   },
+   {
+    "file": "train-00001-of-00004-5852b56a2bd28fd9.parquet",
+    "bytes": 248171980,
+    "sha256": "e2f173a6dcc2b5895183e8ad376e115bd5c06764eb0cfc01ce1add156b2d017f"
+   },
+   {
+    "file": "train-00002-of-00004-a26307300439e943.parquet",
+    "bytes": 245894874,
+    "sha256": "cac73cd1a0973a7fccde022a5a5c78f8ba58ea6849541835c58e7c5fc747f2ef"
+   },
+   {
+    "file": "train-00003-of-00004-d243063613e5a057.parquet",
+    "bytes": 247988350,
+    "sha256": "862514ae75723ddd339337f1ef7617b88f82290dcddd57445e1d38d257ca7891"
+   }
+  ],
+  "fineweb_edu_sample10BT": [
+   {
+    "file": "000_00000.parquet",
+    "bytes": 2152819114,
+    "sha256": "b1ba7b2ce4cb5ea6ef42dca40263eabb85f37700d01693a68e9b30a31d78e871"
+   },
+   {
+    "file": "001_00000.parquet",
+    "bytes": 2152222432,
+    "sha256": "3fcf2dc69cd52503986276d3d2d26a8c356d0f2ea28a0de4fdbda8cf87755693"
+   },
+   {
+    "file": "002_00000.parquet",
+    "bytes": 2151796315,
+    "sha256": "547ae182d132c9f06b6ce63149567208ea9f57630bfd9b1a2938e504f0c9ebd7"
+   }
+  ]
+ },
+ "artifacts": [
+  {
+   "file": "tinystories/ts_shard0.pt",
+   "set": "s_a_tinystories",
+   "token_bytes": 336000000,
+   "disk_bytes": 336001591,
+   "dtype": "uint8",
+   "val_tail_bytes": 2000000,
+   "doc_range": [
+    0,
+    371602
+   ],
+   "source_files": [
+    "train-00000-of-00004-2d5a1467fff1081b.parquet"
+   ],
+   "last_doc_truncated_remainder_discarded": true,
+   "sha256": "10d95d4a30fd5c6bc58370e6bcc5790b9f8c36c3c6b384c892537e7582752cb0",
+   "max_byte": 226,
+   "role": "S-A 10M pretrain stream",
+   "train_bytes": 334000000
+  },
+  {
+   "file": "tinystories/ts_shard1.pt",
+   "set": "s_a_tinystories",
+   "token_bytes": 336000000,
+   "disk_bytes": 336001591,
+   "dtype": "uint8",
+   "val_tail_bytes": 2000000,
+   "doc_range": [
+    371603,
+    742056
+   ],
+   "source_files": [
+    "train-00000-of-00004-2d5a1467fff1081b.parquet",
+    "train-00001-of-00004-5852b56a2bd28fd9.parquet"
+   ],
+   "last_doc_truncated_remainder_discarded": true,
+   "sha256": "e383ddd576ca1849ae65cc737a37e2381598f893ffbc443ae32ea8a09e7e494e",
+   "max_byte": 226,
+   "role": "S-A 10M pretrain stream",
+   "train_bytes": 334000000
+  },
+  {
+   "file": "tinystories/ts_shard2.pt",
+   "set": "s_a_tinystories",
+   "token_bytes": 336000000,
+   "disk_bytes": 336001591,
+   "dtype": "uint8",
+   "val_tail_bytes": 2000000,
+   "doc_range": [
+    742057,
+    1118181
+   ],
+   "source_files": [
+    "train-00001-of-00004-5852b56a2bd28fd9.parquet",
+    "train-00002-of-00004-a26307300439e943.parquet"
+   ],
+   "last_doc_truncated_remainder_discarded": true,
+   "sha256": "48d20c26ad59d41c65d2764d88f1bd1d8f4090ec6ea4d95870290bb04fa34219",
+   "max_byte": 226,
+   "role": "S-A 10M pretrain stream",
+   "train_bytes": 334000000
+  },
+  {
+   "file": "fineweb_stream/fwe_stream_shard0.pt",
+   "set": "s_ab_fineweb_stream",
+   "token_bytes": 1002000000,
+   "disk_bytes": 1002001647,
+   "dtype": "uint8",
+   "val_tail_bytes": 2000000,
+   "doc_range": [
+    0,
+    210323
+   ],
+   "source_files": [
+    "000_00000.parquet"
+   ],
+   "last_doc_truncated_remainder_discarded": true,
+   "sha256": "8353b89c396800bac117a9579272f57b8716d6ff5676d3e64fbe0e00a378451e",
+   "max_byte": 240,
+   "role": "S-A 50M / S-B 25M pretrain stream",
+   "train_bytes": 1000000000
+  },
+  {
+   "file": "fineweb_stream/fwe_stream_shard1.pt",
+   "set": "s_ab_fineweb_stream",
+   "token_bytes": 1002000000,
+   "disk_bytes": 1002001647,
+   "dtype": "uint8",
+   "val_tail_bytes": 2000000,
+   "doc_range": [
+    210324,
+    420237
+   ],
+   "source_files": [
+    "000_00000.parquet"
+   ],
+   "last_doc_truncated_remainder_discarded": true,
+   "sha256": "499bc72cb5349afb68f09d8c7082c8ed2a1668879f0d13ea649e18e679b0b72e",
+   "max_byte": 240,
+   "role": "S-A 50M / S-B 25M pretrain stream",
+   "train_bytes": 1000000000
+  },
+  {
+   "file": "fineweb_e1/fwe_e1_b100M.pt",
+   "set": "s_e1",
+   "token_bytes": 103000000,
+   "disk_bytes": 103001612,
+   "dtype": "uint8",
+   "val_tail_bytes": 2000000,
+   "doc_range": [
+    420238,
+    441577
+   ],
+   "source_files": [
+    "000_00000.parquet"
+   ],
+   "last_doc_truncated_remainder_discarded": true,
+   "sha256": "2b0a1c5351049256f3e6fe190a5eefeb94cbb9010080103a9f42737eefe741b2",
+   "max_byte": 240,
+   "role": "S-E1 unique corpus, budget=100M (25M-param cell)",
+   "budget_bytes": 100000000,
+   "canary_headroom_bytes": 1000000
+  },
+  {
+   "file": "fineweb_e1/fwe_e1_b200M.pt",
+   "set": "s_e1",
+   "token_bytes": 203000000,
+   "disk_bytes": 203001612,
+   "dtype": "uint8",
+   "val_tail_bytes": 2000000,
+   "doc_range": [
+    441578,
+    483052
+   ],
+   "source_files": [
+    "000_00000.parquet"
+   ],
+   "last_doc_truncated_remainder_discarded": true,
+   "sha256": "d1c2ec0f1e06e20c1fb8916fd2a2e9edb35c20e27d8b9f029f96056daaf10611",
+   "max_byte": 243,
+   "role": "S-E1 unique corpus, budget=200M (57M-param cell)",
+   "budget_bytes": 200000000,
+   "canary_headroom_bytes": 1000000
+  },
+  {
+   "file": "fineweb_e1/fwe_e1_b400M.pt",
+   "set": "s_e1",
+   "token_bytes": 403000000,
+   "disk_bytes": 403001612,
+   "dtype": "uint8",
+   "val_tail_bytes": 2000000,
+   "doc_range": [
+    483053,
+    567758
+   ],
+   "source_files": [
+    "000_00000.parquet"
+   ],
+   "last_doc_truncated_remainder_discarded": true,
+   "sha256": "648e7a2d13de22a52f708e11b85da5ad33b27f0e1be093630feb62d8b564045c",
+   "max_byte": 240,
+   "role": "S-E1 unique corpus, budget=400M (160M-param cell)",
+   "budget_bytes": 400000000,
+   "canary_headroom_bytes": 1000000
+  },
+  {
+   "file": "fineweb_e1/fwe_canary_bank.pt",
+   "set": "s_e1",
+   "token_bytes": null,
+   "disk_bytes": 52077,
+   "dtype": "int64",
+   "doc_range": [
+    567759,
+    567991
+   ],
+   "sha256": "f7b50b249029687a84e332932c95680684c77a5cea0ac5347c20ef381909948b",
+   "note": "canary bank dict; keys canaries_128/fresh_128/canaries_256/fresh_256 each [8,L]; seed=0"
+  }
+ ],
+ "elapsed_s": 8.5
+}
