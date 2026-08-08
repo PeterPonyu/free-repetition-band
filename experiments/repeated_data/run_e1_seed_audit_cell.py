@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 from __future__ import annotations
+import os
 import argparse, json, os, sys
 from pathlib import Path
 os.environ.setdefault('OMP_NUM_THREADS','2')
 os.environ.setdefault('MKL_NUM_THREADS','2')
 os.environ.setdefault('OPENBLAS_NUM_THREADS','2')
 os.environ.setdefault('NUMEXPR_NUM_THREADS','2')
-ROOT=Path('/home/zeyufu/Desktop/dl-research')
+ROOT=Path(__file__).resolve().parents[2]
 EXP=ROOT/'experiments/repeated_data'
 OUT=ROOT/'experiments/results/repeated_data_ultragoal_seed_audit'
 if str(EXP) in sys.path: sys.path.remove(str(EXP))

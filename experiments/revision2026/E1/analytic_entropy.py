@@ -24,6 +24,7 @@ floors from rfree_two_convention.json.
 Output: analytic_entropy.json (+ printed table).
 """
 from __future__ import annotations
+from pathlib import Path
 
 import json
 import math
@@ -33,7 +34,7 @@ import sys
 import numpy as np
 import torch
 
-sys.path.insert(0, "/home/zeyufu/Desktop/dl-research/experiments/repeated_data")
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / 'experiments' / 'repeated_data'))
 from data import knobs_for_level, make_corpus, _markov_transition  # noqa: E402
 
 OUT_DIR = os.path.dirname(os.path.abspath(__file__))

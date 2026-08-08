@@ -8,13 +8,15 @@ fixed seed; concatenated with newline separators up to TARGET bytes.
 Format matches wikitext_bytes.pt (torch uint8-valued tensor, vocab <= 256).
 """
 from __future__ import annotations
+import os
+from pathlib import Path
 import hashlib, os, random, sys
 import numpy as np
 import torch
 
 TARGET = 60_000_000
-ROOTS = ['/usr/lib/python3.12', '/home/zeyufu/miniconda3/lib']
-OUT = '/home/zeyufu/Desktop/dl-research/experiments/repeated_data/code_bytes.pt'
+ROOTS = ['/usr/lib/python3.12'] + ([str(Path(os.environ['CONDA_PREFIX']) / 'lib')] if os.environ.get('CONDA_PREFIX') else [])
+OUT = str(Path(__file__).resolve().parents[2] / 'experiments' / 'repeated_data' / 'code_bytes.pt')
 
 files = []
 for root in ROOTS:

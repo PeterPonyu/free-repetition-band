@@ -24,6 +24,7 @@ Data + conventions identical to finegrid_crossings.py:
 Outputs: canary_threshold_sensitivity.json + .md
 """
 from __future__ import annotations
+from pathlib import Path
 
 import glob
 import json
@@ -32,7 +33,7 @@ from collections import defaultdict
 
 import numpy as np
 
-ROOT = "/home/zeyufu/Desktop/dl-research/experiments"
+ROOT = str(Path(__file__).resolve().parents[3] / 'experiments')
 ARCHIVE_DIRS = [
     os.path.join(ROOT, "results", "repeated_data"),
     os.path.join(ROOT, "results", "repeated_data_ultragoal_seed_audit"),

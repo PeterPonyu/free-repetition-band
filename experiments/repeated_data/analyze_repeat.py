@@ -17,6 +17,7 @@ P3 = decay_onset vs mem_onset coincidence; P2 = R_free across the 9 cells.
 Writes results/figures-013/: repeat_verdicts.json, fig_repeat.png.
 """
 from __future__ import annotations
+from pathlib import Path
 
 import glob
 import json
@@ -29,7 +30,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 import sys
-sys.path.insert(0, "/home/zeyufu/Desktop/dl-research/experiments")
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'experiments'))
 import figstyle
 figstyle.apply()
 
