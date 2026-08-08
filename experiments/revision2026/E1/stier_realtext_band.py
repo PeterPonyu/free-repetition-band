@@ -20,6 +20,7 @@ Conventions (the paper's):
 Outputs: stier_realtext_band.json + .md next to this script.
 """
 from __future__ import annotations
+from pathlib import Path
 
 import glob
 import json
@@ -28,7 +29,7 @@ import re
 
 import numpy as np
 
-DATA = "/home/zeyufu/Desktop/dl-research/experiments/revision2026/stier-E1"
+DATA = str(Path(__file__).resolve().parents[3] / 'experiments' / 'revision2026' / 'stier-E1')
 OUT = os.path.dirname(os.path.abspath(__file__))
 ABS_EPS = 0.05
 PHI = 0.0283

@@ -11,12 +11,14 @@ val tail, disjoint file sets) + stats printed (kept/dropped counts, gzip
 bits/byte per shard).
 """
 from __future__ import annotations
+import os
+from pathlib import Path
 import gzip, hashlib, os, random
 import numpy as np
 import torch
 
-ROOTS = ['/usr/lib/python3.12', '/home/zeyufu/miniconda3/lib']
-OUTDIR = '/home/zeyufu/Desktop/dl-research/experiments/repeated_data'
+ROOTS = ['/usr/lib/python3.12'] + ([str(Path(os.environ['CONDA_PREFIX']) / 'lib')] if os.environ.get('CONDA_PREFIX') else [])
+OUTDIR = str(Path(__file__).resolve().parents[2] / 'experiments' / 'repeated_data')
 SHARD = 54_000_000
 N_SHARDS = 3
 K_SHINGLE = 32

@@ -18,6 +18,7 @@ repeated_data/analyze_repeat.py — median over all available seeds per point).
 Output: rfree_two_convention.json + rfree_two_convention.md (comparison table).
 """
 from __future__ import annotations
+from pathlib import Path
 
 import glob
 import json
@@ -26,7 +27,7 @@ from collections import defaultdict
 
 import numpy as np
 
-ROOT = "/home/zeyufu/Desktop/dl-research/experiments/results"
+ROOT = str(Path(__file__).resolve().parents[3] / 'experiments' / 'results')
 DIRS = [
     os.path.join(ROOT, "repeated_data"),
     os.path.join(ROOT, "repeated_data_ultragoal_seed_audit"),
