@@ -1,0 +1,373 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='518.40pt' height='374.40pt' viewBox='0 0 518.40 374.40'>
+<g class='svglite'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite text {
+      white-space: pre;
+    }
+    .svglite g.glyphgroup path {
+      fill: inherit;
+      stroke: none;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<defs>
+  <clipPath id='cpMC4wMHw1MTguNDB8MC4wMHwzNzQuNDA='>
+    <rect x='0.00' y='0.00' width='518.40' height='374.40' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw1MTguNDB8MC4wMHwzNzQuNDA=)'>
+<rect x='0.00' y='-0.000000000000057' width='518.40' height='374.40' style='stroke-width: 1.07; stroke: #FFFFFF; fill: #FFFFFF;' />
+</g>
+<defs>
+  <clipPath id='cpNDQuMDJ8MjkxLjQyfDM2LjUxfDMzNC44NQ=='>
+    <rect x='44.02' y='36.51' width='247.40' height='298.33' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpNDQuMDJ8MjkxLjQyfDM2LjUxfDMzNC44NQ==)'>
+</g>
+<g clip-path='url(#cpMC4wMHw1MTguNDB8MC4wMHwzNzQuNDA=)'>
+</g>
+<defs>
+  <clipPath id='cpNS40OHwxNTAuMjV8NS40OHwxOTQuMzY='>
+    <rect x='5.48' y='5.48' width='144.77' height='188.88' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpNS40OHwxNTAuMjV8NS40OHwxOTQuMzY=)'>
+<rect x='5.48' y='5.48' width='144.77' height='188.88' style='stroke-width: 0.87; stroke: none; fill: #FFFFFF;' />
+</g>
+<g clip-path='url(#cpMC4wMHw1MTguNDB8MC4wMHwzNzQuNDA=)'>
+</g>
+<defs>
+  <clipPath id='cpMTUwLjI1fDUxMi45Mnw1LjQ4fDE5NC4zNg=='>
+    <rect x='150.25' y='5.48' width='362.68' height='188.88' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMTUwLjI1fDUxMi45Mnw1LjQ4fDE5NC4zNg==)'>
+<rect x='150.25' y='5.48' width='362.68' height='188.88' style='stroke-width: 0.87; stroke: none; fill: #FFFFFF;' />
+</g>
+<g clip-path='url(#cpMC4wMHw1MTguNDB8MC4wMHwzNzQuNDA=)'>
+</g>
+<defs>
+  <clipPath id='cpNS40OHwxNTAuMjV8MTk0LjM2fDM2OC45Mg=='>
+    <rect x='5.48' y='194.36' width='144.77' height='174.56' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpNS40OHwxNTAuMjV8MTk0LjM2fDM2OC45Mg==)'>
+<rect x='5.48' y='194.36' width='144.77' height='174.56' style='stroke-width: 0.87; stroke: none; fill: #FFFFFF;' />
+</g>
+<g clip-path='url(#cpMC4wMHw1MTguNDB8MC4wMHwzNzQuNDA=)'>
+</g>
+<defs>
+  <clipPath id='cpMTUwLjI1fDUxMi45MnwxOTQuMzZ8MzY4Ljky'>
+    <rect x='150.25' y='194.36' width='362.68' height='174.56' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMTUwLjI1fDUxMi45MnwxOTQuMzZ8MzY4Ljky)'>
+<rect x='150.25' y='194.36' width='362.68' height='174.56' style='stroke-width: 0.87; stroke: none; fill: #FFFFFF;' />
+</g>
+<g clip-path='url(#cpMC4wMHw1MTguNDB8MC4wMHwzNzQuNDA=)'>
+</g>
+<defs>
+  <clipPath id='cpNDQuMDJ8MTQwLjI4fDM2LjUxfDE0Ny45NQ=='>
+    <rect x='44.02' y='36.51' width='96.26' height='111.44' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpNDQuMDJ8MTQwLjI4fDM2LjUxfDE0Ny45NQ==)'>
+<polyline points='44.02,135.65 140.28,135.65 ' style='stroke-width: 0.53; stroke: #D9DDE3; stroke-linecap: butt;' />
+<polyline points='44.02,48.82 140.28,48.82 ' style='stroke-width: 0.53; stroke: #D9DDE3; stroke-linecap: butt;' />
+<rect x='48.40' y='48.82' width='85.39' height='86.84' style='stroke-width: 0.87; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #56B4E9; fill-opacity: 0.12;' />
+<text x='51.13' y='60.13' style='font-size: 7.97px; font-family: "TeX Gyre Termes";' textLength='46.39px' lengthAdjust='spacingAndGlyphs'>4-10 free band</text>
+<polygon points='126.17,135.65 130.73,131.09 135.29,135.65 130.73,140.21 ' style='stroke-width: 0.58; stroke: none; fill: #444444;' />
+<text x='130.73' y='130.05' text-anchor='middle' style='font-size: 7.11px; font-family: "TeX Gyre Termes";' textLength='65.50px' lengthAdjust='spacingAndGlyphs'>large-scale anchor (~4)</text>
+<text x='98.74' y='90.69' text-anchor='middle' style='font-size: 7.40px;fill: #6B7280; font-family: "TeX Gyre Termes";' textLength='39.94px' lengthAdjust='spacingAndGlyphs'>untested span</text>
+<text x='98.74' y='98.68' text-anchor='middle' style='font-size: 7.40px;fill: #6B7280; font-family: "TeX Gyre Termes";' textLength='49.39px' lengthAdjust='spacingAndGlyphs'>(3-12M vs 8.7B)</text>
+<line x1='50.71' y1='51.23' x2='55.54' y2='46.40' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='50.71' y1='46.40' x2='55.54' y2='51.23' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='50.81' y1='138.07' x2='55.64' y2='133.23' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='50.81' y1='133.23' x2='55.64' y2='138.07' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='51.00' y1='51.23' x2='55.84' y2='46.40' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='51.00' y1='46.40' x2='55.84' y2='51.23' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='51.31' y1='51.23' x2='56.15' y2='46.40' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='51.31' y1='46.40' x2='56.15' y2='51.23' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='50.65' y1='51.23' x2='55.48' y2='46.40' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='50.65' y1='46.40' x2='55.48' y2='51.23' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='51.30' y1='138.07' x2='56.14' y2='133.23' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='51.30' y1='133.23' x2='56.14' y2='138.07' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='51.35' y1='51.23' x2='56.18' y2='46.40' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='51.35' y1='46.40' x2='56.18' y2='51.23' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='51.09' y1='138.07' x2='55.92' y2='133.23' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='51.09' y1='133.23' x2='55.92' y2='138.07' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='51.06' y1='51.23' x2='55.89' y2='46.40' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='51.06' y1='46.40' x2='55.89' y2='51.23' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='50.51' y1='138.07' x2='55.34' y2='133.23' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='50.51' y1='133.23' x2='55.34' y2='138.07' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='50.65' y1='51.23' x2='55.48' y2='46.40' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='50.65' y1='46.40' x2='55.48' y2='51.23' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='50.62' y1='51.23' x2='55.45' y2='46.40' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='50.62' y1='46.40' x2='55.45' y2='51.23' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='51.11' y1='138.07' x2='55.94' y2='133.23' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='51.11' y1='133.23' x2='55.94' y2='138.07' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='50.82' y1='51.23' x2='55.66' y2='46.40' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='50.82' y1='46.40' x2='55.66' y2='51.23' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='51.19' y1='51.23' x2='56.02' y2='46.40' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='51.19' y1='46.40' x2='56.02' y2='51.23' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='50.93' y1='51.23' x2='55.76' y2='46.40' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='50.93' y1='46.40' x2='55.76' y2='51.23' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='51.14' y1='138.07' x2='55.97' y2='133.23' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='51.14' y1='133.23' x2='55.97' y2='138.07' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='51.39' y1='51.23' x2='56.22' y2='46.40' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='51.39' y1='46.40' x2='56.22' y2='51.23' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='50.82' y1='138.07' x2='55.65' y2='133.23' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='50.82' y1='133.23' x2='55.65' y2='138.07' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='51.19' y1='51.23' x2='56.03' y2='46.40' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='51.19' y1='46.40' x2='56.03' y2='51.23' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='51.34' y1='138.07' x2='56.17' y2='133.23' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='51.34' y1='133.23' x2='56.17' y2='138.07' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='50.66' y1='51.23' x2='55.49' y2='46.40' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='50.66' y1='46.40' x2='55.49' y2='51.23' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='51.08' y1='51.23' x2='55.91' y2='46.40' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='51.08' y1='46.40' x2='55.91' y2='51.23' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='50.57' y1='51.23' x2='55.40' y2='46.40' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='50.57' y1='46.40' x2='55.40' y2='51.23' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='50.71' y1='138.07' x2='55.54' y2='133.23' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='50.71' y1='133.23' x2='55.54' y2='138.07' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='50.82' y1='138.07' x2='55.66' y2='133.23' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='50.82' y1='133.23' x2='55.66' y2='138.07' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='50.46' y1='51.23' x2='55.29' y2='46.40' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='50.46' y1='46.40' x2='55.29' y2='51.23' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='50.82' y1='138.07' x2='55.65' y2='133.23' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='50.82' y1='133.23' x2='55.65' y2='138.07' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='51.28' y1='51.23' x2='56.11' y2='46.40' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='51.28' y1='46.40' x2='56.11' y2='51.23' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='50.78' y1='51.23' x2='55.61' y2='46.40' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<line x1='50.78' y1='46.40' x2='55.61' y2='51.23' style='stroke-width: 0.99; stroke: #999999; stroke-opacity: 0.80;' />
+<text x='53.62' y='113.96' style='font-size: 6.83px;fill: #6B7280; font-family: "TeX Gyre Termes";' textLength='48.64px' lengthAdjust='spacingAndGlyphs'>× per-seed R_free</text>
+<text x='53.62' y='121.34' style='font-size: 6.83px;fill: #6B7280; font-family: "TeX Gyre Termes";' textLength='59.67px' lengthAdjust='spacingAndGlyphs'>(small-capacity audit)</text>
+<polygon points='51.22,136.96 58.47,136.96 58.47,129.71 51.22,129.71 ' style='stroke-width: 0.85; stroke: none; fill: #009E73; fill-opacity: 0.90;' />
+<circle cx='59.35' cy='137.97' r='3.63' style='stroke-width: 0.85; stroke: none; fill: #0072B2; fill-opacity: 0.90;' />
+<polygon points='60.84,130.01 65.73,138.47 55.96,138.47 ' style='stroke-width: 0.85; stroke: none; fill: #D55E00; fill-opacity: 0.90;' />
+<polygon points='58.71,136.96 65.96,136.96 65.96,129.71 58.71,129.71 ' style='stroke-width: 0.85; stroke: none; fill: #009E73; fill-opacity: 0.90;' />
+<circle cx='64.86' cy='137.97' r='3.63' style='stroke-width: 0.85; stroke: none; fill: #0072B2; fill-opacity: 0.90;' />
+<polygon points='66.35,130.01 71.24,138.47 61.47,138.47 ' style='stroke-width: 0.85; stroke: none; fill: #D55E00; fill-opacity: 0.90;' />
+<polygon points='64.22,136.96 71.47,136.96 71.47,129.71 64.22,129.71 ' style='stroke-width: 0.85; stroke: none; fill: #009E73; fill-opacity: 0.90;' />
+</g>
+<g clip-path='url(#cpMC4wMHw1MTguNDB8MC4wMHwzNzQuNDA=)'>
+<text x='39.99' y='138.47' text-anchor='end' style='font-size: 8.50px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='4.25px' lengthAdjust='spacingAndGlyphs'>4</text>
+<text x='39.99' y='51.63' text-anchor='end' style='font-size: 8.50px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='8.50px' lengthAdjust='spacingAndGlyphs'>10</text>
+<text x='44.54' y='157.62' text-anchor='middle' style='font-size: 8.50px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='4.25px' lengthAdjust='spacingAndGlyphs'>1</text>
+<text x='54.98' y='157.62' text-anchor='middle' style='font-size: 8.50px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='4.25px' lengthAdjust='spacingAndGlyphs'>3</text>
+<text x='66.42' y='157.62' text-anchor='middle' style='font-size: 8.50px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='8.50px' lengthAdjust='spacingAndGlyphs'>10</text>
+<text x='76.86' y='157.62' text-anchor='middle' style='font-size: 8.50px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='8.50px' lengthAdjust='spacingAndGlyphs'>30</text>
+<text x='88.30' y='157.62' text-anchor='middle' style='font-size: 8.50px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='12.75px' lengthAdjust='spacingAndGlyphs'>100</text>
+<text x='98.74' y='157.62' text-anchor='middle' style='font-size: 8.50px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='12.75px' lengthAdjust='spacingAndGlyphs'>300</text>
+<text x='110.18' y='157.62' text-anchor='middle' style='font-size: 8.50px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='17.00px' lengthAdjust='spacingAndGlyphs'>1000</text>
+<text x='130.73' y='157.62' text-anchor='middle' style='font-size: 8.50px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='17.00px' lengthAdjust='spacingAndGlyphs'>8700</text>
+<text x='92.15' y='184.42' text-anchor='middle' style='font-size: 9.00px;fill: #1A202C; font-family: "TeX Gyre Termes";' textLength='152.00px' lengthAdjust='spacingAndGlyphs'>Model size (million parameters, log scale)</text>
+<text transform='translate(21.59,122.80) rotate(-90)' style='font-size: 9.00px;fill: #1A202C; font-family: "TeX Gyre Termes";' textLength='45.36px' lengthAdjust='spacingAndGlyphs'>Free epochs </text>
+<text transform='translate(21.59,77.44) rotate(-90)' style='font-size: 9.00px;fill: #1A202C; font-family: "TeX Gyre Termes";' textLength='6.00px' lengthAdjust='spacingAndGlyphs'>R</text>
+<text transform='translate(23.01,71.44) rotate(-90)' style='font-size: 6.30px;fill: #1A202C; font-family: "TeX Gyre Termes";' textLength='2.09px' lengthAdjust='spacingAndGlyphs'>f</text>
+<text transform='translate(23.01,69.34) rotate(-90)' style='font-size: 6.30px;fill: #1A202C; font-family: "TeX Gyre Termes";' textLength='2.09px' lengthAdjust='spacingAndGlyphs'>r</text>
+<text transform='translate(23.01,67.25) rotate(-90)' style='font-size: 6.30px;fill: #1A202C; font-family: "TeX Gyre Termes";' textLength='2.80px' lengthAdjust='spacingAndGlyphs'>e</text>
+<text transform='translate(23.01,64.46) rotate(-90)' style='font-size: 6.30px;fill: #1A202C; font-family: "TeX Gyre Termes";' textLength='2.80px' lengthAdjust='spacingAndGlyphs'>e</text>
+<text x='44.02' y='19.53' style='font-size: 9.00px; font-weight: bold;fill: #111827; font-family: "TeX Gyre Termes";' textLength='10.50px' lengthAdjust='spacingAndGlyphs'>(a)</text>
+<text x='56.77' y='19.53' style='font-size: 9.00px;fill: #111827; font-family: "TeX Gyre Termes";' textLength='53.50px' lengthAdjust='spacingAndGlyphs'>Free-repetition</text>
+<text x='112.52' y='19.53' style='font-size: 9.00px;fill: #111827; font-family: "TeX Gyre Termes";' textLength='20.00px' lengthAdjust='spacingAndGlyphs'>count</text>
+<text x='44.02' y='29.58' style='font-size: 9.00px;fill: #111827; font-family: "TeX Gyre Termes";' textLength='6.00px' lengthAdjust='spacingAndGlyphs'>R</text>
+<text x='50.02' y='31.96' style='font-size: 7.20px;fill: #111827; font-family: "TeX Gyre Termes";' textLength='11.16px' lengthAdjust='spacingAndGlyphs'>free</text>
+<text x='63.43' y='29.58' style='font-size: 9.00px;fill: #111827; font-family: "TeX Gyre Termes";' textLength='7.81px' lengthAdjust='spacingAndGlyphs'>vs</text>
+<text x='73.49' y='29.58' style='font-size: 9.00px;fill: #111827; font-family: "TeX Gyre Termes";' textLength='22.50px' lengthAdjust='spacingAndGlyphs'>model</text>
+<text x='98.24' y='29.58' style='font-size: 9.00px;fill: #111827; font-family: "TeX Gyre Termes";' textLength='14.00px' lengthAdjust='spacingAndGlyphs'>size</text>
+</g>
+<defs>
+  <clipPath id='cpMTk1LjE2fDI5MS40MnwzNi41MXwxNDcuOTU='>
+    <rect x='195.16' y='36.51' width='96.26' height='111.44' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMTk1LjE2fDI5MS40MnwzNi41MXwxNDcuOTU=)'>
+<polyline points='195.16,135.65 291.42,135.65 ' style='stroke-width: 0.53; stroke: #D9DDE3; stroke-linecap: butt;' />
+<polyline points='195.16,48.82 291.42,48.82 ' style='stroke-width: 0.53; stroke: #D9DDE3; stroke-linecap: butt;' />
+<rect x='195.16' y='48.82' width='96.26' height='86.84' style='stroke-width: 0.87; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #56B4E9; fill-opacity: 0.12;' />
+<line x1='206.44' y1='135.65' x2='219.98' y2='135.65' style='stroke-width: 2.18; stroke: #1A1A1A; stroke-linecap: butt; stroke-linejoin: miter;' />
+<line x1='236.52' y1='135.65' x2='250.06' y2='135.65' style='stroke-width: 2.18; stroke: #1A1A1A; stroke-linecap: butt; stroke-linejoin: miter;' />
+<line x1='266.61' y1='135.65' x2='280.14' y2='135.65' style='stroke-width: 2.18; stroke: #1A1A1A; stroke-linecap: butt; stroke-linejoin: miter;' />
+<polygon points='269.72,138.50 275.42,138.50 275.42,132.80 269.72,132.80 ' style='stroke-width: 0.58; stroke: none; fill: #009E73; fill-opacity: 0.85;' />
+<circle cx='213.48' cy='135.65' r='2.85' style='stroke-width: 0.58; stroke: none; fill: #0072B2; fill-opacity: 0.85;' />
+<polygon points='242.46,131.22 246.30,137.87 238.62,137.87 ' style='stroke-width: 0.58; stroke: none; fill: #D55E00; fill-opacity: 0.85;' />
+<polygon points='269.14,138.50 274.84,138.50 274.84,132.80 269.14,132.80 ' style='stroke-width: 0.58; stroke: none; fill: #009E73; fill-opacity: 0.85;' />
+<circle cx='212.33' cy='135.65' r='2.85' style='stroke-width: 0.58; stroke: none; fill: #0072B2; fill-opacity: 0.85;' />
+<polygon points='245.45,131.22 249.28,137.87 241.61,137.87 ' style='stroke-width: 0.58; stroke: none; fill: #D55E00; fill-opacity: 0.85;' />
+<polygon points='271.30,138.50 277.00,138.50 277.00,132.80 271.30,132.80 ' style='stroke-width: 0.58; stroke: none; fill: #009E73; fill-opacity: 0.85;' />
+</g>
+<g clip-path='url(#cpMC4wMHw1MTguNDB8MC4wMHwzNzQuNDA=)'>
+<text x='191.13' y='138.47' text-anchor='end' style='font-size: 8.50px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='4.25px' lengthAdjust='spacingAndGlyphs'>4</text>
+<text x='191.13' y='51.63' text-anchor='end' style='font-size: 8.50px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='8.50px' lengthAdjust='spacingAndGlyphs'>10</text>
+<text transform='translate(214.80,156.34) rotate(-20)' text-anchor='end' style='font-size: 7.00px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='33.19px' lengthAdjust='spacingAndGlyphs'>low entropy</text>
+<text transform='translate(244.88,156.34) rotate(-20)' text-anchor='end' style='font-size: 7.00px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='45.91px' lengthAdjust='spacingAndGlyphs'>medium entropy</text>
+<text transform='translate(274.96,156.34) rotate(-20)' text-anchor='end' style='font-size: 7.00px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='35.39px' lengthAdjust='spacingAndGlyphs'>high entropy</text>
+<text transform='translate(166.36,122.80) rotate(-90)' style='font-size: 9.00px;fill: #1A202C; font-family: "TeX Gyre Termes";' textLength='45.36px' lengthAdjust='spacingAndGlyphs'>Free epochs </text>
+<text transform='translate(166.36,77.44) rotate(-90)' style='font-size: 9.00px;fill: #1A202C; font-family: "TeX Gyre Termes";' textLength='6.00px' lengthAdjust='spacingAndGlyphs'>R</text>
+<text transform='translate(167.78,71.44) rotate(-90)' style='font-size: 6.30px;fill: #1A202C; font-family: "TeX Gyre Termes";' textLength='2.09px' lengthAdjust='spacingAndGlyphs'>f</text>
+<text transform='translate(167.78,69.34) rotate(-90)' style='font-size: 6.30px;fill: #1A202C; font-family: "TeX Gyre Termes";' textLength='2.09px' lengthAdjust='spacingAndGlyphs'>r</text>
+<text transform='translate(167.78,67.25) rotate(-90)' style='font-size: 6.30px;fill: #1A202C; font-family: "TeX Gyre Termes";' textLength='2.80px' lengthAdjust='spacingAndGlyphs'>e</text>
+<text transform='translate(167.78,64.46) rotate(-90)' style='font-size: 6.30px;fill: #1A202C; font-family: "TeX Gyre Termes";' textLength='2.80px' lengthAdjust='spacingAndGlyphs'>e</text>
+<text x='195.16' y='19.53' style='font-size: 9.00px; font-weight: bold;fill: #111827; font-family: "TeX Gyre Termes";' textLength='11.00px' lengthAdjust='spacingAndGlyphs'>(b)</text>
+<text x='208.41' y='19.53' style='font-size: 9.00px;fill: #111827; font-family: "TeX Gyre Termes";' textLength='41.61px' lengthAdjust='spacingAndGlyphs'>Per-entropy</text>
+<text x='252.27' y='19.53' style='font-size: 9.00px;fill: #111827; font-family: "TeX Gyre Termes";' textLength='13.00px' lengthAdjust='spacingAndGlyphs'>cell</text>
+<text x='267.52' y='19.53' style='font-size: 9.00px;fill: #111827; font-family: "TeX Gyre Termes";' textLength='41.55px' lengthAdjust='spacingAndGlyphs'>distribution</text>
+</g>
+<defs>
+  <clipPath id='cpNDQuMDJ8MTQwLjI4fDIyMy40MXwzMzQuODU='>
+    <rect x='44.02' y='223.41' width='96.26' height='111.44' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpNDQuMDJ8MTQwLjI4fDIyMy40MXwzMzQuODU=)'>
+<polyline points='44.02,334.83 140.28,334.83 ' style='stroke-width: 0.53; stroke: #D9DDE3; stroke-linecap: butt;' />
+<polyline points='44.02,308.14 140.28,308.14 ' style='stroke-width: 0.53; stroke: #D9DDE3; stroke-linecap: butt;' />
+<polyline points='44.02,281.46 140.28,281.46 ' style='stroke-width: 0.53; stroke: #D9DDE3; stroke-linecap: butt;' />
+<polyline points='44.02,254.77 140.28,254.77 ' style='stroke-width: 0.53; stroke: #D9DDE3; stroke-linecap: butt;' />
+<polyline points='44.02,228.08 140.28,228.08 ' style='stroke-width: 0.53; stroke: #D9DDE3; stroke-linecap: butt;' />
+<rect x='48.40' y='308.14' width='87.51' height='16.01' style='stroke-width: 0.87; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #56B4E9; fill-opacity: 0.12;' />
+<polygon points='61.69,327.61 68.52,327.61 68.52,320.79 61.69,320.79 ' style='stroke-width: 0.85; stroke: none; fill: #E69F00; fill-opacity: 0.90;' />
+<polygon points='61.69,327.90 68.52,327.90 68.52,321.08 61.69,321.08 ' style='stroke-width: 0.85; stroke: none; fill: #E69F00; fill-opacity: 0.90;' />
+<polygon points='61.69,327.48 68.52,327.48 68.52,320.65 61.69,320.65 ' style='stroke-width: 0.85; stroke: none; fill: #E69F00; fill-opacity: 0.90;' />
+<polygon points='61.69,327.47 68.52,327.47 68.52,320.64 61.69,320.64 ' style='stroke-width: 0.85; stroke: none; fill: #E69F00; fill-opacity: 0.90;' />
+<polygon points='61.69,327.54 68.52,327.54 68.52,320.71 61.69,320.71 ' style='stroke-width: 0.85; stroke: none; fill: #E69F00; fill-opacity: 0.90;' />
+<polygon points='61.69,333.20 68.52,333.20 68.52,326.37 61.69,326.37 ' style='stroke-width: 0.85; stroke: none; fill: #E69F00; fill-opacity: 0.90;' />
+<polygon points='61.69,332.95 68.52,332.95 68.52,326.12 61.69,326.12 ' style='stroke-width: 0.85; stroke: none; fill: #E69F00; fill-opacity: 0.90;' />
+<polygon points='61.69,332.51 68.52,332.51 68.52,325.69 61.69,325.69 ' style='stroke-width: 0.85; stroke: none; fill: #E69F00; fill-opacity: 0.90;' />
+<polygon points='61.69,333.15 68.52,333.15 68.52,326.32 61.69,326.32 ' style='stroke-width: 0.85; stroke: none; fill: #E69F00; fill-opacity: 0.90;' />
+<polygon points='61.69,332.69 68.52,332.69 68.52,325.87 61.69,325.87 ' style='stroke-width: 0.85; stroke: none; fill: #E69F00; fill-opacity: 0.90;' />
+<polygon points='61.69,327.52 68.52,327.52 68.52,320.70 61.69,320.70 ' style='stroke-width: 0.85; stroke: none; fill: #E69F00; fill-opacity: 0.90;' />
+<polygon points='61.69,327.38 68.52,327.38 68.52,320.55 61.69,320.55 ' style='stroke-width: 0.85; stroke: none; fill: #E69F00; fill-opacity: 0.90;' />
+<polygon points='61.69,332.55 68.52,332.55 68.52,325.73 61.69,325.73 ' style='stroke-width: 0.85; stroke: none; fill: #E69F00; fill-opacity: 0.90;' />
+<circle cx='86.31' cy='323.95' r='3.41' style='stroke-width: 0.85; stroke: none; fill: #56B4E9; fill-opacity: 0.90;' />
+<circle cx='86.31' cy='323.76' r='3.41' style='stroke-width: 0.85; stroke: none; fill: #56B4E9; fill-opacity: 0.90;' />
+<circle cx='86.31' cy='323.82' r='3.41' style='stroke-width: 0.85; stroke: none; fill: #56B4E9; fill-opacity: 0.90;' />
+<circle cx='94.51' cy='323.80' r='3.41' style='stroke-width: 0.85; stroke: none; fill: #56B4E9; fill-opacity: 0.90;' />
+<polygon points='72.34,275.81 76.93,283.77 67.74,283.77 ' style='stroke-width: 0.85; stroke: none; fill: #7F7F7F; fill-opacity: 0.90;' />
+<polygon points='64.99,276.01 69.59,283.97 60.40,283.97 ' style='stroke-width: 0.85; stroke: none; fill: #7F7F7F; fill-opacity: 0.90;' />
+<polygon points='55.00,223.17 59.60,231.13 50.41,231.13 ' style='stroke-width: 0.85; stroke: none; fill: #7F7F7F; fill-opacity: 0.90;' />
+</g>
+<g clip-path='url(#cpMC4wMHw1MTguNDB8MC4wMHwzNzQuNDA=)'>
+<text x='39.99' y='337.65' text-anchor='end' style='font-size: 8.50px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='4.25px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='39.99' y='310.96' text-anchor='end' style='font-size: 8.50px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='8.50px' lengthAdjust='spacingAndGlyphs'>10</text>
+<text x='39.99' y='284.27' text-anchor='end' style='font-size: 8.50px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='8.50px' lengthAdjust='spacingAndGlyphs'>20</text>
+<text x='39.99' y='257.59' text-anchor='end' style='font-size: 8.50px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='8.50px' lengthAdjust='spacingAndGlyphs'>30</text>
+<text x='39.99' y='230.90' text-anchor='end' style='font-size: 8.50px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='8.50px' lengthAdjust='spacingAndGlyphs'>40</text>
+<text x='57.18' y='344.51' text-anchor='middle' style='font-size: 8.50px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='4.25px' lengthAdjust='spacingAndGlyphs'>3</text>
+<text x='72.43' y='344.51' text-anchor='middle' style='font-size: 8.50px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='8.50px' lengthAdjust='spacingAndGlyphs'>10</text>
+<text x='86.35' y='344.51' text-anchor='middle' style='font-size: 8.50px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='8.50px' lengthAdjust='spacingAndGlyphs'>30</text>
+<text x='101.60' y='344.51' text-anchor='middle' style='font-size: 8.50px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='12.75px' lengthAdjust='spacingAndGlyphs'>100</text>
+<text x='115.52' y='344.51' text-anchor='middle' style='font-size: 8.50px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='12.75px' lengthAdjust='spacingAndGlyphs'>300</text>
+<text x='130.77' y='344.51' text-anchor='middle' style='font-size: 8.50px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='17.00px' lengthAdjust='spacingAndGlyphs'>1000</text>
+<text x='92.15' y='357.31' text-anchor='middle' style='font-size: 9.00px;fill: #1A202C; font-family: "TeX Gyre Termes";' textLength='152.00px' lengthAdjust='spacingAndGlyphs'>Model size (million parameters, log scale)</text>
+<text transform='translate(21.59,309.70) rotate(-90)' style='font-size: 9.00px;fill: #1A202C; font-family: "TeX Gyre Termes";' textLength='45.36px' lengthAdjust='spacingAndGlyphs'>Free epochs </text>
+<text transform='translate(21.59,264.34) rotate(-90)' style='font-size: 9.00px;fill: #1A202C; font-family: "TeX Gyre Termes";' textLength='6.00px' lengthAdjust='spacingAndGlyphs'>R</text>
+<text transform='translate(23.01,258.34) rotate(-90)' style='font-size: 6.30px;fill: #1A202C; font-family: "TeX Gyre Termes";' textLength='2.09px' lengthAdjust='spacingAndGlyphs'>f</text>
+<text transform='translate(23.01,256.24) rotate(-90)' style='font-size: 6.30px;fill: #1A202C; font-family: "TeX Gyre Termes";' textLength='2.09px' lengthAdjust='spacingAndGlyphs'>r</text>
+<text transform='translate(23.01,254.15) rotate(-90)' style='font-size: 6.30px;fill: #1A202C; font-family: "TeX Gyre Termes";' textLength='2.80px' lengthAdjust='spacingAndGlyphs'>e</text>
+<text transform='translate(23.01,251.35) rotate(-90)' style='font-size: 6.30px;fill: #1A202C; font-family: "TeX Gyre Termes";' textLength='2.80px' lengthAdjust='spacingAndGlyphs'>e</text>
+<text x='44.02' y='208.41' style='font-size: 9.00px; font-weight: bold;fill: #111827; font-family: "TeX Gyre Termes";' textLength='10.00px' lengthAdjust='spacingAndGlyphs'>(c)</text>
+<text x='56.27' y='208.41' style='font-size: 9.00px;fill: #111827; font-family: "TeX Gyre Termes";' textLength='16.28px' lengthAdjust='spacingAndGlyphs'>Real</text>
+<text x='74.80' y='208.41' style='font-size: 9.00px;fill: #111827; font-family: "TeX Gyre Termes";' textLength='20.98px' lengthAdjust='spacingAndGlyphs'>bytes,</text>
+<text x='98.04' y='208.41' style='font-size: 9.00px;fill: #111827; font-family: "TeX Gyre Termes";' textLength='21.75px' lengthAdjust='spacingAndGlyphs'>capxl,</text>
+<text x='122.04' y='208.41' style='font-size: 9.00px;fill: #111827; font-family: "TeX Gyre Termes";' textLength='13.00px' lengthAdjust='spacingAndGlyphs'>and</text>
+<text x='137.29' y='208.41' style='font-size: 9.00px;fill: #111827; font-family: "TeX Gyre Termes";' textLength='22.50px' lengthAdjust='spacingAndGlyphs'>PCFG</text>
+<text x='162.04' y='208.41' style='font-size: 9.00px;fill: #111827; font-family: "TeX Gyre Termes";' textLength='9.00px' lengthAdjust='spacingAndGlyphs'>on</text>
+<text x='173.29' y='208.41' style='font-size: 9.00px;fill: #111827; font-family: "TeX Gyre Termes";' textLength='11.00px' lengthAdjust='spacingAndGlyphs'>the</text>
+<text x='44.02' y='218.46' style='font-size: 9.00px;fill: #111827; font-family: "TeX Gyre Termes";' textLength='18.00px' lengthAdjust='spacingAndGlyphs'>scale</text>
+<text x='64.27' y='218.46' style='font-size: 9.00px;fill: #111827; font-family: "TeX Gyre Termes";' textLength='14.50px' lengthAdjust='spacingAndGlyphs'>axis</text>
+</g>
+<defs>
+  <clipPath id='cpMTk1LjE2fDI5MS40MnwyMjMuNDF8MzM0Ljg1'>
+    <rect x='195.16' y='223.41' width='96.26' height='111.44' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMTk1LjE2fDI5MS40MnwyMjMuNDF8MzM0Ljg1)'>
+<polyline points='195.16,321.31 291.42,321.31 ' style='stroke-width: 0.53; stroke: #D9DDE3; stroke-linecap: butt;' />
+<polyline points='195.16,300.59 291.42,300.59 ' style='stroke-width: 0.53; stroke: #D9DDE3; stroke-linecap: butt;' />
+<polyline points='195.16,279.86 291.42,279.86 ' style='stroke-width: 0.53; stroke: #D9DDE3; stroke-linecap: butt;' />
+<polyline points='195.16,259.13 291.42,259.13 ' style='stroke-width: 0.53; stroke: #D9DDE3; stroke-linecap: butt;' />
+<polyline points='195.16,238.40 291.42,238.40 ' style='stroke-width: 0.53; stroke: #D9DDE3; stroke-linecap: butt;' />
+<line x1='195.16' y1='279.86' x2='291.42' y2='279.86' style='stroke-width: 1.07; stroke: #999999; stroke-dasharray: 5.69,5.69; stroke-linecap: butt;' />
+<circle cx='262.17' cy='321.62' r='2.42' style='stroke-width: 0.58; stroke: #999999; stroke-opacity: 0.80; fill: #999999; fill-opacity: 0.80;' />
+<circle cx='216.35' cy='252.26' r='2.42' style='stroke-width: 0.58; stroke: #999999; stroke-opacity: 0.80; fill: #999999; fill-opacity: 0.80;' />
+<circle cx='267.10' cy='290.74' r='2.42' style='stroke-width: 0.58; stroke: #999999; stroke-opacity: 0.80; fill: #999999; fill-opacity: 0.80;' />
+<circle cx='263.66' cy='291.81' r='2.42' style='stroke-width: 0.58; stroke: #999999; stroke-opacity: 0.80; fill: #999999; fill-opacity: 0.80;' />
+<circle cx='260.72' cy='329.78' r='2.42' style='stroke-width: 0.58; stroke: #999999; stroke-opacity: 0.80; fill: #999999; fill-opacity: 0.80;' />
+<circle cx='217.60' cy='228.47' r='2.42' style='stroke-width: 0.58; stroke: #999999; stroke-opacity: 0.80; fill: #999999; fill-opacity: 0.80;' />
+<circle cx='265.69' cy='326.05' r='2.42' style='stroke-width: 0.58; stroke: #999999; stroke-opacity: 0.80; fill: #999999; fill-opacity: 0.80;' />
+<circle cx='224.68' cy='264.70' r='2.42' style='stroke-width: 0.58; stroke: #999999; stroke-opacity: 0.80; fill: #999999; fill-opacity: 0.80;' />
+<circle cx='269.84' cy='280.33' r='2.42' style='stroke-width: 0.58; stroke: #999999; stroke-opacity: 0.80; fill: #999999; fill-opacity: 0.80;' />
+<circle cx='218.54' cy='271.96' r='2.42' style='stroke-width: 0.58; stroke: #999999; stroke-opacity: 0.80; fill: #999999; fill-opacity: 0.80;' />
+<circle cx='268.09' cy='303.62' r='2.42' style='stroke-width: 0.58; stroke: #999999; stroke-opacity: 0.80; fill: #999999; fill-opacity: 0.80;' />
+<circle cx='265.27' cy='296.10' r='2.42' style='stroke-width: 0.58; stroke: #999999; stroke-opacity: 0.80; fill: #999999; fill-opacity: 0.80;' />
+<circle cx='223.04' cy='248.46' r='2.42' style='stroke-width: 0.58; stroke: #999999; stroke-opacity: 0.80; fill: #999999; fill-opacity: 0.80;' />
+<circle cx='267.79' cy='281.26' r='2.42' style='stroke-width: 0.58; stroke: #999999; stroke-opacity: 0.80; fill: #999999; fill-opacity: 0.80;' />
+<circle cx='267.84' cy='329.61' r='2.42' style='stroke-width: 0.58; stroke: #999999; stroke-opacity: 0.80; fill: #999999; fill-opacity: 0.80;' />
+<circle cx='260.46' cy='293.12' r='2.42' style='stroke-width: 0.58; stroke: #999999; stroke-opacity: 0.80; fill: #999999; fill-opacity: 0.80;' />
+<circle cx='217.18' cy='253.99' r='2.42' style='stroke-width: 0.58; stroke: #999999; stroke-opacity: 0.80; fill: #999999; fill-opacity: 0.80;' />
+<circle cx='267.07' cy='282.93' r='2.42' style='stroke-width: 0.58; stroke: #999999; stroke-opacity: 0.80; fill: #999999; fill-opacity: 0.80;' />
+<circle cx='222.71' cy='256.96' r='2.42' style='stroke-width: 0.58; stroke: #999999; stroke-opacity: 0.80; fill: #999999; fill-opacity: 0.80;' />
+<circle cx='267.03' cy='292.53' r='2.42' style='stroke-width: 0.58; stroke: #999999; stroke-opacity: 0.80; fill: #999999; fill-opacity: 0.80;' />
+<circle cx='220.28' cy='268.99' r='2.42' style='stroke-width: 0.58; stroke: #999999; stroke-opacity: 0.80; fill: #999999; fill-opacity: 0.80;' />
+<circle cx='260.53' cy='289.50' r='2.42' style='stroke-width: 0.58; stroke: #999999; stroke-opacity: 0.80; fill: #999999; fill-opacity: 0.80;' />
+<circle cx='269.04' cy='291.69' r='2.42' style='stroke-width: 0.58; stroke: #999999; stroke-opacity: 0.80; fill: #999999; fill-opacity: 0.80;' />
+<circle cx='264.34' cy='280.27' r='2.42' style='stroke-width: 0.58; stroke: #999999; stroke-opacity: 0.80; fill: #999999; fill-opacity: 0.80;' />
+<circle cx='217.25' cy='274.33' r='2.42' style='stroke-width: 0.58; stroke: #999999; stroke-opacity: 0.80; fill: #999999; fill-opacity: 0.80;' />
+<circle cx='217.55' cy='265.21' r='2.42' style='stroke-width: 0.58; stroke: #999999; stroke-opacity: 0.80; fill: #999999; fill-opacity: 0.80;' />
+<circle cx='270.30' cy='281.61' r='2.42' style='stroke-width: 0.58; stroke: #999999; stroke-opacity: 0.80; fill: #999999; fill-opacity: 0.80;' />
+<circle cx='218.76' cy='274.53' r='2.42' style='stroke-width: 0.58; stroke: #999999; stroke-opacity: 0.80; fill: #999999; fill-opacity: 0.80;' />
+<circle cx='269.01' cy='296.23' r='2.42' style='stroke-width: 0.58; stroke: #999999; stroke-opacity: 0.80; fill: #999999; fill-opacity: 0.80;' />
+<circle cx='266.13' cy='294.85' r='2.42' style='stroke-width: 0.58; stroke: #999999; stroke-opacity: 0.80; fill: #999999; fill-opacity: 0.80;' />
+</g>
+<g clip-path='url(#cpMC4wMHw1MTguNDB8MC4wMHwzNzQuNDA=)'>
+<text x='191.13' y='324.13' text-anchor='end' style='font-size: 8.50px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='14.88px' lengthAdjust='spacingAndGlyphs'>0.03</text>
+<text x='191.13' y='303.40' text-anchor='end' style='font-size: 8.50px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='14.88px' lengthAdjust='spacingAndGlyphs'>0.04</text>
+<text x='191.13' y='282.67' text-anchor='end' style='font-size: 8.50px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='14.88px' lengthAdjust='spacingAndGlyphs'>0.05</text>
+<text x='191.13' y='261.95' text-anchor='end' style='font-size: 8.50px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='14.88px' lengthAdjust='spacingAndGlyphs'>0.06</text>
+<text x='191.13' y='241.22' text-anchor='end' style='font-size: 8.50px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='14.88px' lengthAdjust='spacingAndGlyphs'>0.07</text>
+<text x='221.41' y='344.51' text-anchor='middle' style='font-size: 8.50px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='4.25px' lengthAdjust='spacingAndGlyphs'>4</text>
+<text x='265.17' y='344.51' text-anchor='middle' style='font-size: 8.50px;fill: #2D3748; font-family: "TeX Gyre Termes";' textLength='8.50px' lengthAdjust='spacingAndGlyphs'>10</text>
+<text x='202.07' y='357.50' style='font-size: 9.00px;fill: #1A202C; font-family: "TeX Gyre Termes";' textLength='39.72px' lengthAdjust='spacingAndGlyphs'>Seed-level </text>
+<text x='241.79' y='357.50' style='font-size: 9.00px;fill: #1A202C; font-family: "TeX Gyre Termes";' textLength='6.00px' lengthAdjust='spacingAndGlyphs'>R</text>
+<text x='247.80' y='358.92' style='font-size: 6.30px;fill: #1A202C; font-family: "TeX Gyre Termes";' textLength='2.09px' lengthAdjust='spacingAndGlyphs'>f</text>
+<text x='249.89' y='358.92' style='font-size: 6.30px;fill: #1A202C; font-family: "TeX Gyre Termes";' textLength='2.09px' lengthAdjust='spacingAndGlyphs'>r</text>
+<text x='251.99' y='358.92' style='font-size: 6.30px;fill: #1A202C; font-family: "TeX Gyre Termes";' textLength='2.80px' lengthAdjust='spacingAndGlyphs'>e</text>
+<text x='254.78' y='358.92' style='font-size: 6.30px;fill: #1A202C; font-family: "TeX Gyre Termes";' textLength='2.80px' lengthAdjust='spacingAndGlyphs'>e</text>
+<text x='257.57' y='357.50' style='font-size: 9.00px;fill: #1A202C; font-family: "TeX Gyre Termes";' textLength='26.94px' lengthAdjust='spacingAndGlyphs'> verdict</text>
+<text transform='translate(166.17,279.13) rotate(-90)' text-anchor='middle' style='font-size: 9.00px;fill: #1A202C; font-family: "TeX Gyre Termes";' textLength='81.52px' lengthAdjust='spacingAndGlyphs'>Excess at n = 10 (nats)</text>
+<text x='195.16' y='208.41' style='font-size: 9.00px; font-weight: bold;fill: #111827; font-family: "TeX Gyre Termes";' textLength='11.00px' lengthAdjust='spacingAndGlyphs'>(d)</text>
+<text x='208.41' y='208.41' style='font-size: 9.00px;fill: #111827; font-family: "TeX Gyre Termes";' textLength='36.50px' lengthAdjust='spacingAndGlyphs'>Small-cap</text>
+<text x='247.16' y='208.41' style='font-size: 9.00px;fill: #111827; font-family: "TeX Gyre Termes";' textLength='18.58px' lengthAdjust='spacingAndGlyphs'>n=10</text>
+<text x='267.99' y='208.41' style='font-size: 9.00px;fill: #111827; font-family: "TeX Gyre Termes";' textLength='16.00px' lengthAdjust='spacingAndGlyphs'>seed</text>
+<text x='286.24' y='208.41' style='font-size: 9.00px;fill: #111827; font-family: "TeX Gyre Termes";' textLength='18.00px' lengthAdjust='spacingAndGlyphs'>audit</text>
+<circle cx='311.91' cy='148.48' r='3.63' style='stroke-width: 0.85; stroke: none; fill: #0072B2; fill-opacity: 0.90;' />
+<polygon points='371.25,142.84 376.13,151.30 366.37,151.30 ' style='stroke-width: 0.85; stroke: none; fill: #D55E00; fill-opacity: 0.90;' />
+<polygon points='442.37,152.10 449.62,152.10 449.62,144.85 442.37,144.85 ' style='stroke-width: 0.85; stroke: none; fill: #009E73; fill-opacity: 0.90;' />
+<text x='321.43' y='151.29' style='font-size: 8.50px; font-family: "TeX Gyre Termes";' textLength='40.30px' lengthAdjust='spacingAndGlyphs'>low entropy</text>
+<text x='380.77' y='151.29' style='font-size: 8.50px; font-family: "TeX Gyre Termes";' textLength='55.70px' lengthAdjust='spacingAndGlyphs'>medium entropy</text>
+<text x='455.52' y='151.29' style='font-size: 8.50px; font-family: "TeX Gyre Termes";' textLength='42.95px' lengthAdjust='spacingAndGlyphs'>high entropy</text>
+<circle cx='315.51' cy='182.08' r='3.41' style='stroke-width: 0.85; stroke: none; fill: #000000; fill-opacity: 0.90;' />
+<polygon points='360.17,176.77 364.77,184.73 355.58,184.73 ' style='stroke-width: 0.85; stroke: none; fill: #000000; fill-opacity: 0.90;' />
+<polygon points='428.13,185.49 434.96,185.49 434.96,178.67 428.13,178.67 ' style='stroke-width: 0.85; stroke: none; fill: #000000; fill-opacity: 0.90;' />
+<text x='328.63' y='184.90' style='font-size: 8.50px; font-family: "TeX Gyre Termes";' textLength='18.42px' lengthAdjust='spacingAndGlyphs'>capxl</text>
+<text x='373.30' y='184.90' style='font-size: 8.50px; font-family: "TeX Gyre Termes";' textLength='45.12px' lengthAdjust='spacingAndGlyphs'>PCFG family</text>
+<text x='444.67' y='184.90' style='font-size: 8.50px; font-family: "TeX Gyre Termes";' textLength='32.58px' lengthAdjust='spacingAndGlyphs'>real bytes</text>
+<circle cx='315.51' cy='219.29' r='3.41' style='stroke-width: 0.85; stroke: #56B4E9; stroke-opacity: 0.90; fill: #56B4E9; fill-opacity: 0.90;' />
+<circle cx='360.17' cy='219.29' r='3.41' style='stroke-width: 0.85; stroke: #E69F00; stroke-opacity: 0.90; fill: #E69F00; fill-opacity: 0.90;' />
+<text x='328.63' y='222.10' style='font-size: 8.50px; font-family: "TeX Gyre Termes";' textLength='18.42px' lengthAdjust='spacingAndGlyphs'>capxl</text>
+<text x='373.30' y='222.10' style='font-size: 8.50px; font-family: "TeX Gyre Termes";' textLength='32.58px' lengthAdjust='spacingAndGlyphs'>real bytes</text>
+</g>
+</g>
+</svg>

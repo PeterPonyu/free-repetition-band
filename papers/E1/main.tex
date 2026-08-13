@@ -1,0 +1,2175 @@
+%% Bundle E1 — submission draft, LaTeX (generic article class).
+%% Compile: lualatex x2 (bibliography is inlined as thebibliography; no bibtex pass needed).
+%% LuaLaTeX is the canonical engine since the 2026-06-28 R-TikZ figure migration.
+%% The PeerJ upload workspace uses pdflatex instead -- see papers/VERSIONS.md.
+%% Self-contained: figures are standalone vector PDFs in figures/; bibliography is inline (thebibliography). No external ../figs or ../references.bib dependency.
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+% defaultfeatures={Renderer=Node}: newtxtext forces Renderer=Basic under LuaTeX,
+% which drops the TeX ``/'' ligatures (quotes rendered as two single-quote glyphs);
+% the Node renderer restores them.
+\usepackage[defaultfeatures={Renderer=Node}]{newtxtext}
+\usepackage{newtxmath}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{float}
+\usepackage{microtype}
+\usepackage[round]{natbib}
+\usepackage{xcolor}
+\definecolor{linknavy}{RGB}{25,50,110}
+\definecolor{citeteal}{RGB}{15,90,80}
+\definecolor{urlnavy}{RGB}{45,55,120}
+\usepackage{hyperref}
+\hypersetup{
+colorlinks=true, linkcolor=linknavy, citecolor=citeteal, urlcolor=urlnavy,
+  pdftitle={Repeating training data is nearly free for four to ten epochs: a 1000x-smaller-scale test of the data-repetition value hypothesis},
+  pdfauthor={Zeyu Fu},
+  pdfsubject={Small-scale tests of data repetition and free-repetition bands in sequence models},
+  pdfkeywords={data repetition, epoch budget, small-scale language modeling, transformers, reproducibility}
+}
+\usepackage{tablefootnote}
+\usepackage{orcidlink}
+\input{../figs/figpreamble.tex}
+
+% Tighter float placement to reduce whitespace
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.9}
+\renewcommand{\textfraction}{0.07}
+\renewcommand{\floatpagefraction}{0.75}
+\setcounter{topnumber}{3}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{5}
+
+\begin{document}
+
+\title{Repeating training data is nearly free for four to ten epochs:
+memorization onset, not the capacity--entropy ratio, bounds the free-repetition band}
+\author{Zeyu Fu\,\orcidlink{0009-0001-8329-0108}\\
+State Key Laboratory of Trauma and Chemical Poisoning, Institute of Combined Injury,\\
+Chongqing Engineering Research Center for Nanomedicine, College of Preventive Medicine,\\
+Army Medical University, Chongqing, China\\
+\href{mailto:fuzeyu09@gmail.com}{fuzeyu09@gmail.com}}
+\date{}
+
+\maketitle
+
+\begin{abstract}
+In language-model pretraining, a widely used data-reuse heuristic holds that repeating
+the training corpus is ``nearly free'' for about four epochs. Whether this threshold
+is a universal property of repeated training or merely the capacity-to-entropy ratio
+at which it was first measured has not been tested, because capacity and entropy are
+confounded in natural-language pretraining. We test it on synthetic Markov corpora
+whose capacity and entropy are dialed independently: 218 training runs at a fixed
+20M-token budget, five capacities ($2.5$M--$57$M parameters) and three entropies. A
+linear reading of the capacity--entropy-artifact account predicts the free-epoch
+threshold should move by ${\sim}100\times$ across the grid; it does not move (a
+logarithmic reading predicts a sub-resolution shift and is not excluded). The free
+zone instead reduces to a bounded $4$--$10$-epoch band, and a memorization-clock
+account explains why the band lands near four independently of the ratio. The band's
+collapse is accompanied by copied-canary memorization: an exposure-matched control
+shows the coincidence of memorization and decay onset is an artifact of the
+oversampled probe convention, while the band itself is invariant to that convention
+($R_{\mathrm{free}}$, the largest repetition count whose median excess stays below
+threshold, is identical in $9/9$ cells). The structure reproduces on a
+context-free grammar and survives an optimizer swap to Muon. On real bytes,
+WikiText-103 gives $R_{\mathrm{free}}{=}4$ across five seeds and three disjoint corpus
+draws; a source-code corpus contracts the band to $2$ and returns to $4$ after
+near-duplicate removal, so duplication-driven effective repetition, not byte-level
+predictability, drives the contraction. The rule needs no scale-specific mechanism:
+it is memorization onset, bounded.
+\end{abstract}
+
+\vspace{4pt}\noindent\textbf{Keywords:} repeated data; data-constrained training;
+memorization onset; controlled falsification; scaling laws; generalization
+
+% Highlights (Elsevier highlights go in a separate file at submission):
+% - the 4-epoch free-reuse rule is a bounded 4-10 band, not a capacity-entropy artifact
+% - the threshold does not shift ~100x with capacity/entropy (artifact account falsified)
+% - decay onset coincides with canary-memorization onset per epoch (8/9 cells); a 324-run exposure-matched control scopes the ordering to the probe convention and leaves the band unchanged
+% - R_free lies in 4-10 across all nine full-coverage capacity x entropy cells
+
+\section{Introduction}\label{sec:intro}
+
+\paragraph{Motivation.}
+Training large language models is data-hungry: empirical scaling laws show that model
+performance improves as a power law in data volume \citep{kaplan2020scalinglaws}, and
+compute-optimal recipes (``Chinchilla'' rules) demand token counts that scale linearly
+with parameter count \citep{hoffmann2022chinchilla}. In data-constrained settings---where
+unique tokens are scarce relative to the compute budget---practitioners inevitably repeat
+the training corpus \citep{xue2023repeat}. \citet{muennighoff2023scaling} quantified the cost of this repetition
+at large-language-model (LLM) scale, establishing a now-standard heuristic: repeating the data is
+\emph{nearly free} for approximately four epochs, after which additional repetition yields
+rapidly diminishing---eventually negative---returns. This $\approx 4$-epoch constant has
+become a practical rule-of-thumb for data-reuse budgets. Yet the constant was measured in
+a single regime (large language models, natural-language corpora with a particular
+entropy-to-capacity ratio), and it is unclear whether it is universal or merely the value
+the threshold takes at that regime's specific capacity-to-entropy ratio. The published
+measurements cluster almost entirely at LLM scale
+(Figure~\ref{fig:landscape}, Table~\ref{tab:repeat-landscape}), and current extensions
+refine the repetition penalty within that same regime \citep{lovelace2026prescriptive}.
+
+\paragraph{The capacity/entropy-artifact hypothesis.}
+A natural alternative is that the ``free epochs'' threshold is a function of
+how much the model's capacity exceeds the data's entropy---capacity-based accounts of
+memorization quantify exactly such a budget \citep{morris2025capacity}. If so, the threshold should shift
+by orders of magnitude as that ratio is varied across an experiment. The large-scale study
+\citep{muennighoff2023scaling} could not test this because capacity and entropy are
+confounded in natural-language training. An independent line of work
+\citep{hernandez2022repeateddata} further predicts non-monotone (double-descent
+\citep{nakkiran2020double}) loss curves under some repetition regimes. These hypotheses
+jointly demand a controlled testbed where entropy and capacity are independently tunable.
+
+\paragraph{This paper.}
+We ask how many times a fixed corpus can be reused before its value collapses, on
+synthetic Markov corpora with construction-tunable entropy---sweeping corpus entropy
+and model capacity independently. Stated precisely once: our models are
+$150$--$3{,}500\times$ smaller in parameter count ($2.5$M--$57$M vs.\ the
+$8.7$B-parameter anchor) and our token budgets $18{,}000$--$45{,}000\times$ smaller
+($20$--$50$M vs.\ $900$B tokens) than the anchor study of
+\citet{muennighoff2023scaling}; elsewhere we describe this gap generically as
+``orders of magnitude'' below language-model scale.\footnote{This is the only data-constrained-pretraining study in this line of
+work: it asks how many times training tokens can be reused before their value
+collapses, a repeated-data question that shares no phenomenon (repetition value decay
+vs.\ delayed generalisation), no testbed (Markov corpora and WikiText bytes vs.\
+modular arithmetic), and no citation base (repeated-data scaling and memorization vs.\
+grokking and optimizers) with adjacent small-scale training-dynamics studies.} We
+label four preregistered claims P1--P4 (P = prediction/probe). Our contributions are:
+\begin{enumerate}
+  \item We show the free-epoch threshold does not shift with the capacity-to-entropy
+        ratio, falsifying the linear-ratio form of the capacity--entropy-artifact
+        account (P2; we state that form explicitly as the strongest testable member
+        of the capacity-ratio family, since no published account commits to one, and
+        a logarithmic form predicts a sub-resolution shift and is not
+        excluded), and that the free zone is instead a bounded $4$--$10$ epoch band
+        (P1)---across $>10\times$ entropy and ${\sim}23\times$ capacity
+        ($2.5$M--$57$M params) at 20M-token
+        scale (218 distinct training runs: nine core cells with full epoch-grid
+        coverage at 3 seeds, a twelve-run boundary seed audit, and a 44-run
+        xl/xxl capacity extension; the full $>10\times$ entropy factorial is
+        core-grid, xl adds all three entropies, xxl the medium one).
+  \item We show that repetition decay onset coincides with copied-canary memorization
+        onset in 8 of 9 cells, an onset coincidence consistent with the memorization
+        account \citep{tirumala2022memorization} (P3), and give a memorization-clock
+        heuristic for why the band lands near four independently of the ratio.
+  \item We provide a grid-resolution power argument showing the epoch grid is
+        1--2 orders of magnitude finer than the linear account's predicted
+        ${\sim}100\times$ shift, making that falsification a large-effect-size result
+        rather than an underpowered null---while stating explicitly which alternative
+        (logarithmic growth) the grid cannot resolve (\S\ref{sec:p2}).
+  \item We extend the test to real bytes in two domains with corpus-level
+        replication: WikiText-103 gives $R_{\mathrm{free}}=4$ in five seeds and three
+        disjoint corpus draws. A source-code corpus ($1.8$ vs $2.8$ gzip bits/byte)
+        separates two mechanisms: as collected it contracts the band to
+        $R_{\mathrm{free}}=2$ ($5/5$), and near-duplicate removal restores
+        $R_{\mathrm{free}}=4$---so the contraction is effective repetition from
+        duplicated files, a practically important hazard of real code corpora, while
+        the ratio account's predicted extension never appears. Canary probes ported to
+        real bytes place memorization onset at or before decay onset in both domains
+        (\S\ref{sec:scale}). A 48-run replication at $30$M--$57$M parameters keeps
+        FineWeb-Edu inside the band ($R_{\mathrm{free}}=6$ and $4$, both threshold
+        conventions within one rung) and reproduces the code contraction
+        ($R_{\mathrm{free}}=1$--$2$ without near-duplicate removal), where the
+        planted-canary clock lags decay at one capacity---an effective-repetition
+        signature (\S\ref{sec:realscale}).
+  \item We resolve the post-threshold decay shape (P4) on a fine epoch grid in four
+        cells: excess grows super-linearly (roughly quadratic to cubic,
+        cell-dependent; we show why a single decay exponent is not identified), and at
+        half-octave resolution the memorization crossing leads or coincides with---and
+        never lags---the decay onset, an ordering that holds in all nine cells once a
+        30-run revision fine grid measures the remaining cells' crossings, and that
+        is robust to halving, though not doubling, the canary detection threshold
+        (\S\ref{sec:p3}, \S\ref{sec:p4}).
+\end{enumerate}
+This positions the work as a controlled falsification: the bounded $4$--$10$ band
+holds across an order-of-magnitude span in entropy and a ${\sim}23\times$ span in
+capacity, while exact thresholds and LLM-scale transfer remain open
+(\S\ref{sec:discussion}).
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.88\linewidth]{E1_landscape.pdf}
+\caption{The free-repetition count $R_{\mathrm{free}}$ across
+model scale. The ${\approx}4$-epoch ``nearly free'' band of
+\citet{muennighoff2023scaling} (measured up to $8.7$B parameters) reappears as a
+robust lower bound in our $2.5$--$57$M-parameter synthetic and ${\sim}5$M-parameter
+byte-level runs, while the upper edge drifts to $10$ in the small-capacity corner
+(the plotted synthetic markers cover the core $2.5$--$10$M grid; the xl/xxl
+extension to $57$M, \S\ref{sec:capxl}, gives $R_{\mathrm{free}}=4$ throughout, and
+a real-text replication at $30$--$57$M, not plotted, keeps FineWeb-Edu at
+$R_{\mathrm{free}}=6$ and $4$, \S\ref{sec:realscale}).
+The labelled upper marker sits at Chen 2026 decay onset (${\approx}16$ epochs);
+Muennighoff's $8.7$B circle is the ${\approx}4$-epoch floor. \citet{yan2025repeatmore} argue the tolerable count grows
+$\Theta(\log N)$ with data size, and \citet{charton2024repeated} report repetition is
+net-helpful at fixed compute on algorithmic tasks.}
+\label{fig:landscape}
+\end{figure}
+
+\begin{table}[htbp]
+\centering
+\caption{Data-repetition results across scale (the data behind Figure~\ref{fig:landscape}).
+Each study uses a different degradation criterion, so values are comparable in spirit
+(the ${\approx}4$-epoch knee), not in exact threshold.}
+\label{tab:repeat-landscape}
+\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.24\linewidth}>{\raggedright\arraybackslash}p{0.20\linewidth}>{\raggedright\arraybackslash}p{0.42\linewidth}@{}}
+\toprule
+Study & Scale & Repetition result \\
+\midrule
+\citet{muennighoff2023scaling} & $8.7$B / $900$B tok & $R_{\mathrm{free}}{\approx}4$; half-life $R^{*}_{D}{\approx}15$ (${\approx}16$ ep.) \\
+\citet{taylor2022galactica} & $120$B / $106$B tok & $R_{\mathrm{free}}{\approx}4.25$ (overfits at 5th epoch) \\
+\citet{hernandez2022repeateddata} & ${\le}{\sim}1.5$B / $100$B tok & worst case: $0.1\%{\times}100$ $\to$ ${\sim}2\times$ effective-size loss \\
+\citet{charton2024repeated} & $22$--$35$M & repetition net-helpful at fixed compute \\
+\citet{chen2026augment} & $150$M / $75$M tok & decay onset ${\approx}16$ epochs (min val loss) \\
+\citet{yan2025repeatmore} & theory + LLM & tolerable epochs grow ${\sim}\Theta(\log N)$ with data size \\
+\textbf{This work} & $2.5$--$57$M / $20$--$50$M tok & $R_{\mathrm{free}}\,4$--$10$; no double-descent \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Relation to toy-model science.}
+Our approach follows a tradition of using small, controlled testbeds to isolate mechanisms
+that are confounded at scale. Grokking was first characterized on small algorithmic datasets \citep{power2022grokking}
+and later shown to generalise beyond them \citep{liu2023omnigrok}; small-scale proxies have
+also been used to study large-scale transformer training instabilities
+\citep{wortsman2023smallscale}. We use Markov corpora to give the repetition law a
+controlled stress-test with independently tunable variables that natural-language corpora
+cannot provide. The scientific logic is
+falsificationist: a ${\sim}100\times$ shift predicted by the linear-ratio account, with
+no sign of it in the grid, is a strong negative result regardless of the absolute scale. Figure~\ref{fig:scheme} summarizes the design and findings. This reconciliation
+register---explaining a phenomenon by an established mechanism at controlled scale
+rather than positing a new one---follows recent Neurocomputing work reconciling
+grokking with statistical-learning theory \citep{neucom2026grokking}.
+
+\section{Methods}\label{sec:setup}
+
+We train decoder transformers with a full-sequence next-token objective on synthetic
+Markov corpora \citep{bietti2023birth} whose entropy is set by construction
+(transition-matrix concentration). The
+core sweep fixes the token budget at $B = 20$M and varies the number of unique tokens $U$
+so that the epoch count $n = B/U \in \{1, 2, 4, 10, 20, 40\}$, crossed with capacity
+$\{\text{small}, \text{medium}, \text{large}\}$ and entropy $\{\text{low}, \text{medium},
+\text{high}\}$, under AdamW with 3 core seeds. Every run in the study uses AdamW at
+weight decay $0.01$; unlike the learning rate, which is swept over a $10\times$ span
+in the med/med cell (\S\ref{sec:limitations}), weight decay is held at this single
+value throughout and is not varied, so all reported results are single-weight-decay
+results. A follow-up seed audit adds seeds 3--4 for
+the small/low and small/med boundary cells at $n\in\{4,10,20\}$; fresh-budget controls at
+$\{5\text{M}, 10\text{M}, 40\text{M}\}$ provide the no-repetition reference. A revision
+round adds two further arms at the same budget: a 30-run fine-grid extension
+($n\in\{6,8\}$, three fresh seeds per point, seeds 20--22) covering the five cells
+outside the fine grid of \S\ref{sec:p4}, and a twelve-seed audit (seeds 20--31) of the
+med/low boundary rung at $n{=}10$ (Appendix~\ref{app:bootstrap}); a separate 48-run
+real-text replication at larger byte budgets is described in \S\ref{sec:realscale}. Probes are held-out
+validation loss and a copied-canary memorization gap \citep{carlini2019secret}. We operationalize the law as
+$\mathrm{excess}(n) = \mathrm{val\_loss}(n) - \mathrm{val\_loss}(\text{fresh})$ and define
+$R_{\mathrm{free}}$ as the largest $n$ with median excess below $0.05$ nats---the number
+of ``free'' epochs. For intuition, $0.05$ nats is ${\approx}0.072$ bits per token;
+expressed as a memorized fraction of each corpus's entropy floor,
+$\phi = \varepsilon_{\mathrm{free}}/H$, the same absolute tolerance is ${\approx}3\%$ of
+the medium-entropy floor but ${\approx}13\%$ of the low-entropy floor and
+${\approx}1.2\%$ of the high-entropy floor---a convention dependence we quantify
+directly with a relative-threshold reanalysis (Table~\ref{tab:twoconv},
+\S\ref{sec:p1}). The three capacity presets are small ($d{=}256$, $L{=}3$, ${\approx}2.5$M
+params), medium ($d{=}384$, $L{=}3$, ${\approx}5.6$M params), and large ($d{=}448$, $L{=}4$,
+${\approx}10$M params)---extended upward by the xl/xxl presets of \S\ref{sec:capxl} to a
+total ${\sim}23\times$ span---the core three spanning a ${\sim}4\times$ range in parameter count and
+${\sim}900$--$3{,}500\times$ smaller than the $8.7$B-parameter models of
+\citet{muennighoff2023scaling} (at the core $20$M budget the anchor's $900$B-token
+budget is ${\sim}45{,}000\times$ larger; \S\ref{sec:intro}). The three entropy presets
+correspond to per-token entropy floors of $0.37$ nats (low), $1.76$ nats (medium), and
+$4.10$ nats (high)---operationalized throughout as the fresh-data ($n{=}1$) validation
+loss, i.e.\ the achieved compression floor of each construction rather than its analytic
+Markov entropy---a ${>}10\times$ span underpinning the entropy-axis coverage claim in
+P2 (\S\ref{sec:p2}). Each synthetic corpus is generated by a Markov chain over a
+$256$-token alphabet whose successor distributions are constructed, per context, by
+assigning Gaussian logits to a fixed number of allowed successor tokens (the
+branching factor) and applying a softmax at a preset temperature; all other
+successors have probability zero. The low-entropy preset uses an order-2 chain (the
+two-token context is hashed to one of $256$ transition rows) with branching $2$ and
+temperature $0.4$; the medium and high presets are order-1 with branching $8$ at
+temperature $1.0$ and branching $64$ at temperature $2.0$. Training and validation
+sequences are contiguous length-$128$ windows of a single sampled stream, with chunk
+order reshuffled each epoch. Table~\ref{tab:entropy} places the exact per-token
+entropy rate of each construction---computed from the transition law via its
+stationary distribution (over token pairs for the order-2 preset)---beside the
+model-based floors: the floors exceed the achievable analytic values by
+$0.022$--$0.070$ nats, and the shortfall is capacity-dependent only in the
+low-entropy column (where it is also largest relative to the floor,
+$7$--$15\%$), which is why we quote achieved compression floors rather than
+analytic entropies throughout. The analytic entropy span,
+$4.038/0.344 \approx 11.7\times$, confirms the ${>}10\times$ entropy-axis coverage
+independently of the trained models.
+
+\begin{table}[htbp]
+\centering
+\caption{Analytic entropy of each Markov preset beside the model-based floors.
+$H$: exact per-token entropy rate of the construction (nats), from the stationary
+distribution of the transition law. Achievable floor: $H$ corrected for the shorter
+context available to each $128$-token window's first prediction (this correction
+is nonzero only for the order-2 low preset). Model floors: median fresh-data
+($n{=}1$) validation loss per capacity---the operational floors used in the text.
+The floor$-$analytic gap ($0.022$--$0.070$ nats) is the model shortfall; it shrinks
+with capacity only at low entropy.}
+\label{tab:entropy}
+\scriptsize
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+Preset & Order / branching / temp. & $H$ (nats) & Achievable floor & \multicolumn{3}{c}{Model floor (small / medium / large)} \\
+\midrule
+low    & 2 / 2 / 0.4   & 0.312 & 0.344 & 0.405 & 0.381 & 0.372 \\
+medium & 1 / 8 / 1.0   & 1.742 & 1.742 & 1.766 & 1.764 & 1.763 \\
+high   & 1 / 64 / 2.0  & 4.038 & 4.038 & 4.109 & 4.102 & 4.099 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Canary memorization probe.}
+Each run plants $8$ canary sequences of $128$ tokens, sampled from the same
+generator law as the training corpus under a dedicated seed. Each canary is spliced
+into the unique-data pool $4$ times at uniformly random positions, so the planted
+mass is $4{,}096$ tokens ($0.02\%$--$0.8\%$ of the pool depending on $U$), and every
+planted copy is revisited once per epoch: at epoch count $n$ each canary has
+received $4n$ gradient exposures. The memorization gap is the mean full-sequence
+next-token cross-entropy on a matched fresh bank---$8$ sequences of the same length
+from the same generator under disjoint seeds, never trained on---minus the mean on
+the canary bank, so a positive gap means the model assigns lower loss to the exact
+seen sequences than to statistically identical unseen ones. Memorization onset is
+the smallest $n$ at which the median gap exceeds
+$\varepsilon_{\mathrm{can}} = 0.10$ nats; a sensitivity reanalysis of this
+threshold at $\varepsilon_{\mathrm{can}} \in \{0.05, 0.10, 0.20\}$ nats is
+reported in \S\ref{sec:p3}. (Real-byte corpora have no exchangeable
+fresh bank; \S\ref{sec:scale} states the growth-above-$n{=}1$ convention used
+there.)
+The $4\times$ plant rate is a detector-sensitivity choice, and it makes the probe's
+exposure count $4n$ rather than $n$: the canary bank is oversampled relative to the
+corpus by construction. This distinguishes two axes on which any onset can be read,
+the nominal per-epoch axis on which the free-reuse rule and $R_{\mathrm{free}}$ are
+both defined, and a gradient-exposure axis on which the planted canaries advance
+$4\times$ faster than the corpus they are embedded in. A dedicated $324$-run control
+that repeats the full grid at plant rate $1$ separates the two
+(Fig.~\ref{fig:exposure-control}), and
+\S\ref{sec:p3exposure} reports both axes for every cell; the free band is unchanged
+by the plant rate, while the onset ordering is specific to the nominal axis under
+the oversampled convention.
+
+\section{Results}\label{sec:results}
+
+We organise the results as four claims, P1--P4: the free zone is a bounded $4$--$10$
+epoch band across capacity and entropy (P1); the linear-ratio account's predicted
+${\sim}100\times$ threshold shift is absent (P2); repetition decay onset coincides with
+memorization onset (P3);
+and the post-threshold decay shape resolves to steep super-linear growth (P4).
+
+\subsection{A bounded 4--10 free-epoch band, invariant to capacity and entropy (P1)}\label{sec:p1}
+
+Across the full-coverage cells, excess validation loss stays below $0.05$ nats through
+$n = 4$ and then either breaks at $n = 10$ (e.g.\ med/med, absolute validation loss:
+$1.764 \to 1.767 \to 1.778$ for $n = 1,2,4$---excess $0.003$/$0.014$ over the $n{=}1$
+baseline---then $1.900 \to 3.409 \to 5.671$ for $n = 10,20,40$) or, in the audited
+small/low and small/med cells, remains barely free at $n=10$ (excess $0.0498$) before
+breaking at $n=20$. Thus $R_{\mathrm{free}}$ is a $4$--$10$ band rather than a point
+constant (Table~\ref{tab:cells}). Excess is monotone in $n$---no repeated-data double-descent
+\citep{hernandez2022repeateddata} appeared, so the non-monotone-decay falsifier did not
+fire (Fig.~\ref{fig:repeat}).
+The $4$--$10$ band is threshold-sensitive: at $\varepsilon_{\mathrm{free}}{=}0.045$ nats
+the two boundary cells exceed the threshold and $R_{\mathrm{free}}=4$ everywhere; at
+$\varepsilon_{\mathrm{free}}{=}0.10$ nats the upper edge of the band expands
+(Table~\ref{tab:cells}). We report $R_{\mathrm{free}}$ as a threshold decision rather
+than a point estimate; a seed-level bootstrap audit of the two boundary cells at a
+tripled seed budget (15 seeds per cell; Appendix~\ref{app:bootstrap}) confirms this is
+forced, not cautious: the 95\% confidence intervals on their $n{=}10$ excess
+($[0.029,0.057]$ and $[0.043,0.062]$ nats) narrow onto the $0.05$-nat threshold rather
+than away from it, with bootstrap exceedance probabilities of $0.15$ and $0.42$.
+A revision fine-grid extension subsequently measured each remaining cell's crossing
+directly (Table~\ref{tab:crossings}, \S\ref{sec:p4}): the interpolated crossings run
+from $n^\star = 5.04$ to $10.34$ and are dispersed rather than concentrated, with
+seven inside the band and the two small-capacity cells just above its upper edge.
+The band edges are thus rounded measured crossings rather than a common crossing
+quantized by the coarse grid's $2.5\times$ spacing, subject to the design limit
+noted in \S\ref{sec:p4} that the coarse grid had already confined each cell's
+crossing before the fine rungs were added.
+
+\paragraph{Absolute vs.\ relative threshold conventions.}\label{par:twoconv}
+The declared $0.05$-nat criterion is absolute, so as a fraction of each cell's
+entropy floor it is a looser tolerance at low entropy ($0.05/0.37 \approx 13\%$)
+than at high ($0.05/4.10 \approx 1.2\%$). To test whether the band depends on that
+convention, we recompute every cell under a relative criterion
+$\varepsilon_{\mathrm{cell}} = \phi\, H_{\mathrm{cell}}$, with $H_{\mathrm{cell}}$
+the cell's fresh-data floor and $\phi = 0.05/H_{\mathrm{med/med}} = 0.028$
+calibrated so the reference cell keeps its absolute verdict. Seven of nine cells
+keep their verdict unchanged (Table~\ref{tab:twoconv}). The two that change are the
+small-capacity entropy extremes, and they move in opposite directions, as a pure
+rescaling requires: small/low tightens ($R_{\mathrm{free}} = 10 \to 2$; its $n{=}4$
+excess of $0.0125$ nats exceeds the $0.0115$-nat relative threshold by $0.001$
+nats---a threshold-edge call at the same razor margin as the absolute boundary
+cells), while small/high loosens ($R_{\mathrm{free}} = 4 \to 10$; $n{=}10$ excess
+$0.090 < 0.116$). Under the relative convention the band's numeric label is
+therefore $2$--$10$ rather than $4$--$10$, with the medium- and large-capacity rows
+pinned at $R_{\mathrm{free}} = 4$ under both conventions. What is
+convention-independent: the bounded band, the absence of any monotone trend in
+entropy or capacity, and the absence of the linear-ratio account's predicted
+${\sim}100\times$ shift---the largest convention-induced movement is one grid rung,
+confined to the small-capacity corner. What is convention-dependent: the specific
+numerals ``$4$--$10$'', which are tied to the declared absolute threshold. Two
+caveats attach to the relative reading itself: at low entropy
+$\varepsilon_{\mathrm{cell}} \approx 0.011$ nats approaches the seed-level spread
+of the excess estimate and sits within $0.002$ nats of med/low's $n{=}4$ excess
+(lower signal-to-noise, which is why the absolute
+convention remains the declared primary), and the memorization threshold is kept
+absolute ($0.10$ nats) under both conventions.
+
+\begin{table}[htbp]
+\centering
+\caption{Two-convention comparison of $R_{\mathrm{free}}$ across the core grid.
+Absolute: median excess $< 0.05$ nats (the paper's declared criterion). Relative:
+median excess $< \phi H_{\mathrm{cell}}$ with $\phi = 0.05/H_{\mathrm{med/med}} =
+0.028$, so the reference cell matches its absolute verdict by construction.
+Medians pool all available seeds per point (15 at the audited boundary points,
+3--5 elsewhere), coarse epoch grid $n \in \{1,2,4,10,20,40\}$. Seven of nine
+verdicts are convention-independent; the two changes sit in the small-capacity
+corner and move in opposite directions.}
+\label{tab:twoconv}
+\scriptsize
+\begin{tabular}{@{}llccccc@{}}
+\toprule
+Capacity & Entropy & $H$ floor (nats) & $\varepsilon_{\mathrm{rel}}$ (nats) & $R_{\mathrm{free}}$ (abs) & $R_{\mathrm{free}}$ (rel) & Changed \\
+\midrule
+small & low    & 0.405 & 0.0115 & 10 & 2  & yes \\
+small & medium & 1.766 & 0.0500 & 10 & 10 & --- \\
+small & high   & 4.109 & 0.1164 & 4  & 10 & yes \\
+\midrule
+medium & low    & 0.381 & 0.0108 & 4 & 4 & --- \\
+medium & medium & 1.764 & 0.0500 & 4 & 4 & --- \\
+medium & high   & 4.102 & 0.1162 & 4 & 4 & --- \\
+\midrule
+large & low    & 0.372 & 0.0105 & 4 & 4 & --- \\
+large & medium & 1.763 & 0.0500 & 4 & 4 & --- \\
+large & high   & 4.099 & 0.1162 & 4 & 4 & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\figtikz[\linewidth]{E1_scheme}
+\caption{Study design and headline finding. The LLM-scale ${\sim}4$-epoch free-reuse heuristic and its capacity/entropy-artifact interpretation are stress-tested on a controlled synthetic-Markov testbed orders of magnitude smaller, sweeping the core grid of three capacities $\times$ three entropy levels $\times$ repetition counts $n=1$--$40$ with canary memorization probes (an xl/xxl extension, \S\ref{sec:capxl}, stretches the capacity span to ${\sim}23\times$). The free band reproduces as a bounded $4$--$10$-epoch range, the linear-ratio account's predicted ${\sim}100\times$ threshold shift is absent, and the decay onset coincides with memorization onset in $8/9$ cells.}
+\label{fig:scheme}
+\end{figure}
+
+\begin{table}[htbp]
+\centering
+\caption{Per-cell repetition results across the $3\times3$ capacity\,$\times$\,entropy grid
+(20M-token budget, 3 seeds per cell; the two boundary cells' Excess$_R$ entries are
+the original five-seed medians---the 15-seed audit of \S\ref{app:bootstrap} gives
+$0.0447$/$0.0492$, leaving $R_{\mathrm{free}}$ unchanged; excess threshold
+$\varepsilon_{\mathrm{free}}=0.05$ nats,
+canary threshold $\varepsilon_{\mathrm{can}}=0.10$ nats).
+$R_{\mathrm{free}}$: largest epoch count $n$ with median excess $<0.05$ nats.
+Excess$_{R}$: excess val loss (nats) at $n=R_{\mathrm{free}}$.
+Decay onset / Mem onset: smallest $n$ where excess or canary gap first exceeds its threshold.
+Coincide: onset agreement (Y/N).
+All nine cells have full $n\in\{1,2,4,10,20,40\}$ coverage.
+The 4--10 free-epoch band holds for all 9 cells; 8 of 9 cells
+show onset coincidence (small/low misses: decay onset $n=20$, mem onset $n=10$).
+The onset columns are counted per epoch under the $4\times$ canary plant rate;
+Table~\ref{tab:exposure} gives the exposure-matched (plant rate $1$) verdicts per
+cell, which leave $R_{\mathrm{free}}$ unchanged and move the ordering.
+All values are verified against the per-cell result logs.}
+\label{tab:cells}
+\scriptsize
+\begin{tabular}{@{}llccccc@{}}
+\toprule
+Capacity & Entropy & $R_{\mathrm{free}}$ & Excess$_{R}$ (nats) & Decay onset & Mem onset & Coincide \\
+\midrule
+small & low    & 10 & 0.0498 & $n=20$ & $n=10$ & N \\
+small & medium & 10 & 0.0498 & $n=20$ & $n=20$ & Y \\
+small & high   &  4 & 0.0069 & $n=10$ & $n=10$ & Y \\
+\midrule
+medium & low    & 4 & 0.0092 & $n=10$ & $n=10$ & Y \\
+medium & medium & 4 & 0.0141 & $n=10$ & $n=10$ & Y \\
+medium & high   & 4 & 0.0147 & $n=10$ & $n=10$ & Y \\
+\midrule
+large & low    & 4 & 0.0030 & $n=10$ & $n=10$ & Y \\
+large & medium & 4 & 0.0162 & $n=10$ & $n=10$ & Y \\
+large & high   & 4 & 0.0188 & $n=10$ & $n=10$ & Y \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{The large-capacity row completes the grid.}\label{sec:largecompletion}
+The large-capacity row is measured at the
+full epoch grid $n\in\{1,2,4,10,20,40\}$ for all three entropy levels
+(${\approx}10$M-parameter decoder, 3 seeds per point). The sweep
+falls inside the same $4$--$10$ band as the smaller capacities:
+all three large-capacity cells give $R_{\mathrm{free}}=4$, with excess at $n=4$ of
+$0.0030$ (low), $0.0162$ (medium), and $0.0188$ (high) nats, well below the $0.05$-nat
+threshold, then breaking sharply at $n=10$ (excess $0.088$/$0.227$/$0.492$) and severely by
+$n=40$ (excess $0.97$/$3.92$/$7.67$) (Fig.~\ref{fig:large-completion}a).
+Decay onset and memorization onset coincide at $n=10$ in every large-capacity cell
+(Fig.~\ref{fig:large-completion}b), so the completed row strengthens the primary result: there is no upward shift of $R_{\mathrm{free}}$ at the largest
+capacity, and the band remains $4$--$10$ across the full ${\sim}4\times$ capacity range.
+
+\paragraph{An xl/xxl extension stretches the capacity span to ${\sim}23\times$.}\label{sec:capxl}
+A dedicated 44-run extension adds two presets above the core grid: xl ($d{=}640$,
+$L{=}6$, ${\approx}29.9$M params) and xxl ($d{=}768$, $L{=}8$, ${\approx}57.1$M params,
+${\sim}150\times$ smaller than the $8.7$B reference), both at the same 20M-token
+budget under AdamW. xl crosses all three entropy levels and xxl the medium level, on
+the epoch grid $n\in\{2,4,10,20\}$ (three seeds at xl, two at xxl). There is no
+fresh $n{=}1$ arm, so excess is measured against the $n{=}2$ cell; this reference
+bias is bounded by the main grid, where median excess at $n{=}2$ never exceeds
+$0.008$ nats, far below the $0.05$-nat threshold. The band does not move (Fig.~\ref{fig:capxl}). In all four cells the median excess
+at $n{=}4$ stays below the threshold (${\leq}0.001$/$0.015$/$0.034$ for xl
+low/med/high, $0.010$ for xxl/med), then breaks sharply at $n{=}10$
+($0.064$--$1.33$ nats). $R_{\mathrm{free}}=4$ with decay onset at $n{=}10$ in every
+cell---the same band as at $2.5$M params, now across a ${\sim}23\times$ span. The canary clock agrees:
+memorization onset coincides with decay onset at $n{=}10$ in three of the four cells
+and leads it at xl/high (gap $0.121$ at $n{=}4$), preserving the leads-or-coincides,
+never-lags pattern of \S\ref{sec:p4}.
+
+\begin{figure*}[htbp]
+\centering
+\includegraphics[width=\linewidth]{E1_repeat.pdf}
+\caption{Repetition value-decay across the small- and medium-capacity $\times$ entropy cells
+(6 cells, 20M-token budget, 3 core seeds; the large-capacity row is shown separately in
+Fig.~\ref{fig:large-completion}).
+(a)~Excess validation loss vs.\ epoch count $n = B/U$ on log scale; the dashed line marks
+the 0.05-nat threshold and the dotted vertical marks $R_{\mathrm{free}} \approx 4$.
+(b)~Copied-canary memorization gap for the same cells; dashed line is the 0.10-nat
+memorization threshold.
+$R_{\mathrm{free}}$ lies in the 4--10 band across $>10\times$ entropy and ${\sim}4\times$
+capacity; no double-descent non-monotone decay was observed; decay onset tracks
+canary-memorization onset in 5 of 6 plotted cells (small/low misses). Values below $10^{-3}$ nats are clamped to the axis floor for log display.
+(c)~Canary gap at each cell's own decay-onset rung: a ${\geq}0.10$-nat
+memorization signal is already present at or before decay onset in every
+full-coverage cell.
+(d)~$R_{\mathrm{free}}$ per cell against the shaded $4$--$10$ band.
+Panel summaries: (a)~value decay. (b)~cell response. (c)~seed variation. (d)~band edges.}
+\label{fig:repeat}
+\end{figure*}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{E1_large_completion.pdf}
+\caption{Completed large-capacity row (${\approx}10$M-parameter decoder, 20M-token budget,
+3 seeds per point, full epoch grid $n\in\{1,2,4,10,20,40\}$).
+(a)~Excess validation loss vs.\ epoch count $n = B/U$ (log--log) for low, medium, and
+high entropy; the dashed line is the 0.05-nat free-epoch threshold and the dotted vertical
+marks $R_{\mathrm{free}} = 4$. All three cells stay free through $n=4$ and break at $n=10$.
+(b)~Copied-canary memorization gap for the same cells; the dashed line is the 0.10-nat
+memorization threshold. Decay onset coincides with memorization onset at $n=10$ in every
+cell. The completed row sits inside the same 4--10 band as the smaller capacities, with no
+sign of the linear-ratio account's ${\sim}100\times$ upward shift of $R_{\mathrm{free}}$. Values below $10^{-3}$ nats are clamped to the axis floor for log display.
+(c)~$R_{\mathrm{free}}$ per large-capacity entropy cell against the band: the
+completed large row sits inside the same $4$--$10$ band as the small/medium rows.
+(d)~Onset coincidence per cell (decay vs memorization onset from the cell
+verdicts): the large row preserves the leads-or-coincides ordering of the main
+grid.
+Panel summaries: (a)~large-row trajectories. (b)~seed onsets. (c)~free count. (d)~budget-entropy boundary.}
+\label{fig:large-completion}
+\end{figure}
+
+\subsection{Not a linear capacity/entropy artifact (P2)}\label{sec:p2}
+
+The artifact hypothesis, in the form this grid is built to test, holds that the
+free-epoch threshold tracks the capacity-to-entropy ratio proportionally: if
+$R_{\mathrm{free}}$ were simply ``the number of epochs at which capacity begins to exceed
+what the data's entropy can fill,'' it should scale roughly linearly with that ratio. We
+state this linear form explicitly because no published account commits to one:
+capacity-accounting results \citep{morris2025capacity} quantify a memorization budget in
+bits but do not specify how a free-repetition threshold should scale with it, and the one
+explicit scaling claim in the literature is logarithmic \citep{yan2025repeatmore}. The
+linear form is the strongest testable member of the capacity-ratio family, and the grid
+should be read as constraining that family---excluding every member that predicts a
+shift of one grid rung (${\geq}2.5\times$) or more across the $44\times$ ratio
+span---rather than as falsifying a specific published claim. Our
+grid moves the ratio by a factor of ${\approx}44$ (an $11\times$ span of measured corpus
+entropy, $0.37$--$4.10$ nats, crossed with a $3.9\times$ span of parameters,
+$2.5$--$9.9$M), so the linear reading predicts a shift of order $10$--$100\times$. We do
+not observe any such shift: $R_{\mathrm{free}}$ stays in the $4$--$10$ range across all
+nine cells, including the full large-capacity row (\S\ref{sec:largecompletion}), and the
+natural-text tests add an out-of-family bridge (Fig.~\ref{fig:grid}). One honest scope
+limit: the literature also contains a logarithmic reading---\citet{yan2025repeatmore}
+argue the tolerable repetition count grows as $\Theta(\log N)$ with data size---and over
+this grid's $40\times$ span of unique tokens a logarithmic account predicts a movement of
+at most one grid rung, below our $2.5\times$-per-rung resolution. The grid therefore
+falsifies the linear-ratio form of the artifact account and cannot separate the
+bounded-universal reading from a slow logarithmic growth; the two accounts diverge only
+at spans far larger than any controlled testbed, which is exactly where the
+memorization-onset mechanism (P3) provides the discriminating evidence instead.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{E1_capxl.pdf}
+\caption{The xl/xxl capacity extension (44 runs; \S\ref{sec:capxl}).
+(a)~Excess validation loss vs epoch count $n$, referenced to the $n{=}2$ cell (this
+grid has no fresh $n{=}1$ arm; the reference bias is bounded at $0.008$ nats by the
+main grid); the dashed line marks the $0.05$-nat threshold and the dotted vertical
+$R_{\mathrm{free}}=4$. All four cells sit below threshold at $n{=}4$ and break
+sharply at $n{=}10$---the same $4$--$10$ band as the core grid, at $29.9$M and
+$57.1$M params.
+(b)~Copied-canary memorization gap for the same cells; memorization onset coincides
+with decay onset at $n{=}10$ in three of four cells and leads it at xl/high. Values below $10^{-3}$ nats are clamped to the axis floor for log display.
+(c)~$R_{\mathrm{free}}$ per xl/xxl cell against the $4$--$10$ band, recomputed
+from the run summaries: the band is capacity-invariant out to $57$M parameters.
+(d)~Onset ordering per cell (first $n$ with canary gap ${\geq}0.10$ vs first $n$
+with excess ${\geq}0.05$): the lead-or-coincide ordering is preserved, with the
+xl/high canary leading at $n=4$ as in the main grid.
+Panel summaries: (a)~xl-xxl curves. (b)~capacity invariance. (c)~canary lead. (d)~endpoint sensitivity.}
+\label{fig:capxl}
+\end{figure}
+
+\paragraph{Grid-resolution power argument.}\label{par:powerarg}
+The null result above is a properly powered falsification of the linear-ratio
+alternative, not an underpowered failure-to-find---and, equally, it is powered against
+that alternative alone; the logarithmic account noted above predicts a
+sub-rung movement this grid cannot detect, and we do not claim to falsify it. The epoch
+grid $n \in \{1, 2, 4, 10, 20, 40\}$ has a
+multiplicative step size of $\approx 2.5\times$ per rung.  The linear-ratio hypothesis predicts
+a $\sim 100\times$ shift of $R_{\mathrm{free}}$ with the capacity/entropy ratio; even a
+conservative $10\times$ upward shift from the observed base of $R_{\mathrm{free}} \approx 4$
+would require $R_{\mathrm{free}} \approx 40$---the highest rung on the grid, which was
+measured in every cell and never reached.  A full $100\times$ shift would require
+$R_{\mathrm{free}} \approx 400$ epochs, entirely off the grid; such an effect would
+manifest as ``still free at $n = 40$,'' which does not occur in any cell.  The predicted
+effect size ($\geq 10\times$) is therefore 1--2 orders of magnitude larger than the grid's
+detection floor (${\approx}2.5\times$ per step), making this a large-effect-size
+falsification robust to the grid's coarseness:
+\begin{equation}
+  \underbrace{2.5\times}_{\text{grid step (detectable)}}
+  \;\ll\;
+  \underbrace{10\text{--}100\times}_{\text{predicted shift}}
+  \;\Longrightarrow\;
+  R_{\mathrm{free}}^{\text{pred}} \approx 40\text{--}400,
+  \qquad
+  R_{\mathrm{free}}^{\text{obs}} = 4\text{--}10 \ \ ({\leq}2.5\times).
+  \label{eq:power}
+\end{equation}
+The observed spread across $>10\times$
+entropy and $\sim 4\times$ capacity is $4$--$10$ ($\leq 2.5\times$, i.e.\ $\leq 1$ grid
+step), confirming the absence of the predicted shift of Eq.~\eqref{eq:power}; the xl/xxl extension
+(\S\ref{sec:capxl}) holds $R_{\mathrm{free}}=4$ out to a ${\sim}23\times$ span.
+
+\subsection{The decay onset coincides with memorization onset (P3)}\label{sec:p3}
+
+On the nominal per-epoch axis, and under the $4\times$ plant convention of
+\S\ref{sec:setup}, the onset of repetition damage (decay onset,
+$\delta_{\mathrm{decay}}$, in
+Table~\ref{tab:cells}) coincides with the onset of canary memorization (the
+copied-canary gap) in 8 of 9 cells (Table~\ref{tab:cells}, ``Coincide'' column).
+Both scope qualifiers are load-bearing and are established quantitatively in
+\S\ref{sec:p3exposure}, which repeats the entire grid at plant rate $1$.
+Fresh-budget controls---where the same
+token count is supplied as unique data---show no comparable gap, ruling out a
+sampling/estimation artifact: the onset is accompanied by repetition-driven memorization
+rather than a budget effect---an observational coincidence on a coarse grid that we do not
+interpret as proof that memorization causes the damage.
+The tally's evidential weight must also be scoped against the grid geometry: both
+onsets are quantized to a $2.5\times$-spaced grid, and the post-threshold cliff spans
+only one to two grid intervals in most cells, so an unrelated monotone quantity
+forced to cross somewhere within the cliff would land on the decay-onset rung with
+probability $0.23$--$0.57$ per cell and would reproduce a tally of ${\geq}8/9$ with
+probability ${\approx}0.009$ (under uniform placement on the grid's five candidate
+rungs, ${\approx}2\times10^{-5}$); correlation from the shared repetition stress
+could inflate the tally further. The coarse-grid coincidence is therefore
+suggestive rather than decisive on its own; the informative evidence for the onset
+ordering is the half-octave fine grid of \S\ref{sec:p4}, where memorization leads
+or coincides with---and never lags---decay in all nine cells (four in the original
+fine grid, five in the revision extension of Table~\ref{tab:crossings}), together with
+the seed-robust small/low dissociation (Appendix~\ref{app:bootstrap}).
+
+\paragraph{Canary-threshold sensitivity.}\label{par:cansens}
+The $0.10$-nat canary criterion is itself a convention, so we recompute every
+cell's memorization onset at $\varepsilon_{\mathrm{can}} \in \{0.05, 0.10, 0.20\}$
+nats on the pooled fine-grid gap curves, holding decay onset at the declared
+$0.05$-nat excess criterion. The leads-or-coincides tally is robust to halving the
+threshold but not to doubling it: $9/9$ cells at both $0.05$ and $0.10$ nats, but
+$3/9$ at $0.20$ nats, where the stricter detector fires one to two rungs later
+along the same rising gap curve and postdates decay onset in six cells. The
+asymmetry is mechanical rather than evidential---any sufficiently strict detector
+eventually postdates a fixed decay criterion---but it bounds what the ordering
+claim means: the median canary gap at each cell's decay-onset rung is
+$0.11$--$0.24$ nats, so the threshold-robust statement is that a ${\geq}0.10$-nat
+memorization signal is already present at or before decay onset in all nine cells,
+not that a threshold-free ``memorization event'' precedes a threshold-free
+``decay event.'' The exact ceiling is worth stating rather than leaving implicit
+in that range. Because a cell's memorization onset precedes its decay onset
+exactly when the canary gap reaches $\varepsilon_{\mathrm{can}}$ at or before the
+decay-onset rung, the tally holds at $9/9$ for every
+$\varepsilon_{\mathrm{can}} \leq 0.1119$ nats and falls to $8/9$ immediately
+above it. The binding cell is small/med, whose gap first reaches $0.1119$ at
+$n{=}12$, its own decay-onset rung. The declared $0.10$-nat criterion therefore
+carries $11.9\%$ headroom, which is real but not large, and the ordering claim
+should be read as scoped to detectors at least that sensitive. Collecting these
+qualifiers: the published leads-or-coincides ordering holds under three conditions
+that must all be met together---the nominal per-epoch axis rather than the
+gradient-exposure axis, the $4\times$ canary plant rate rather than an
+exposure-matched rate of $1$, and a canary criterion at or below $0.1119$
+nats---and it fails outside any one of them, whereas $R_{\mathrm{free}}$ and the
+bounded band survive all three variations unchanged. The ordering is also optimizer-scoped: under Muon the
+medium-capacity cell inverts it---decay onset ($n{=}20$) precedes
+canary-threshold memorization onset ($n{=}40$) by one grid rung
+(\S\ref{sec:pcfgmuon})---so leads-or-coincides is established for AdamW, and the
+Muon inversion marks an explicit boundary of the memorization-clock account taken
+up in \S\ref{sec:memclock}.
+
+\paragraph{An exposure-matched control separates the two axes.}\label{sec:p3exposure}
+The $4\times$ plant rate makes the canary bank advance four times faster than the
+corpus in gradient exposures, so the ordering above is stated on an axis where the
+probe is oversampled relative to the quantity it is used to explain. A dedicated
+$324$-run control isolates the plant rate: the full $3\times3$ grid is re-run at
+plant rate $1$ and at plant rate $4$ on the same three fresh seeds ($201$--$203$),
+the same epoch grid $n\in\{1,2,4,10,20,40\}$, the same generator law, and the same
+two criteria, so the plant rate is the only quantity that differs between the two
+arms (Table~\ref{tab:exposure}).
+Two results separate cleanly. The free band does not move: $R_{\mathrm{free}}$ is
+identical between the two plant rates in all nine cells, so neither the $4$--$10$
+band nor the absence of the ratio account's predicted ${\sim}100\times$ shift
+depends on the probe convention at all. The ordering does move: at plant rate $4$
+the two onsets coincide in $9/9$ cells of this control, while at the
+exposure-matched rate $1$ the canary clock reads later than decay in $6$ of $9$
+cells, memorization onset moving from $n{=}10$ to $n{=}20$ against a decay onset
+that stays at $n{=}10$. The three cells that still coincide (large/high, med/high,
+small/med) are those whose canary gap is already well clear of the criterion at the
+decay rung. In the six lagging cells the rate-$1$ canary gap at the decay rung is
+$0.030$--$0.070$ nats, $30$--$70\%$ below the $0.10$-nat criterion, so no
+re-thresholding recovers coincidence in them without lowering the detector to a
+level that fires on the $n\leq4$ rungs where no decay has occurred.
+On the gradient-exposure axis the reading is starker: scoring both arms in exposures
+rather than epochs puts memorization onset after decay onset in $9/9$ cells,
+including the published plant-rate-$4$ runs.
+Two disclosures attach to this control. Its plant-rate-$4$ arm gives $9/9$
+coincidence where Table~\ref{tab:cells} reports $8/9$, because on these three fresh
+seeds small/low places decay onset at $n{=}10$ rather than $n{=}20$; that cell is
+the threshold-edge cell whose seed sensitivity Appendix~\ref{app:bootstrap}
+documents, so the control's r$4$ arm is a matched-seed comparison against its own
+r$1$ arm rather than a reproduction of the archived table. And the direction of the
+effect is the one a fixed-clock account predicts---fewer exposures per epoch move a
+fixed-exposure detector to a later epoch---so the control bounds the scope of the
+ordering claim without disturbing the band. The P2 falsification is untouched, since
+it rests on the absence of the ratio account's predicted shift in
+$R_{\mathrm{free}}$ and not on the onset ordering.
+
+\begin{table}[htbp]
+\centering
+\caption{Exposure-matched control (E1-C): the same $3\times3$ grid at canary plant
+rate $4$ (the published convention) and plant rate $1$ (exposure-matched), $324$
+runs, three fresh seeds ($201$--$203$) per point, $20$M-token budget, criteria
+$\varepsilon_{\mathrm{free}}=0.05$ and $\varepsilon_{\mathrm{can}}=0.10$ nats.
+$R_{\mathrm{free}}$ is identical across plant rates in all nine cells. The nominal
+ordering inverts from coincides to lags in six cells; on the gradient-exposure axis
+both arms read lags in all nine. Gap$_{\mathrm{dec}}$ is the rate-$1$ median canary
+gap at that cell's own decay rung, against the $0.10$-nat criterion. This control's
+rate-$4$ small/low verdict differs from Table~\ref{tab:cells} at the seed level
+(decay onset $n{=}10$ here vs.\ $n{=}20$ there); see \S\ref{sec:p3exposure}.}
+\label{tab:exposure}
+\scriptsize
+\begin{tabular}{@{}llcccccc@{}}
+\toprule
+& & \multicolumn{2}{c}{$R_{\mathrm{free}}$} & \multicolumn{2}{c}{Nominal order} & & \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}
+Capacity & Entropy & r$4$ & r$1$ & r$4$ & r$1$ & Gap$_{\mathrm{dec}}$ (r$1$) & Inverted \\
+\midrule
+small & low    & 4  & 4  & coincides & lags      & 0.040 & yes \\
+small & medium & 10 & 10 & coincides & coincides & 0.116 & --- \\
+small & high   & 4  & 4  & coincides & lags      & 0.058 & yes \\
+\midrule
+medium & low    & 4 & 4 & coincides & lags      & 0.056 & yes \\
+medium & medium & 4 & 4 & coincides & lags      & 0.066 & yes \\
+medium & high   & 4 & 4 & coincides & coincides & 0.122 & --- \\
+\midrule
+large & low    & 4 & 4 & coincides & lags      & 0.030 & yes \\
+large & medium & 4 & 4 & coincides & lags      & 0.070 & yes \\
+large & high   & 4 & 4 & coincides & coincides & 0.197 & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{E1_exposure_control.pdf}
+\caption{The $324$-run exposure-matched control (E1-C) on the $3\times3$ grid,
+plant rate $1$ versus plant rate $4$, three fresh seeds per arm.
+(a)~Paired decay and memorization onsets per cell, rate $1$ on the $x$-axis and
+rate $4$ on the $y$-axis; points above the diagonal are onsets the slower plant
+rate delays.
+(b)~Onset ordering on the nominal epoch axis: at rate $4$ the two onsets
+coincide in $9/9$ cells; at rate $1$ memorization lags decay in $6/9$.
+(c)~The same tally read on the gradient-exposure axis, grouped by the
+nominal-axis order: the coincidence is a plant-rate artifact of the probe
+convention, not a property of the corpus clock.
+(d)~$R_{\mathrm{free}}$ per cell at both rates: the free band is identical at
+rate $1$ and rate $4$ in all nine cells---the band is convention-invariant even
+where the onset ordering is not.
+Panel summaries: (a)~plant-rate comparison. (b)~nominal ordering. (c)~exposure ordering. (d)~band invariance.}
+\label{fig:exposure-control}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\makebox[\linewidth][c]{\includegraphics[width=\linewidth]{E1_case.pdf}}
+\caption{Case study for the med/med cell ($d{=}384$, $L{=}3$, ${\approx}5.6$M params;
+20M-token budget, 3 seeds).
+(a)~Excess validation loss vs.\ epoch count $n$ (log--log); the green shaded region marks
+the free zone ($n \le R_{\mathrm{free}} = 4$, excess $< 0.05$ nats); excess is $0.0141$ at
+$n=4$ (inside the band) and rises to $0.1358$ at $n=10$ (past the threshold).
+(b)~Copied-canary memorization gap; the orange dashed line is
+$\varepsilon_{\mathrm{can}} = 0.10$, and the dotted vertical marks the memorization
+onset at $n=10$.
+(c)~Both metrics on a shared $n$-axis, each normalised to its own threshold
+(excess$/\varepsilon_{\mathrm{free}}$ and canary gap$/\varepsilon_{\mathrm{can}}$), so
+each curve crosses $1.0$ (grey dashed) exactly at its onset. The two crossings land on the
+same vertical: decay onset and memorization onset coincide at $n=10$ ($R_{\mathrm{free}}=4$).
+Unlike the per-cell aggregate scatter of Fig.~\ref{fig:grid}(b), this view shows the
+$\delta_{\mathrm{decay}} = \delta_{\mathrm{mem}}$ coincidence within the single
+med/med cell, exemplifying the aggregate P3 finding.
+(d)~The exposure-matched control for this cell (E1-C arm): at plant rate $4$
+(the published convention) decay and memorization onsets coincide at $n=10$,
+while at the exposure-matched rate $1$ memorization onset moves to $n=20$
+(lags), with $R_{\mathrm{free}}$ identical at both rates---the
+convention-dependence of the coincidence and the convention-invariance of the
+band, shown on the case cell.
+Panel summaries: (a)~boundary trajectory. (b)~canary gap. (c)~onset comparison. (d)~exposure-matched control.}
+\label{fig:case}
+\end{figure}
+
+\subsection{The post-threshold decay shape (P4)}\label{sec:p4}
+
+A fine epoch grid ($n\in\{6,8,12,16\}$, three to five seeds per point, interleaved with
+the coarse grid's $n\in\{2,4,10,20,40\}$) resolves the shape that the coarse grid left
+open, in four cells spanning the design's corners: med/med, large/high, small/high, and
+large/low. In med/med the median excess runs $0.003$, $0.014$, $0.027$, $0.059$,
+$0.136$, $0.255$, $0.724$, $1.65$, $3.91$ nats across $n=2$--$40$: the $0.05$-nat
+threshold is crossed between $n=6$ and $n=8$, and beyond threshold the excess grows
+steeply and smoothly. Three features matter. First, the shape is not cliff-like in any
+of the four cells: post-threshold growth is super-linear everywhere, so the practical
+cost of overshooting the band by one grid step is bounded but compounding. Second, we
+deliberately do not report a decay exponent as a result: a log--log fit over the
+post-threshold points gives slopes of $2.9$, $2.7$, $2.4$, and $1.7$ in the four cells,
+and the fitted value moves by up to a full unit under defensible changes of fit window
+(the fit start is itself defined by a threshold crossing), so the honest summary is
+``roughly quadratic-to-cubic growth, cell-dependent,'' not a universal power law.
+Third, the canary memorization gap crosses its own $0.10$-nat threshold either in the
+same fine-grid interval as the decay onset or one interval before it, in all four
+cells---the onset order is never inverted (memorization never lags decay), which is the
+ordering a memorization-gated account requires and which \S\ref{sec:p3}'s coarse-grid
+coincidence could not resolve. Per-seed spread is small throughout (three to five seeds
+per point; full per-point ranges in the archived logs).
+
+\paragraph{A revision extension measures every cell's crossing.}\label{par:crossings}
+The four-cell fine grid leaves open whether the remaining cells' onsets are quantization
+of the coarse grid's $2.5\times$ spacing. A 30-run extension adds the $n\in\{6,8\}$
+rungs to the five cells not yet covered (med/high, large/med, med/low, small/low,
+small/med; three fresh seeds per point, seeds 20--22, 20M-token budget), so every cell
+of the core grid now has a measured threshold crossing (Table~\ref{tab:crossings}). The
+crossings fan out rather than piling on one rung, occupying
+four distinct half-octave brackets: med/high and large/high cross between $n{=}4$ and
+$6$ (med/high median excess $0.0512$ at $n{=}6$, a threshold-edge call: per-seed range
+$0.045$--$0.054$); med/med and large/med between $n{=}6$ and $8$ ($0.0394 \to 0.0973$
+for large/med); med/low, large/low, and small/high between $n{=}8$ and $10$ (med/low
+$0.0484 \to 0.0776$, with the $n{=}8$ rung itself threshold-edge); and the two
+small-capacity boundary cells remain below threshold at $n{=}8$ ($0.034$ and $0.026$ on
+the fresh seeds, matching the archived ten-seed medians of $0.040$ and $0.026$) before
+crossing between $n{=}10$ and $12$ (Appendix~\ref{app:bootstrap}).
+
+Interpolating each crossing directly turns the spread from an impression into a
+measurement. Solving $\mathrm{excess}(n^\star) = 0.05$ nats by log-linear
+interpolation between the two rungs that bracket each cell's crossing, with a
+run-level bootstrap over seeds, places the nine crossings from $n^\star = 5.04$
+(large/high, 95\% CI $[4.80, 5.19]$) to $n^\star = 10.34$ (small/low,
+$[9.14, 11.19]$), a $2.05\times$ spread. Twenty-six of the $36$ pairwise
+comparisons have disjoint intervals, and no single crossing value is compatible
+with all nine, since the largest lower bound, $9.14$, exceeds the smallest upper
+bound, $5.19$. The crossings are therefore dispersed across the band's interior
+rather than concentrated at a common value that the grid rounds to different
+rungs. The two small-capacity cells cross at $n^\star = 10.34$ and $10.05$, just
+above the band's declared upper edge, so the nine crossings span $5.0$ to $10.3$
+rather than falling strictly within $4$--$10$.
+
+Two limits bound what this establishes. First, the fine grid is a partial rather
+than a complete answer to the grid-quantization objection, because the coarse
+grid had already constrained every cell's crossing before any fine rung was run.
+All nine cells were free at $n{=}4$, and seven were already broken at $n{=}10$,
+so for those seven the crossing was pinned to $(4, 10]$ in advance and the added
+rungs at $6$ and $8$ could only locate it inside an interval the coarse grid had
+fixed; the remaining two cells were free at $n{=}10$ as well, which pinned their
+crossings above $10$. What the fine grid measures is therefore the dispersion of
+the crossings and their position within pre-fixed intervals, not independently
+the location of the band. Second, three of the nine bracket assignments turn on
+margins below $0.002$ nats and are close to coin flips. The share of bootstrap
+replicates landing in the assigned bracket is $0.58$ for small/med, whose
+$n{=}10$ excess falls $0.0008$ nats short of threshold, $0.62$ for med/low
+($0.0016$ nats short at $n{=}8$) and $0.74$ for med/high ($0.0012$ nats over at
+$n{=}6$), against $0.81$ to $1.00$ in the other six cells
+(Table~\ref{tab:crossings}). We therefore treat the interpolated crossing points
+and their intervals as the primary quantitative content of that table and retain
+the bracket labels because the two-convention comparison of \S\ref{sec:p1} is
+stated in them.
+
+The
+canary ordering extends with it: in the five newly covered cells the memorization
+crossing again leads or coincides with---and never lags---the decay crossing (e.g.\
+med/low canary gap $0.097 \to 0.146$ across $n{=}6 \to 8$ against a decay crossing
+between $n{=}8$ and $10$), so the leads-or-coincides ordering is fine-grid-verified in
+all nine cells. Under the relative convention of \S\ref{sec:p1} the crossings shift as
+the rescaled thresholds require---low-entropy cells cross earlier under their tighter
+$\varepsilon_{\mathrm{rel}}$ and high-entropy cells later under their looser one---but
+no coarse-grid $R_{\mathrm{free}}$ verdict of Table~\ref{tab:twoconv} changes under
+either convention.
+
+\begin{table}[htbp]
+\centering
+\caption{Measured decay-threshold crossings for all nine core cells. Median excess
+(nats) at the fine rungs $n{=}6$ and $n{=}8$; the half-octave interval in which the
+median excess first crosses the threshold, under the absolute criterion ($0.05$
+nats, the declared primary) and the relative criterion
+($\varepsilon_{\mathrm{rel}} = \phi H_{\mathrm{cell}}$ of Table~\ref{tab:twoconv});
+and the interpolated crossing point $n^\star$ solving
+$\mathrm{excess}(n^\star) = 0.05$ by log-linear interpolation between the two rungs
+that bracket the crossing, with a percentile confidence interval from a run-level
+bootstrap ($B = 2\times10^{5}$, each rung resampled to its own seed count and the
+$n{=}1$ baseline resampled once per replicate and shared across rungs). $P$ is the
+share of bootstrap replicates whose crossing falls in the same half-octave bracket
+as the point estimate; the three cells below $0.75$ are the threshold-edge calls
+discussed in the text. Seeds are the pooled counts at the two bracket rungs.
+Rungs pool the coarse grid, the \S\ref{sec:p4} fine grid (med/med, large/high,
+small/high, large/low), the archived ten-seed small-capacity rungs (which extend to
+$n\in\{12,16\}$; Appendix~\ref{app:bootstrap}), the 30-run revision extension
+adding $n\in\{6,8\}$ at three fresh seeds to the remaining five cells, and the
+twelve-seed med/low $n{=}10$ audit. Seven crossings land inside the published
+band's interior and the two small-capacity cells cross just above its upper edge;
+no cell's coarse-grid $R_{\mathrm{free}}$ verdict changes under either convention.}
+\label{tab:crossings}
+\scriptsize
+\begin{tabular}{@{}llccccrcc@{}}
+\toprule
+Capacity & Entropy & Excess at $n{=}6$ & Excess at $n{=}8$ & Crossing (abs) & Crossing (rel) & Seeds & $n^\star$ (95\% CI) & $P$ \\
+\midrule
+small & low    & 0.0200 & 0.0398 & $10$--$12$ & $2$--$4$   & 15/10 & $10.34$ $[9.14, 11.19]$ & 0.85 \\
+small & medium & 0.0143 & 0.0259 & $10$--$12$ & $10$--$12$ & 15/10 & $10.05$ $[9.02, 10.44]$ & 0.58 \\
+small & high   & 0.0166 & 0.0462 & $8$--$10$  & $10$--$12$ & 3/3   & $8.16$ $[8.11, 8.52]$   & 1.00 \\
+\midrule
+medium & low    & 0.0287 & 0.0484 & $8$--$10$ & $4$--$6$ & 3/15 & $8.12$ $[6.83, 9.19]$ & 0.62 \\
+medium & medium & 0.0272 & 0.0585 & $6$--$8$  & $6$--$8$ & 5/5  & $7.40$ $[6.58, 8.01]$ & 0.96 \\
+medium & high   & 0.0512 & 0.1338 & $4$--$6$  & $6$--$8$ & 3/3  & $5.92$ $[5.68, 6.12]$ & 0.74 \\
+\midrule
+large & low    & 0.0209 & 0.0386 & $8$--$10$ & $4$--$6$ & 3/3 & $8.42$ $[7.65, 8.99]$ & 0.81 \\
+large & medium & 0.0394 & 0.0973 & $6$--$8$  & $6$--$8$ & 3/3 & $6.32$ $[5.97, 6.77]$ & 0.93 \\
+large & high   & 0.0735 & 0.2308 & $4$--$6$  & $6$--$8$ & 3/5 & $5.04$ $[4.80, 5.19]$ & 1.00 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\figtikz[\linewidth]{E1_within_run}
+\caption{Within-run signatures of the free band, from one large-capacity,
+medium-entropy cell ($n=4$ within the band, $n=20$ past it).
+(a)~Reuse schedule of the two runs: repeats per epoch $n$ and unique corpus
+tokens $U$ for each arm.
+(b)~Validation loss during reuse: the $n=4$ run stays flat while the $n=20$ run
+climbs from the fourth epoch on.
+(c)~Accumulated repeated-data exposure (repeats $\times$ epoch): the $n=20$
+arm accumulates five times faster on the same schedule.
+(d)~Train--validation gap: the within-run failure mode---training loss keeps
+falling as validation loss rises once repetition passes the band, splitting
+around the fourth epoch.
+Panel summaries: (a)~reuse schedule. (b)~validation loss. (c)~repeated exposure. (d)~within-run boundary.}
+\label{fig:within-run}
+\end{figure}
+
+\subsection{A memorization-clock reading of the band}\label{sec:memclock}
+
+The invariance of $R_{\mathrm{free}}$ across the grid (P2) together with its coincidence
+with memorization onset (P3) admits a back-of-envelope reading. Write $U$ for the number
+of unique tokens, $B$ for the token budget, $n=B/U$ for the epoch count, $H$ for the
+per-token entropy floor, and $C$ for usable model capacity (bits), and define the
+capacity-to-entropy ratio $\rho = C/(U H)$.
+
+\emph{Assumptions.} (A1, non-binding capacity) in the free regime $\rho \gtrsim 1$, so the
+model can fit the unique corpus without memorizing repeats. (A2, fixed memorization clock)
+memorizing a specific length-$\ell$ sequence to the canary threshold takes a roughly fixed
+number $k^\star$ of passes over that sequence, counted on the nominal per-epoch axis and
+set by the optimizer's per-example memorization
+time---an SGD implicit-bias quantity in the spirit of \citep{neucom2026sgdbias}---and, once
+(A1) holds, independent of $C$ and $H$. (A3, floor crossing) excess validation loss stays
+below $\varepsilon_{\mathrm{free}}$ until repeated surface statistics begin to be memorized.
+
+The axis in (A2) is a restriction, and we state it before using it. Both
+$R_{\mathrm{free}}$ and the free-reuse rule it tests are defined per epoch, so that is
+the axis on which the heuristic is posed. Counted instead in gradient exposures, the
+planted canaries reach the criterion at $k^\star \approx 40$ exposures under the
+$4\times$ plant convention and $\approx 20$ under the exposure-matched control
+(\S\ref{sec:p3exposure}), against $R_{\mathrm{free}} \approx 4$ epochs, a gap of
+$5$--$10\times$. The numerical agreement below is therefore an agreement in epochs
+only; it does not survive translation into exposures, and we do not read it as
+identifying one mechanism common to both quantities.
+
+\emph{Heuristic.} Under (A1)--(A3), and on the nominal axis, $R_{\mathrm{free}} \approx k^\star$, independent of
+$\rho$ across the range where (A1) holds. The observed $k^\star \approx 4$ is then a property
+of the memorization clock, not of the capacity-to-entropy ratio, so no ${\sim}100\times$
+shift with $\rho$ is predicted---consistent with P2, though P2's falsification does not
+depend on this reading: it rests on the measured absence of the ratio account's
+predicted shift in $R_{\mathrm{free}}$, which stands whether or not the clock
+interpretation is accepted. The clock constant itself is family- and
+optimizer-dependent while remaining $\rho$-invariant within a construction: the probabilistic-context-free-grammar (PCFG)
+family gives $k^\star\approx20$ and Muon shifts it ${\sim}2$--$2.5\times$
+(Section~\ref{sec:pcfgmuon}). The residual drift to $R_{\mathrm{free}}=10$ in
+the small-capacity, low-entropy corner is the boundary where (A1) tightens ($\rho$ falls
+toward $1$): with less spare capacity the memorization clock runs \emph{slower},
+\emph{lengthening} the free band---the opposite sign to the artifact account, which requires
+$R_{\mathrm{free}}$ to \emph{grow with} $\rho$.
+
+\emph{Floor calibration (order of magnitude).} Reading excess as a memorized fraction
+$\phi$ times entropy, $\varepsilon_{\mathrm{free}} \approx \phi\,H$, the declared $0.05$ nats
+correspond to $\phi \approx \varepsilon_{\mathrm{free}}/H \approx 0.03$ at medium entropy
+($H{=}1.76$)---a few-percent memorized-fraction tolerance, consistent with the sharp break at
+$n{=}10$.
+
+This is an analytic sketch, not a derivation, and after the exposure-matched control
+it is best read as a heuristic stated on the nominal axis rather than as the
+mechanism behind P2. Assumption (A2)---that $k^\star$ is
+capacity- and entropy-invariant---is \emph{post-hoc consistent} with the grid (P2), not
+independently derived: the grid is consistent with a capacity-invariant memorization clock,
+but we do not prove one. Two further limits are now explicit. The $R_{\mathrm{free}}
+\approx k^\star$ agreement is an epoch-unit agreement that becomes a $5$--$10\times$
+disagreement in exposure units, so it is evidence that a per-epoch memorization
+clock is a useful bookkeeping device for a per-epoch data-budget rule, not evidence
+that a single fixed-exposure quantity sets both onsets. And the coincidence in (P3)
+that motivated the reading is itself convention-scoped
+(\S\ref{sec:p3exposure}). What the nominal axis retains is its operational
+content: the question a data-budget rule has to answer is whether memorization has
+appeared by the epoch at which reuse stops being free, and that question is posed
+per epoch, with the $4\times$ plant rate buying detector sensitivity rather than
+changing the epoch at which the corpus is reused. The $\varepsilon_{\mathrm{free}}\approx\phi H$ conversion is
+back-of-envelope. The small-capacity sign argument, by contrast, checks out in the existing
+logs: at every matched $(n,\text{entropy})$ point with $n\geq10$, the small-capacity median
+canary gap is smaller than both larger capacities' ($18/18$ pairwise comparisons), and the
+only onset-grade shift on the coarse $n$-grid (memorization onset $10\to20$) occurs in a
+small-capacity cell---the memorization clock indeed runs slower, not faster, as $\rho$
+falls toward $1$, the sign that separates the clock reading from the capacity/entropy-artifact
+account. The Muon arm (\S\ref{sec:pcfgmuon}) marks a second, sharper boundary: at
+medium capacity the onset ordering inverts (decay onset $n{=}20$ precedes
+canary-threshold memorization onset $n{=}40$), so Muon's outward-shifted band is not
+gated by canary-threshold memorization the way (A2)--(A3) describe. A slower clock
+constant alone cannot produce this---rescaling $k^\star$ delays both onsets
+together---so the clock reading as stated is AdamW-specific: under Muon either the
+canary probe under-reads the relevant memorization or the decay onset has a
+component the memorization gate does not control.
+
+\subsection{Real-text bridge: the band holds on WikiText bytes and moves on code}\label{sec:scale}
+
+As a bridge beyond synthetic Markov data, we repeat the test on real text. Using
+WikiText-103 as a byte stream
+(vocabulary 256, so the model is identical to the synthetic setup) with a larger
+${\sim}5$M-parameter decoder and a $2.5\times$ larger budget ($B=50$M tokens), the band
+holds unchanged: excess validation loss stays below $0.05$ nats through $n=4$
+(median $0.019$, range $0.013$--$0.029$), breaks at $n=10$ (median $0.086$, range
+$0.068$--$0.102$), and is severe by $n=40$ ($2.05$--$2.51$ in the two seeds run that
+far), giving $R_{\mathrm{free}}=4$ in all five seeds (Fig.~\ref{fig:e1scale}).
+This small-scale real-text bridge is consistent with, but does not prove, scale robustness.
+Three separate $10$M-token real-text audit seeds now recover the same decision boundary
+($R_{\mathrm{free}}=4$): excess at $n=4$ is $0.0086/0.0079/0.0180$, while $n=10$
+excess is $0.086/0.088/0.101$ and $n=20$ is $0.598/0.657/0.669$
+(Fig.~\ref{fig:e1scale}d). The $0.1$-nat
+threshold is sensitive at $n=10$ (two of three seeds would extend to $R_{\mathrm{free}}=10$),
+so the paper keeps $0.05$ nats as the decision threshold and treats the real-text result as
+a small bridge rather than an LLM-scale proof. A capacity bridge at small and large
+real-text model sizes confirms the free band spans $R_{\mathrm{free}}=4$--10 across
+capacities and thresholds, with $n=20$ consistently costly
+(Fig.~\ref{fig:capacity-bridge}).
+
+\begin{figure}[htbp]
+\centering
+\figtikz[\linewidth]{E1_capacity_bridge}
+\caption{Fresh 10M-token WikiText byte-level runs at small and
+large capacity, sweeping $n \in \{1, 2, 4, 10, 20\}$ across multiple seeds.
+The free-repetition boundary depends on both capacity and threshold:
+$n=20$ is consistently costly across all seeds and capacities, and the 0.05-nat free band
+spans $R_{\mathrm{free}} = 4$--10 across seeds/capacities, expanding under the looser
+0.10-nat threshold.
+(b)~$R_{\mathrm{free}}$ by threshold ($0.05$ vs $0.10$ nats) per seed per
+capacity: the band expands under the looser threshold, honestly.
+(c)~Excess at the two decision rungs ($n=4$ and $n=10$) per seed.
+(d)~Cost at $n=20$ per seed: consistently costly across seeds and capacities.
+Panel summaries: (a)~threshold conventions. (b)~seed bridge. (c)~two-convention verdict. (d)~fresh-budget control.}
+\label{fig:capacity-bridge}
+\end{figure}
+
+The replication level of these byte arms deserves precision: the five WikiText seeds
+above rerun one fixed corpus draw (optimization noise only), so we additionally ran
+three disjoint $52$M-byte WikiText shards; all three give $R_{\mathrm{free}}=4$
+(excess at $n=4$: $-0.007$--$0.018$; at $n=10$: $0.051$--$0.078$), so the wiki verdict
+is stable at the corpus-draw level as well.
+
+The two accounts of the band make opposite predictions for a second, more predictable
+real domain, so we ran one: source code, under the identical protocol
+($50$M-token budget, medium capacity, the same epoch grid). Code is far more
+compressible than encyclopedic prose ($1.8$ vs $2.8$ bits/byte under gzip-9 on matched
+$20$MB samples), so the capacity-to-entropy ratio is higher and the ratio account
+predicts the free zone should extend. What we find separates two mechanisms instead.
+On the corpus as collected (exact-deduplicated Python source from a CPython
+installation and its site-packages---which, like all real code corpora, retains
+version-vendored near-duplicate files), the band contracts to $R_{\mathrm{free}}=2$ in
+five of five seeds: excess $0.011$--$0.030$ at $n=2$, $0.058$--$0.072$ at $n=4$. But
+after MinHash near-duplicate removal (Jaccard $\geq0.8$ on $32$-byte shingles;
+compressibility unchanged at $1.83$ bits/byte), three disjoint corpus draws give
+$R_{\mathrm{free}}=4$, $4$, and $2$---the third at the threshold edge (excess $0.0503$
+at $n=4$; the other two at $0.036$ and $0.044$, versus WikiText's $0.014$--$0.018$).
+The as-collected contraction is therefore driven by effective repetition from
+near-duplicated files, not by byte-level predictability itself: duplication makes the
+nominal epoch count understate the true reuse, and the free band shrinks accordingly.
+Both readings matter. For practice, real code corpora carry exactly this duplication,
+so their free band genuinely is shorter at face value---deduplication is what buys the
+epochs back. For the theory contest, the ratio account's predicted extension fails to
+appear under either treatment, while the deduplicated corpus sits measurably closer to
+the threshold at $n=4$ than prose does, a residual earlier-pressure signal consistent
+with, but not proving, the memorization account.
+
+The canary probe also ports to real bytes, with one convention made explicit: real
+canary and fresh banks are not statistically exchangeable the way synthetic ones are
+(the two banks are different real byte sequences), so the memorization signal is the
+growth of the gap above its $n{=}1$ level rather than its absolute value. Under that
+convention, on WikiText the gap grows by $0.10$ nats between $n=2$ and $n=4$ and decay
+onsets at $n=4$--$10$; on the as-collected code corpus the gap growth crosses the same
+level between $n=2$ and $n=4$ while decay onsets at $n=2$--$4$. In both domains
+memorization onset arrives at or before decay onset---the same never-inverted ordering
+as the synthetic grid (\S\ref{sec:p4})---and both onsets shift down together on the
+duplication-heavy corpus. (At $30$M parameters the code-corpus ordering does
+invert; \S\ref{sec:realscale} reports and interprets that lag.) Remaining caveats
+are recorded in \S\ref{sec:limitations}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.88\linewidth]{E1_grid.pdf}
+\caption{Full capacity $\times$ entropy sweep across 174 distinct training runs at the
+20M-token budget: $9$ cells $\times$ $6$ epoch counts $\times$ $3$ seeds $=162$ (the
+completed large-capacity row included), plus the twelve-run boundary seed audit; one
+archived duplicate rerun is excluded from the count.
+(a)~$R_{\mathrm{free}}$ heatmap over the $3{\times}3$ $\{$capacity $\times$ entropy$\}$
+grid; cell numbers are the computed $R_{\mathrm{free}}$ values; every cell now has full
+epoch-grid coverage, the 4--10 band holds across all nine cells, and there is no
+${\sim}100{\times}$ shift.
+(b)~Decay onset (epoch where excess first exceeds 0.05 nats) vs.\ memorization onset
+(epoch where canary gap first exceeds 0.10) per cell; green ring marks coincidence;
+8 of 9 cells coincide (small/low misses: decay onset $n=20$, mem onset $n=10$).
+(c)~$R_{\mathrm{free}}$ per cell against the shaded $4$--$10$ band.
+(d)~The exposure-matched control (E1-C, $324$ runs, fresh seeds $201$--$203$):
+$R_{\mathrm{free}}$ is identical at canary plant rates $4$ and $1$ in all nine
+cells, while the nominal onset ordering inverts to lags in six cells at matched
+exposure---the coincidence is a property of the oversampled probe convention,
+and the band is not.
+Panel summaries: (a)~nine-cell curves. (b)~per-cell free count. (c)~nominal ordering. (d)~entropy-capacity interaction.}
+\label{fig:grid}
+\end{figure}
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\linewidth]{E1_scale.pdf}
+\caption{Excess validation loss vs.\ epoch count $n$ on real bytes
+(${\sim}5$M-parameter decoder, 50M-token budget).
+(a)~WikiText-103, five seeds: all give $R_{\mathrm{free}}=4$---excess stays below
+$0.05$ nats through $n=4$ ($0.013$--$0.029$), breaks at $n=10$ ($0.068$--$0.102$), and
+is severe by $n=40$ ($2.05$--$2.51$ in the two seeds run that far); three disjoint
+corpus draws replicate the verdict (text).
+(b)~Python source as collected (exact deduplication only, so the corpus retains the
+near-duplicate files real code carries), five seeds: all give $R_{\mathrm{free}}=2$,
+with excess $0.058$--$0.072$ already at $n=4$.
+(c)~The same source after MinHash near-duplicate removal, three disjoint corpus draws:
+the band returns to $R_{\mathrm{free}}=4$ ($n=4$ excess $0.036$, $0.044$, and a
+threshold-edge $0.050$)---the contraction in (b) is duplication-driven effective
+repetition, not byte-level predictability (compressibility is unchanged by the
+dedup, $1.83$ bits/byte).
+The dotted horizontal marks the 0.05-nat threshold; the dashed verticals mark each
+panel's last free grid point.
+(d)~Threshold robustness on the three $10$M-token audit seeds (merged from the
+appendix panel): $R_{\mathrm{free}}$ by threshold per seed---stable at the
+declared $0.05$-nat level ($R_{\mathrm{free}}=4$ in $3/3$), with two of three
+seeds extending to $10$ at the looser $0.10$-nat threshold.
+Panel summaries: (a)~real-byte loss. (b)~real-text onset. (c)~seed spread. (d)~transfer boundary.}
+\label{fig:e1scale}
+\end{figure}
+
+\subsection{Real-text replication at 30M--57M parameters}\label{sec:realscale}
+
+The byte arms above top out near $5$M parameters, so their verdicts could still be
+read as small-model accidents. A 48-run replication raises the real-text capacity
+to the top of the study's span: byte-level decoders at $30.0$M and $57.2$M
+parameters (the xl/xxl capacity presets of \S\ref{sec:capxl} instantiated at the
+byte protocol's $256$-token context, hence marginally larger counts than the
+synthetic arms' $29.9$M/$57.1$M), trained on document-disjoint
+fixed byte budgets of $100$M and $200$M respectively, drawn from two corpora---
+FineWeb-Edu educational web text, and an exact-deduplicated GitHub code collection
+that, like the as-collected condition of \S\ref{sec:scale} and like real code
+corpora generally, retains version-vendored near-duplicate files. The protocol is
+otherwise unchanged: $U=B/n$ unique bytes repeated $n$ times at fixed budget, epoch
+grids $n\in\{1,2,4,6,8,10,16\}$ (FineWeb) and $n\in\{1,2,4,10,16\}$ (code), two
+fresh seeds per cell, AdamW, fresh validation on a held-out $2$M-byte document tail,
+and eight $256$-byte canaries planted four times each ($4n$ exposures at epoch
+count $n$) under the growth-above-$n{=}1$ gap convention stated in
+\S\ref{sec:scale}. Table~\ref{tab:realscale} gives every verdict under both
+threshold conventions.
+
+\begin{table}[htbp]
+\centering
+\caption{Real-text replication at $30$M--$57$M parameters (48 runs; cell medians
+over two seeds, per-seed values in parentheses where they differ). $H$: fresh
+($n{=}1$) validation floor, nats/byte. $R_{\mathrm{free}}$ under the absolute
+$0.05$-nat criterion and the relative $\varepsilon=\phi H$ criterion
+($\phi=0.0283$, Table~\ref{tab:twoconv}). Onsets are grid rungs: decay = first
+$n$ with median excess $\geq0.05$ nats; memorization = first $n$ with median
+canary-gap growth above its $n{=}1$ level exceeding
+$\varepsilon_{\mathrm{can}}\in\{0.05,0.10,0.20\}$ nats. Ordering compares the
+$0.10$-nat memorization onset to the decay onset.}
+\label{tab:realscale}
+\scriptsize
+\begin{tabular}{@{}llllllll@{}}
+\toprule
+Cell & Params & $H$ & $R_{\mathrm{free}}$ (abs) & $R_{\mathrm{free}}$ (rel) & Decay & Mem.\ ($0.05/0.10/0.20$) & Ordering \\
+\midrule
+FineWeb/xl  & $30.0$M & $1.181$ & $6$ ($8/6$) & $6$ & $8$ & $4/4/6$ & leads \\
+FineWeb/xxl & $57.2$M & $1.105$ & $4$ & $2$ ($2/4$) & $6$ & $2/4/6$ & leads \\
+Code/xl     & $30.0$M & $0.875$ & $1$ & $1$ & $2$ & $2/4/4$ & lags \\
+Code/xxl    & $57.2$M & $0.888$ & $2$ & $1$ & $4$ & $2/4/4$ & coincides \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+FineWeb stays inside the synthetic band at both capacities. Median excess crosses
+the $0.05$-nat threshold between $n=6$ and $n=8$ at $30$M
+($R_{\mathrm{free}}=6$, per-seed $8/6$; excess $0.020$ at $n=6$, $0.058$ at $n=8$)
+and between $n=4$ and $n=6$ at $57$M ($R_{\mathrm{free}}=4$ in both seeds; $0.033$
+at $n=4$, $0.059$ at $n=6$)---the same $4$--$10$ range the synthetic grid gives,
+now on natural web text at $6$--$11\times$ the parameters and $2$--$4\times$ the
+budget of the WikiText arms. Under the relative convention the $30$M verdict is
+unchanged at $6$ and the $57$M verdict drops one rung to $2$, but this is a
+threshold-edge call: median excess at $n=4$ is $0.0334$ against
+$\varepsilon_{\mathrm{rel}}=0.0313$, a $0.002$-nat margin on which the two seeds
+split ($2/4$). As on the synthetic grid, the band label is convention-sensitive by
+at most one grid rung while its boundedness is not.
+
+The code corpus contracts below the band at both capacities:
+$R_{\mathrm{free}}=1$ at $30$M and $2$ at $57$M (both seeds each; $1$ under the
+relative convention). This reproduces the as-collected code contraction of
+\S\ref{sec:scale} ($R_{\mathrm{free}}=2$ at ${\sim}5$M) at $6$--$11\times$ the
+parameters, on an independently collected corpus family. The reading offered
+there---duplication-driven effective repetition, since exact deduplication leaves
+the near-duplicate files that make the nominal epoch count understate true
+reuse---predicts exactly this: no near-duplicate-removal arm was run at this
+scale, so the present cells correspond to the as-collected condition, and the
+band they show is the practically relevant face-value one. Whether MinHash
+deduplication buys the epochs back at $30$--$57$M as it does at $5$M remains
+untested here.
+
+The onset ordering is capacity-robust on FineWeb and breaks, informatively, on
+code. On FineWeb the memorization crossing leads decay at both capacities under
+the declared $0.10$-nat criterion ($n=4$ vs $8$ at $30$M; $4$ vs $6$ at $57$M)
+and never lags at any of the three thresholds (at $0.20$ nats the $57$M cell
+coincides at $n=6$). On code/xxl the two onsets coincide at $n=4$. But on
+code/xl decay onsets at $n=2$ while the planted-canary crossing arrives at
+$n=4$ (both seeds)---the first observed lag in this study, at the $0.10$- and
+$0.20$-nat criteria; at the halved $0.05$-nat criterion the growth crossing
+moves to $n=2$ and the ordering returns to coincidence (and the code grid has
+no rung between $2$ and $4$, so the lag is at most one coarse rung). We report
+this as a genuine boundary rather than noise, and it is the boundary the
+duplication account itself draws: the planted canary counts nominal repetition
+($4n$ exposures), while on a duplication-heavy corpus decay is driven by
+effective repetition of corpus-internal near-duplicates that the planted probe
+does not track, so decay can front-run the probe precisely where duplication
+understates the epoch count. The lead-or-coincide ordering should therefore be
+read as a property of corpora whose repetition is nominal---it held in all nine
+synthetic cells, on WikiText, and on FineWeb at both capacities---not as a
+corpus-independent law.
+
+Caveats: two seeds per cell (against $3$--$15$ on the synthetic grid), two corpus
+families, no deduplication arm, a coarser code epoch grid, and a capacity ceiling
+of $57$M---models at ${\sim}100$M parameters and above remain untested on real
+text. Within those limits, the replication removes the two scoping attacks the
+earlier bridges left open: the band and its onset ordering are not
+Markov-family-specific, and on natural text they are not specific to
+${\sim}5$M-parameter models either.
+
+\subsection{Two further stress tests: a second synthetic family and an optimizer swap}\label{sec:pcfgmuon}
+
+Two follow-up sweeps target two axes the core grid leaves untested: whether the band's
+numeric value is specific to the Markov construction, and whether it is specific to
+AdamW.
+
+\paragraph{A second generative family (PCFG).}
+We repeat the core protocol on a probabilistic context-free grammar (ambiguity
+$0.25$; measured conditional entropy ${\approx}4.04$ bits at $n{=}1$---not
+entropy-matched to the Markov medium-entropy preset (${\approx}2.54$ bits, i.e.\ the $1.76$-nat preset of Section~\ref{sec:setup}): the two
+families' entropy labels are internal to each construction, not a matched pair),
+crossing capacity $\{\text{small}, \text{medium}, \text{large}\}$ with the same
+epoch grid $n\in\{1,2,4,10,20,40\}$ at 3 seeds and the same $B{=}20$M token budget,
+under AdamW. $R_{\mathrm{free}}=20$ at every capacity (per-seed $\{40,20,20\}$
+small, $\{20,20,20\}$ medium, $\{20,20,20\}$ large; Table~\ref{tab:pcfg}), with a
+sharp crossing at the boundary: excess is $0.010$--$0.013$ nats at $n=20$ across all
+three capacities, jumping to $0.064$/$0.130$/$0.249$ nats at $n=40$
+(small/medium/large)---nothing lands near the threshold. This answers the outlook
+question of \S\ref{sec:discussion}: the $4$--$10$ band's numeric value is
+Markov-specific (PCFG tolerates ${\sim}2$--$5\times$ more repetition before
+breaking), but the qualitative law---flat excess, then a sharp, capacity-invariant
+onset---reproduces on a second generative family, and the linear-ratio account
+has its capacity leg falsified on both families (onset location does not move with capacity on
+either one); PCFG's single entropy setting leaves the entropy leg of the ratio untested
+there. In short: the onset structure is portable across generative families; the
+numeric constant is family-specific. A secondary observation, not one of the preregistered claims: severity
+at $n=40$ grows monotonically with capacity ($0.064<0.130<0.249$, a ${>}4\times$
+spread), a capacity gradient the Markov P2 sweep did not show; we flag it as a
+follow-up question rather than a claim.
+
+\begin{table}[htbp]
+\centering
+\caption{PCFG generator, per-capacity repetition results (ambiguity $0.25$;
+measured conditional entropy ${\approx}4.04$ bits at $n{=}1$, not entropy-matched to
+the Markov medium preset, ${\approx}2.54$ bits; 3 seeds per cell, $B=20$M, AdamW).
+Excess at $n=20$ is $0.010$--$0.013$ nats at every capacity; Excess$_{40}$ is the
+median excess validation loss (nats) at $n=40$.}
+\label{tab:pcfg}
+\scriptsize
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Capacity & $R_{\mathrm{free}}$ & Per-seed $R_{\mathrm{free}}$ & Excess$_{40}$ (nats) \\
+\midrule
+small  & 20 & $\{40,20,20\}$ & 0.064 \\
+medium & 20 & $\{20,20,20\}$ & 0.130 \\
+large  & 20 & $\{20,20,20\}$ & 0.249 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+One caveat is hard and is stated explicitly so it is not read past: the
+copied-canary probe is broken at the PCFG fresh-data baseline. The median canary
+gap at $n=1$ is already $0.094$--$0.110$ nats---at or above the $0.10$-nat
+memorization threshold before any repetition occurs---with seed-structured
+variation (one seed near $0.01$--$0.02$, the other two near $0.09$--$0.13$, at every
+$n$). Raw memorization-onset counts on PCFG are therefore uninterpretable (the
+pcfg/small seed-0 outlier at $R_{\mathrm{free}}=40$ shares this root cause), and we
+make no P3-style decay--memorization-coincidence claim for the PCFG family without
+a seed-relative or de-meaned canary metric, which this round did not build.
+
+\paragraph{An optimizer swap (Muon).}
+On the Markov medium-entropy cell, we swap AdamW for Muon \citep{jordan2024muon} at
+the small and medium capacities (same epoch grid, 3 seeds, $B{=}20$M). Muon shifts
+the free band outward rather than erasing it (Table~\ref{tab:muon}): at small
+capacity $R_{\mathrm{free}}$ moves from $10$ (AdamW) to a threshold-fragile
+$10$--$20$ under Muon (excess at $n=20$ is $0.0471$ nats, just under the $0.05$
+threshold; per-seed $\{10,10,20\}$); at medium capacity it moves cleanly from $4$
+to $10$ (per-seed $\{10,10,10\}$). The shift is a roughly $2$--$2.5\times$ outward
+move of the band at both capacities, not its disappearance. Onset ordering also
+changes under Muon: at medium capacity decay onset ($n=20$) precedes memorization
+onset ($n=40$) by one grid step---the reverse of the never-lags ordering
+\S\ref{sec:p4} established for AdamW---while at small capacity the two onsets
+coincide at $n=40$. This inversion is treated as an explicit boundary of the
+memorization-clock account in \S\ref{sec:p3} and \S\ref{sec:memclock}. This contrasts with a companion optimizer-clock finding on a
+different testbed, where Muon trivializes an objective-driven grokking clock---leaving
+no objective-dependent delay to shift---rather than re-shaping it; taken together,
+optimizer effects on training-dynamics clocks are
+clock-specific, not a single ``Muon removes clocks'' rule.
+
+\begin{table}[htbp]
+\centering
+\caption{Muon optimizer arm (Markov medium-entropy cell; same epoch grid, 3 seeds,
+$B=20$M). $R_{\mathrm{free}}$ shifts outward under Muon rather than disappearing;
+the onset order flips at medium capacity.}
+\label{tab:muon}
+\scriptsize
+\begin{tabular}{@{}lcccl@{}}
+\toprule
+Capacity & AdamW $R_{\mathrm{free}}$ & Muon $R_{\mathrm{free}}$ & Muon per-seed & Note \\
+\midrule
+small  & 10 & 10--20 & $\{10,10,20\}$ & threshold-fragile (Excess$_{20}=0.0471$) \\
+medium & 4  & 10     & $\{10,10,10\}$ & clean; decay onset ($n{=}20$) leads mem.\ onset ($n{=}40$) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Both arms run 3 seeds per cell (no bootstrap-scale confidence interval as in
+Appendix~\ref{app:bootstrap}), and the Muon arm covers only the small and medium
+capacities at one entropy level; both caveats are carried into
+\S\ref{sec:limitations}.
+
+\section{Related work}\label{sec:related}
+
+\paragraph{Data-repetition and repeated-data scaling laws.}
+\citet{muennighoff2023scaling} fit the repetition value-decay law and the $\approx
+4$-epoch constant at LLM scale; we examine its universality at a scale orders of
+magnitude smaller with independently tunable entropy and capacity. \citet{hernandez2022repeateddata} develop
+scaling laws for repeated data and predict non-monotone (double-descent) loss curves under
+some repetition regimes; we do not observe such non-monotone decay on our grid.
+\citet{charton2024repeated} report that repeated examples can in fact beat single-use data
+on certain mathematical tasks, showing that repetition is not uniformly harmful---context
+that sharpens the question of when the threshold is crossed. The Chinchilla scaling
+study \citep{hoffmann2022chinchilla} established compute-optimal data-scaling recipes that
+underlie modern pretraining norms; our work is downstream of that setting, examining what
+happens after the token budget is fixed and unique data become scarce. The original
+neural scaling laws \citep{kaplan2020scalinglaws} provide the power-law backdrop against
+which data-constrained regimes are defined. \citet{sorscher2022beyond} showed that data
+pruning can yield super-power-law scaling, pointing to the quality dimension of data value;
+our results address the repetition (quantity/novelty) dimension.
+
+\paragraph{Quantitative comparison with the Muennighoff et al.\ benchmark.}
+Table~\ref{tab:prior-work} places our results against the closest large-scale prior-work anchor
+in explicit numerical terms.
+\citet{muennighoff2023scaling} measured $R_{\mathrm{free}} \approx 4$ epochs at
+LLM scale (billion-parameter models, billion-token corpora of natural language).
+Our experiments find a lower bound of $R_{\mathrm{free}} \approx 4$ across all
+nine grid cells, with the small-capacity corner extending to $R_{\mathrm{free}} = 10$
+at parameter scales $150$--$3{,}500\times$ smaller and token budgets
+$18{,}000$--$45{,}000\times$ smaller ($2.5$--$57$M params, $20$--$50$M tokens).
+The low-end quantitative agreement ($R_{\mathrm{free}} \geq 4$ at our scale) is the
+primary result: the same $\approx 4$-epoch free band reappears orders of magnitude smaller,
+with no sign of the ${\sim}100\times$ upward shift in $R_{\mathrm{free}}$ that a
+strong capacity-scaling reading of the large-scale result would predict
+(Fig.~\ref{fig:scale-band}).
+This is a test, not a replication: our setting differs in corpus type (synthetic
+Markov vs.\ natural language), model scale, and tokenisation, so the match is
+evidence for bounded universality rather than a controlled reproduction.
+\citet{hernandez2022repeateddata} and \citet{charton2024repeated} predict qualitatively
+similar value-decay shapes (free band then sharp decline); in their worst case, repeating
+$0.1\%$ of the data $100$ times degraded an $800$M-parameter model to the performance of a
+$400$M-parameter one (a ${\approx}2\times$ effective-size loss via mid-training double
+descent). Our value-decay curves are
+consistent in shape at toy scale but show no such non-monotone double descent, because we
+repeat the whole corpus rather than a small, heavily-repeated fraction.
+
+\begin{table}[htbp]
+\centering
+\caption{Comparison of free-repetition epoch counts across scales.
+$R_{\mathrm{free}}$: largest reuse count $n$ with excess validation loss $<0.05$ nats
+(our threshold; Muennighoff et al.\ report a qualitative ``nearly free'' reading
+rather than a fixed nat threshold).
+Our result is an orders-of-magnitude-smaller-scale test, not a controlled
+replication at LLM scale; the low-end agreement is the primary result.}
+\label{tab:prior-work}
+\scriptsize
+\begin{tabular}{@{}lllll@{}}
+\toprule
+Study & $R_{\mathrm{free}}$ & Params & Tokens & Corpus \\
+\midrule
+\citet{muennighoff2023scaling}  & ${\approx}4$ & ${\sim}$B & ${\sim}$B & Natural language \\
+\textbf{Ours (synthetic, full grid)} & \textbf{4--10} & \textbf{2.5--57M} & \textbf{20M} & \textbf{Synthetic Markov} \\
+\textbf{Ours (real-text bridge)}     & \textbf{4}    & \textbf{${\sim}$5M}  & \textbf{50M} & \textbf{WikiText-103 (byte)} \\
+\textbf{Ours (real-text replication)} & \textbf{4--6} & \textbf{30--57M} & \textbf{100--200M} & \textbf{FineWeb-Edu (byte)} \\
+\bottomrule
+\end{tabular}
+\vspace{2pt}
+
+\noindent\textit{Agreement}: the ${\approx}4$-epoch lower bound recurs at
+orders-of-magnitude smaller scale (matched at the low end). \textit{Divergence}: the upper end of our band
+reaches $R_{\mathrm{free}}=10$ in the small-capacity synthetic corner, and we observe no
+${\sim}100\times$ capacity-driven upward shift in $R_{\mathrm{free}}$ as predicted
+by a linear capacity/entropy-artifact interpretation of the LLM-scale result. The
+code-corpus cells ($R_{\mathrm{free}}=1$--$2$ as collected, \S\ref{sec:realscale})
+sit below the band by the duplication mechanism of \S\ref{sec:scale} and are
+omitted here.
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\linewidth]{E1_scale_band.pdf}
+\caption{Free-repetition count versus model size (log scale). Each marker is the
+$R_{\mathrm{free}}$ of one full-coverage synthetic cell (coloured by entropy level);
+across our three capacities (${\approx}2.5$, $5.6$, and $9.9$M parameters)
+$R_{\mathrm{free}}$ stays in the shaded $4$--$10$ band, with the small-capacity corner at
+$10$ and every larger cell at $4$ (the xl/xxl extension cells at $29.9$M and $57.1$M
+parameters, all $R_{\mathrm{free}}=4$, \S\ref{sec:capxl}, are not plotted). Grey crosses show the per-seed free/not-free decision at
+$n=10$ for the small-capacity cells (the borderline corner of the band). The diamond marks
+the large-scale anchor of $R_{\mathrm{free}}{\approx}4$ at $8.7$B parameters
+\citep{muennighoff2023scaling}; the two measured regions agree ($R_{\mathrm{free}}\approx4$
+at both anchors), with the three decades between them explicitly unmeasured (in-panel
+note)---the data exclude a large upward shift at the anchors but do not establish
+flatness across the gap.
+(b)~Per-entropy cell distribution of $R_{\mathrm{free}}$ behind panel (a).
+(c)~Real-byte, capxl, and PCFG points on the same scale axis (recomputed from
+run summaries): WikiText $5.6$M ($R_{\mathrm{free}}=4$), code as collected
+($2$) and near-deduplicated ($4$), capxl xl/xxl ($29.9$/$57.1$M, all in band),
+and the PCFG family at its family-specific ${\approx}20$.
+(d)~Small-capacity per-seed audit at the $n=10$ decision point (excess per
+seed against the $0.05$-nat line).
+Panel summaries: (a)~capacity band. (b)~entropy stratification. (c)~real-data overlays. (d)~PCFG comparison.}
+\label{fig:scale-band}
+\end{figure}
+
+\paragraph{The free band is a scale-dependent floor, not a universal constant.}
+The published anchors describe a floor rather than a fixed value.
+\citet{muennighoff2023scaling} fit a repeated-token half-life of $R^{*}_{D}\approx15$
+(${\approx}16$ epochs, at which a repeated token retains $1-1/e\approx0.63$ of its value)
+sitting above their $\approx4$-epoch ``nearly free'' band, across models up to $8.7$B
+parameters and $900$B tokens. \citet{yan2025repeatmore} sharpen this into a scaling
+statement: the tolerable repetition count is not constant but grows---$\Theta(\log N)$ in the
+strongly-convex case---with dataset size $N$. Our grid carries the same qualitative lesson on
+a different axis: $R_{\mathrm{free}}$ is not a single number but ranges from $4$ to $10$ with
+model capacity and source entropy, holding its $\approx4$-epoch lower bound across more than four
+orders of magnitude of model scale (from our $2.5$--$57$M-parameter synthetic and
+${\sim}5$M-parameter byte models up to the $8.7$B--$120$B-parameter LLMs of
+\citet{muennighoff2023scaling,taylor2022galactica}) while its upper edge drifts to $10$ in the small-capacity,
+low-entropy corner. Whether the controlling variable is dataset size
+\citep{yan2025repeatmore}, model capacity, source entropy, or mixture composition
+\citep{sedova2026mixture}, the published and present
+evidence converge on one conclusion: ``${\approx}4$ free epochs'' is a robust
+lower bound that holds at toy scale, not a universal constant.
+
+\paragraph{Memorization and generalization.}
+The interplay of memorization and generalisation is central to our P3 finding.
+\citet{tirumala2022memorization} show that large LLMs memorize training data faster and
+earlier in training, and that memorization and overfitting can decouple---motivating our
+use of a copied-canary probe to detect the onset of harmful memorization; at scale this
+onset is itself emergent yet predictable from smaller models \citep{biderman2023emergentmem}.
+\citet{carlini2021extracting} demonstrate --- and \citet{carlini2023quantifying}
+quantify across model scales --- that verbatim training sequences are extractable
+from language models, establishing memorization as a concrete, measurable phenomenon.
+\citet{feldman2020longtail} provide theoretical justification for why memorization of
+rare examples can be necessary for optimal generalisation, adding nuance to the view that
+memorization is purely harmful. These works frame our finding---that
+repetition decay onset coincides with canary-memorization onset---as a specific instance
+of the broader memorization-generalisation transition in neural-network learning.
+
+\paragraph{Toy-model and small-scale science.}
+Using controlled small-scale testbeds to isolate scaling-law
+mechanisms follows a productive tradition. \citet{power2022grokking} introduced grokking on
+small algorithmic datasets as a window into delayed generalisation, a phenomenon later shown
+to extend beyond algorithmic data \citep{liu2023omnigrok}.
+\citet{wortsman2023smallscale} demonstrated that small-scale proxy experiments can predict
+large-scale transformer training instabilities, validating the approach of stress-testing
+at reduced scale before committing to LLM-scale experiments. The Pythia model suite
+\citep{biderman2023pythia} provides a complementary strategy---tracking training dynamics
+across 70M--12B parameters on fixed public data---that could serve as a medium-scale bridge
+between our synthetic Markov setting and full LLM-scale pretraining. A related
+grokking $\times$ generalization-bounds analysis \citep{neucom2026grokking} shares the same
+small-controlled-testbed methodology while addressing a different phenomenon (delayed
+generalisation on algorithmic tasks); a further Neurocomputing study accelerating
+grokking on arithmetic tasks via Kolmogorov--Arnold representations
+\citep{park2025kagrokking} is a third small-scale training-dynamics neighbour on a
+distinct phenomenon.
+
+\section{Discussion}\label{sec:discussion}
+
+A practically used repetition heuristic from large-scale training has a bounded analogue at
+small scale: the ${\approx}4$-epoch free band survives our capacity/entropy-artifact
+falsification test at a scale and in a data regime far removed from where it was fitted.
+The coincidence of decay onset with memorization onset gives a mechanistic reading
+consistent with the large-scale account (repetition becomes harmful once the model begins
+to memorize repeated tokens \citep{tirumala2022memorization}). The result is positive but
+bounded: it strengthens the case for treating a $4$--$10$ free-epoch band as a useful
+small-scale default, while leaving exact thresholds and LLM-scale transfer unresolved
+(Table~\ref{tab:evidence-ledger} collects each claim, its diagnostic, and its boundary).
+
+\paragraph{Relation to the data-value literature.}
+The repetition dimension studied here complements the data-quality dimension of
+\citet{sorscher2022beyond} and the memorization view of \citet{feldman2020longtail}
+(both framed in \S\ref{sec:related}): even high-quality tokens lose value after
+$\approx 4$--$10$ repetitions, with the model transitioning from learning structure to
+memorizing surface statistics as $n$ increases. This reading---explaining the band by an
+established memorization mechanism rather than a new capacity--entropy law
+(\S\ref{sec:memclock})---follows the reconciliation register of recent in-venue work
+\citep{neucom2026grokking}.
+
+\paragraph{Limitations.}
+\label{sec:limitations}
+The current testbed has two hard limits. First, it now uses two synthetic data
+families (Markov and PCFG corpora, \S\ref{sec:pcfgmuon}) at one token budget (20M
+tokens for the core sweep); the post-threshold decay shape is now measured on a
+fine epoch grid in four cells (\S\ref{sec:p4}); the remaining five cells now have
+measured threshold crossings (Table~\ref{tab:crossings}) but only two fine rungs
+each ($n\in\{6,8\}$), so their decay shape and all other budgets remain unprobed,
+and the fitted log--log slopes ($1.7$--$2.9$,
+window-sensitive) are descriptive, not a law. The PCFG addition carries its own
+caveats: the copied-canary probe is broken at the PCFG fresh-data baseline (median
+gap $0.094$--$0.110$ nats at $n{=}1$, at or above the $0.10$-nat threshold, with
+seed-structured variation), so no decay--memorization-coincidence claim is made for
+that family; the Muon optimizer arm covers only the small and medium capacities at
+one entropy level (no large-capacity cell); and both new arms run 3 seeds per cell,
+without the bootstrap-scale confidence intervals Appendix~\ref{app:bootstrap} gives
+the two Markov boundary cells. The Muon arm also inverts the decay/memorization
+onset ordering at medium capacity, so the memorization-clock reading of
+\S\ref{sec:memclock} is established for AdamW and does not transfer to Muon
+unmodified. Second,
+entropy is
+construction-controlled rather than measured on natural text, so the mapping to
+natural-language perplexity scales is indirect. Relatedly, the band's numeric label
+is convention-dependent at the small-capacity corner: under the relative
+$\varepsilon = \phi H$ criterion (Table~\ref{tab:twoconv}) it reads $2$--$10$
+rather than $4$--$10$, with seven of nine cell verdicts and every headline
+conclusion (bounded band, no ratio-driven shift) unchanged. The onset-ordering
+claim is likewise detection-threshold-scoped: it survives canary thresholds at or
+below the declared $0.10$ nats but inverts in six of nine cells at $0.20$ nats
+(\S\ref{sec:p3}); on real bytes it is additionally corpus-scoped, since the
+planted-canary clock lags decay on the duplication-heavy code corpus at $30$M
+parameters (\S\ref{sec:realscale}). It is also scoped to the probe convention and to
+the axis on which onsets are counted, and this is the sharpest limit on it: a
+$324$-run exposure-matched control (\S\ref{sec:p3exposure}) leaves
+$R_{\mathrm{free}}$ identical in all nine cells but moves the nominal ordering from
+coincides to lags in six of them at plant rate $1$, and on the gradient-exposure
+axis the ordering reads lags in all nine cells at both plant rates. The band and the
+P2 falsification are therefore convention-robust, while leads-or-coincides is a
+statement about the nominal per-epoch axis under a $4\times$-oversampled probe, and
+the memorization-clock reading of \S\ref{sec:memclock} is correspondingly a
+nominal-axis heuristic rather than a demonstrated mechanism: its
+$R_{\mathrm{free}} \approx k^\star$ agreement holds in epochs and becomes a
+$5$--$10\times$ gap in gradient exposures. The capacity axis is fully covered---all three large-capacity cells span
+the full epoch grid $n\in\{1,2,4,10,20,40\}$ (\S\ref{sec:largecompletion}), and the
+xl/xxl extension stretches the span to $\sim 23\times$ ($2.5$M--$57$M params;
+\S\ref{sec:capxl})---but even $57$M params
+remains modest relative to LLM scale, and the extension has no fresh $n{=}1$ arm
+(its excess is referenced to $n{=}2$, a bias bounded at $0.008$ nats on the main grid). The
+real-text bridge now includes five $50$M WikiText seeds, three smaller $10$M audit
+seeds, a five-seed source-code arm, and a 48-run FineWeb-Edu/GitHub-code
+replication at $30$M and $57$M parameters (\S\ref{sec:realscale}), so real text
+now reaches the same $57$M ceiling as the synthetic grid; but the replication runs
+two seeds per cell, covers two corpus families with no deduplication arm, and
+stops below ${\sim}100$M parameters---it rules out Markov-specific and
+small-model artifacts but does not prove LLM-scale robustness. The code arm's two original caveats have
+been converted into tests: the canary probe is now ported to real bytes (with the
+bank-exchangeability convention stated in \S\ref{sec:scale}), and near-duplication was
+tested directly and identified as the driver of the as-collected contraction. What
+remains open there: a single code source family (one installation's Python), the
+threshold-edge third deduplicated draw, and the sensitivity of absolute real-byte
+canary levels to bank composition. Separately, a learning-rate (lr) sweep on the med/med
+cell ($10^{-4}$, $3\times10^{-4}$, $10^{-3}$; within-lr fresh baselines; fine epoch
+grid) keeps $R_{\mathrm{free}}$ within $6$--$8$---inside the $4$--$10$ band, moving at
+most one fine rung across a $10\times$ lr span---so the band is not an artifact of the
+single default learning rate, though a full lr$\times$cell factorial and a second
+architecture remain untested. The optimizer sweep is asymmetric in one respect we
+state plainly: weight decay is fixed at $0.01$ in every run of the study
+(\S\ref{sec:setup}) and is never varied, so every claim here is a
+single-weight-decay claim, and the regularization axis has not been probed the way
+the learning-rate axis has. A weight-decay robustness arm on the same design
+(rates $0$, $0.01$, $0.1$, $0.3$) is specified and its runner built, but it is not
+part of the evidence reported here. The Pythia suite \citep{biderman2023pythia}, which tracks training dynamics
+across a 70M--12B parameter range on public data, would be a natural platform for a future
+medium-scale bridge experiment between our setting and full LLM scale.
+
+\paragraph{Outlook.}
+Three directions are most consequential. First, the capacity-span question is now
+answered within this study's scale: the xl/xxl extension (\S\ref{sec:capxl}) holds the
+band at $4$--$10$ out to $57$M params (${\sim}23\times$), and the real-text
+replication (\S\ref{sec:realscale}) keeps FineWeb-Edu inside the band at the same
+$57$M ceiling, so what remains is the jump to genuinely LLM-scale models rather
+than a wider span at this scale.
+Second, the non-Markov extension is answered rather than merely
+proposed: a PCFG corpus reproduces the qualitative law---a
+flat excess band followed by a sharp, capacity-invariant onset---but at a family-specific
+value ($R_{\mathrm{free}}=20$ across all three capacities, versus $4$--$10$ for Markov;
+\S\ref{sec:pcfgmuon}), confirming that the onset structure, not the numeric band, is the
+invariant object. What remains open is an entropy-matched comparison across families (the
+two corpora's measured entropies, $2.54$ vs.\ $4.04$ bits, are constructed independently
+rather than dialed to coincide) and a further test on hierarchical or
+natural-language-adjacent grammars richer than either testbed used here. Third, a
+medium-scale Pythia-style bridge at 100M--1B parameters would quantify how much of the
+LLM-scale gap between our setting and \citet{muennighoff2023scaling} is driven by scale
+versus corpus statistics. Until those studies exist, the present finding is best read as:
+the repetition value-decay law is not obviously a capacity/entropy artifact at
+orders-of-magnitude smaller scale, the onset mechanism is consistent across scales and
+across a second generative family, and the exact four-epoch constant is not universal in
+the small-capacity corner or across generative families.
+
+\begin{table}[htbp]
+\centering
+\caption{Evidence ledger for the repetition value-decay story. The decision column
+states what each diagnostic permits; the boundary column states what remains unproven.}
+\label{tab:evidence-ledger}
+\scriptsize
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.23\linewidth}>{\raggedright\arraybackslash}p{0.24\linewidth}>{\raggedright\arraybackslash}p{0.18\linewidth}>{\raggedright\arraybackslash}p{0.25\linewidth}@{}}
+\toprule
+Claim & Diagnostic & Evidence & Boundary \\
+\midrule
+A 4--10 free-epoch band holds & Per-cell excess-loss threshold $<0.05$ nats & 218-run synthetic Markov grid (all 9 core cells full coverage $+$ 44-run xl/xxl extension to $57$M params, ${\sim}23\times$ span); a 30-run revision fine grid measures all nine crossings, which interpolate to $n^\star = 5.04$--$10.34$ with $26/36$ pairwise intervals disjoint (Table~\ref{tab:crossings}) and a twelve-seed audit confirms the med/low $n{=}10$ boundary rung ($12/12$ over threshold) & The $4$--$10$ numeric value is Markov-specific (a second family, PCFG, gives $R_{\mathrm{free}}=20$; row below) and convention-dependent in the small-capacity corner (relative threshold: $2$--$10$, Table~\ref{tab:twoconv}); both at one token budget; xl/xxl excess referenced to $n{=}2$ \\
+No observed 100$\times$ capacity/entropy shift & Capacity$\times$entropy grid and falsification cell & Full grid plus case study & Entropy is construction-controlled, not natural-language measured; a logarithmic reading predicts a sub-resolution shift and is not excluded \\
+Decay onset tracks memorization on the nominal axis & Canary-gap onset vs decay onset, both counted per epoch & 8/9 coarse cells align; fine grid: memorization leads or coincides in 9/9 & Not proof of causality; needs three conjunctive conditions---nominal per-epoch axis, $4\times$ plant rate, and $\varepsilon_{\mathrm{can}}\leq0.1119$ nats---and holds for AdamW only (Muon inverts it at medium capacity); at plant rate 1 it lags in 6/9 and on the exposure axis in 9/9 (\S\ref{sec:p3exposure}) \\
+Band is invariant to the canary plant rate & 324-run exposure-matched control, plant rate 4 vs 1, same seeds/grid/criteria & $R_{\mathrm{free}}$ identical in 9/9 cells; nominal ordering inverts in 6/9 (Table~\ref{tab:exposure}) & 3 fresh seeds per point; its rate-4 small/low verdict differs from Table~\ref{tab:cells} at the seed level; does not test the ordering's causal reading \\
+Decay shape is monotone in the grid & Post-threshold excess-loss curves & Repetition sweeps across cells & Exponent is unresolved at this resolution \\
+Real text preserves the band & WikiText-103 byte-level scale check & Five 50M seeds, three disjoint corpus draws, three 10M audit seeds & Small byte-level bridge relative to LLM-scale training \\
+Duplication, not predictability, contracts the code band & Source-code corpus, as-collected vs near-deduplicated & $R_{\mathrm{free}}=2$ in $5/5$ as collected; $4/4/2$\,(edge) across three deduplicated draws & One code source family; third deduplicated draw at the threshold edge \\
+Band and ordering replicate on real text at $30$--$57$M params & 48-run FineWeb-Edu $+$ GitHub-code byte replication, fixed $100$M/$200$M-byte budgets, epoch grids to $n{=}16$ (Table~\ref{tab:realscale}) & FineWeb $R_{\mathrm{free}}=6$ (xl) and $4$ (xxl), in band under both conventions within one rung, memorization leads decay; code contracts to $1$--$2$ as collected, matching the duplication mechanism & Two seeds per cell; no deduplication arm; planted canary lags decay on code/xl at the $0.10$-nat criterion (coincides at $0.05$); ${\geq}100$M params untested \\
+Band is lr-robust in the probed cell & lr sweep $10^{-4}$/$3{\cdot}10^{-4}$/$10^{-3}$, within-lr baselines, fine epoch grid; weight decay fixed at $0.01$ throughout & $R_{\mathrm{free}}$ stays 6--8 across a $10\times$ lr span (med/med) & Single cell; no second architecture; weight decay is a single unswept value, so every claim is single-weight-decay \\
+PCFG family reproduces the onset structure, not the band value & Capacity $\times$ epoch grid on a PCFG generator (ambiguity 0.25) & $R_{\mathrm{free}}=20$ at all three capacities (54 runs) & Canary probe invalid at the PCFG baseline (median gap 0.094--0.110 at $n{=}1$); no P3 verdict for this family; entropy not matched to Markov (4.04 vs.\ 2.54 bits) \\
+Muon shifts, but does not erase, the free band & Optimizer swap (AdamW $\to$ Muon) at Markov/med, small and medium capacities & $R_{\mathrm{free}}$ $10\to10$--$20$ (small, threshold-fragile) and $4\to10$ (medium, clean) & Small-capacity shift is threshold-fragile (per-seed $\{10,10,20\}$); no large-capacity Muon cell; 3 seeds only \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\appendix
+\setcounter{figure}{0}\renewcommand{\thefigure}{A\arabic{figure}}
+\setcounter{table}{0}\renewcommand{\thetable}{A\arabic{table}}
+% Keep hyperref anchors unique after the counter reset (avoids duplicate-destination warnings)
+\renewcommand{\theHfigure}{A\arabic{figure}}
+\renewcommand{\theHtable}{A\arabic{table}}
+\section{Real-text robustness checks}\label{app:robustness}
+
+Two byte-level WikiText checks bound the synthetic repetition law on real text: a
+threshold-sensitivity sweep across three independent seeds (now
+Fig.~\ref{fig:e1scale}d) and a capacity bridge at small and large
+model sizes (Fig.~\ref{fig:capacity-bridge}).
+
+\section{Case study: the decay onset in one corpus cell}\label{sec:casestudy}
+
+To make the aggregate result concrete, we trace one medium-capacity,
+medium-entropy (``med/med'') cell across all epoch counts. The key event is the
+cliff: a sharp rise in excess validation loss once repetition passes
+$R_{\mathrm{free}}$. Its fresh-budget reference loss is $1.764$~nats.
+Table~\ref{tab:casestudy} and Fig.~\ref{fig:case} show the excess validation
+loss and the copied-canary memorization gap at each~$n$.
+
+\begin{table}[htbp]
+\centering
+\caption{Excess validation loss and canary gap for the med/med cell at each epoch count
+$n$.}
+\label{tab:casestudy}
+\begin{tabular}{rcc}
+\toprule
+$n$ (epochs) & Excess val loss (nats) & Canary gap \\
+\midrule
+1  & 0.0000 & $+0.014$ \\
+2  & 0.0033 & $+0.031$ \\
+4  & 0.0141 & $+0.046$ \\
+10 & 0.1358 & $+0.162$ \\
+20 & 1.6454 & $+0.974$ \\
+40 & 3.9072 & $+2.192$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The excess stays below $0.05$ nats through $n = 4$ (values: $0.000$, $0.003$, $0.014$),
+then breaks sharply at $n = 10$ ($0.136$), climbs to $1.645$ at $n = 20$, and reaches
+$3.907$ at $n = 40$---a $\sim 280\times$ rise from the $n = 4$ baseline.  The canary
+memorization gap crosses $\varepsilon_{\mathrm{can}} = 0.10$ between $n = 4$ and
+$n = 10$, exactly coinciding with the decay onset---writing $\delta_{\mathrm{decay}}$ and
+$\delta_{\mathrm{mem}}$ for the decay-onset and memorization-onset epochs (the smallest $n$
+exceeding each threshold), we have $\delta_{\mathrm{decay}} = \delta_{\mathrm{mem}} = 10$.
+This single cell exemplifies the \S\ref{sec:p1} aggregate
+finding: the repetition cliff is sharp, the free zone ends at $n = 4$, and decay onset
+coincides with memorization onset. Within a single run the same transition shows up as a
+training--validation split: a free run ($n=4$) keeps training and validation loss locked
+together, whereas a damaged run ($n=20$) drives training loss down (memorizing the reused
+tokens) while validation loss climbs (Fig.~\ref{fig:within-run}, Appendix~\ref{app:within-run}).
+
+
+
+\section{Within-run divergence trajectory}\label{app:within-run}
+
+Figure~\ref{fig:within-run} traces a single large-capacity, medium-entropy run at each side
+of the free band and shows that the aggregate cliff has a within-run signature: a run inside
+the free band ($n=4$) keeps training and validation loss together for its whole schedule,
+whereas a run past the band ($n=20$) splits them---training loss falls as the model memorizes
+the repeated tokens while validation loss rises. The split begins around the fourth epoch,
+locating when within a run repetition turns harmful.
+
+
+
+\section{Bootstrap audit of the boundary cells}\label{app:bootstrap}
+
+The small/low and small/med cells sit at a median excess of $0.0498$ nats at $n=10$ on
+the original five seeds, $0.0002$ nats below the $0.05$-nat free threshold, so the upper
+edge of the $4$--$10$ band turns on the finest digit of one statistic. A seed-level
+nonparametric bootstrap ($10^{4}$ resamples of the paper's statistic, resampling both
+the repetition seeds and the three fresh-baseline seeds; the statistic is the median final
+validation loss at $n{=}10$ minus the median fresh baseline at $n{=}1$ over three seeds)
+on those five seeds gave threshold-straddling 95\% CIs ($[0.030,0.063]$ and
+$[0.044,0.063]$; exceedance probabilities $0.34$ and $0.50$). We then ran the direct
+test of whether this indeterminacy is sampling noise: ten additional seeds per cell,
+tripling the budget to 15. The intervals narrow onto the threshold rather than away
+from it. For small/low the median excess is $0.0447$ nats with 95\% CI
+$[0.029, 0.057]$ and exceedance probability $0.15$ (the cell leans free at $n{=}10$);
+for small/med the median is $0.0492$ nats with 95\% CI $[0.043, 0.062]$ and exceedance
+probability $0.42$ (the cell sits on the threshold). The residual indeterminacy is
+therefore a property of the cells---their $n{=}10$ excess genuinely lies at the
+threshold---not of the seed budget. This is why Section~\ref{sec:p1} reports
+$R_{\mathrm{free}}$ as a $4$--$10$ band under a stated threshold rather than a point
+constant. A finer epoch grid brackets both cells' onsets directly: median excess at
+$n=6/8/12/16$ is $0.019/0.040/0.074/0.135$ for small/low and $0.014/0.026/0.077/0.180$
+for small/med (ten seeds per point), against $0.045/0.049$ at $n=10$ (15 seeds) and
+$0.231/0.391$ at $n=20$ (15 seeds). Small/med therefore crosses the decay threshold at
+$n\approx10$--$11$; small/low between $n=10$ and $n=12$. The same ladder adjudicates the
+one onset-coincidence miss of \S\ref{sec:p3}: in small/low the canary gap crosses its
+$0.10$-nat threshold already at $n\approx8$ (median $0.111$, ten seeds) while decay
+onsets at $n\approx11$, so the miss is a genuine, seed-robust dissociation in which
+memorization leads decay by roughly half an octave---the ordering a memorization-gated
+account requires (the gate must open before the cost appears), not a counterexample to
+it. The $n=20$ ``broken'' verdicts rest on 15 seeds per cell; the $n=4$ ``free''
+verdicts on five. The band edges, by
+contrast, are seed-stable: at $n=4$ every seed of both cells is free (maximum per-seed
+excess $0.021$ nats, half the threshold) and at $n=20$ every seed has broken (minimum
+per-seed excess $0.214$ nats, four times the threshold)---only the $n=10$ interior of the
+band is indeterminate. A revision-round audit extends the same seed-robustness test to
+the third boundary rung, med/low at $n{=}10$, whose over-threshold verdict rested on
+three seeds (median excess $+0.078$): on twelve fresh seeds (seeds 20--31, same 20M-token
+budget) all twelve land above the $0.05$-nat threshold, with median excess $+0.073$
+(per-seed range $+0.068$ to $+0.101$), so the med/low onset at $n{=}10$ is seed-robust,
+not a three-seed accident. The revision fine grid (Table~\ref{tab:crossings}) also
+re-measures the two small-capacity cells' $n{=}8$ rungs on three fresh seeds,
+reproducing the archived ten-seed medians ($0.034$ vs.\ $0.040$ for small/low and
+$0.026$ vs.\ $0.026$ for small/med). The $8/9$ decay-onset/memorization-onset coincidence rate of
+Section~\ref{sec:p3} carries a bootstrap 95\% CI of $[0.67, 1.00]$: strong evidence the
+coincidence is the rule, with one honest miss. (The bootstrap script is included in the
+archived code repository; see Data availability.)
+
+\section*{Funding}
+This research received no external funding.
+
+\section*{Declaration of competing interest}
+The author declares no competing financial or personal interests.
+
+\section*{CRediT author statement}
+Zeyu Fu: Conceptualization, Methodology, Software, Investigation, Formal analysis,
+Writing -- original draft, Writing -- review \& editing.
+
+\section*{Data availability}
+All corpora are synthetic (construction-specified Markov processes). The complete
+training, probe, and analysis code, the per-cell repeated-data logs, and the
+figure-generation scripts required to reproduce every reported result and figure are
+archived in a public repository under open licenses (code: MIT; data and figures:
+CC~BY~4.0). Repository:
+\href{https://github.com/PeterPonyu/free-repetition-band}{\nolinkurl{github.com/PeterPonyu/free-repetition-band}};
+archived snapshot DOI: \href{https://doi.org/10.5281/zenodo.21020378}{\texttt{10.5281/zenodo.21020378}}.
+
+\bibliographystyle{plainnat}
+\section*{Declaration of generative AI and AI-assisted technologies}
+
+During the preparation of this work the author used Claude (Anthropic) to assist
+with drafting and editing the manuscript text, developing and reviewing the
+analysis code, and preparing the figures. After using this tool, the author
+reviewed and edited the content as needed and takes full responsibility for the
+content of the published article.
+
+\begin{thebibliography}{20}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\href}[2]{#2}
+\providecommand{\path}[1]{#1}
+\providecommand{\DOIprefix}{doi:}
+\providecommand{\ArXivprefix}{arXiv:}
+\providecommand{\URLprefix}{URL: }
+\providecommand{\Pubmedprefix}{pmid:}
+\providecommand{\doi}[1]{\href{https://doi.org/#1}{\path{doi:#1}}}
+\providecommand{\Pubmed}[1]{\href{pmid:#1}{\path{#1}}}
+\providecommand{\bibinfo}[2]{#2}
+\ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Inproceedings
+\bibitem[{Biderman et~al.(2023)Biderman, Schoelkopf, Anthony, Bradley, O'Brien,
+  Hallahan, Khan, Purohit, Prashanth, Raff, Skowron, Sutawika and van~der
+  Wal}]{biderman2023pythia}
+\bibinfo{author}{Biderman, S.}, \bibinfo{author}{Schoelkopf, H.},
+  \bibinfo{author}{Anthony, Q.}, \bibinfo{author}{Bradley, H.},
+  \bibinfo{author}{O'Brien, K.}, \bibinfo{author}{Hallahan, E.},
+  \bibinfo{author}{Khan, M.A.}, \bibinfo{author}{Purohit, S.},
+  \bibinfo{author}{Prashanth, U.}, \bibinfo{author}{Raff, E.},
+  \bibinfo{author}{Skowron, A.}, \bibinfo{author}{Sutawika, L.},
+  \bibinfo{author}{van~der Wal, O.}, \bibinfo{year}{2023}.
+\newblock \bibinfo{title}{Pythia: {A} suite for analyzing large language models
+  across training and scaling}, in: \bibinfo{booktitle}{Proceedings of the
+  International Conference on Machine Learning ({ICML})}.
+\newblock \bibinfo{note}{arXiv:2304.01373}.
+%Type = Inproceedings
+\bibitem[{Biderman et~al.(2023)Biderman, Prashanth, Sutawika,
+  Schoelkopf, Anthony, Purohit and Raff}]{biderman2023emergentmem}
+\bibinfo{author}{Biderman, S.}, \bibinfo{author}{Prashanth, U.S.},
+  \bibinfo{author}{Sutawika, L.}, \bibinfo{author}{Schoelkopf, H.},
+  \bibinfo{author}{Anthony, Q.}, \bibinfo{author}{Purohit, S.},
+  \bibinfo{author}{Raff, E.}, \bibinfo{year}{2023}.
+\newblock \bibinfo{title}{Emergent and predictable memorization in large
+  language models}, in: \bibinfo{booktitle}{Advances in Neural Information
+  Processing Systems (NeurIPS)}.
+\newblock \bibinfo{note}{arXiv:2304.11158}.
+%Type = Inproceedings
+\bibitem[{Bietti et~al.(2023)Bietti, Cabannes, Bouchacourt, Jegou and
+  Bottou}]{bietti2023birth}
+\bibinfo{author}{Bietti, A.}, \bibinfo{author}{Cabannes, V.},
+  \bibinfo{author}{Bouchacourt, D.}, \bibinfo{author}{Jegou, H.},
+  \bibinfo{author}{Bottou, L.}, \bibinfo{year}{2023}.
+\newblock \bibinfo{title}{Birth of a transformer: A memory viewpoint}, in:
+  \bibinfo{booktitle}{Advances in Neural Information Processing Systems
+  (NeurIPS)}.
+\newblock \bibinfo{note}{arXiv:2306.00802}.
+\newblock \doi{10.48550/arXiv.2306.00802}
+%Type = Inproceedings
+\bibitem[{Carlini et~al.(2019)Carlini, Liu, Erlingsson, Kos and
+  Song}]{carlini2019secret}
+\bibinfo{author}{Carlini, N.}, \bibinfo{author}{Liu, C.},
+  \bibinfo{author}{Erlingsson, U.}, \bibinfo{author}{Kos, J.},
+  \bibinfo{author}{Song, D.}, \bibinfo{year}{2019}.
+\newblock \bibinfo{title}{The secret sharer: Evaluating and testing unintended
+  memorization in neural networks}, in: \bibinfo{booktitle}{{USENIX} Security
+  Symposium}.
+\newblock \doi{10.48550/arXiv.1802.08232}
+%Type = Inproceedings
+\bibitem[{Carlini et~al.(2021)Carlini, Tramer, Wallace, Jagielski,
+  Herbert-Voss, Lee, Roberts, Brown, Song, Erlingsson, Oprea and
+  Raffel}]{carlini2021extracting}
+\bibinfo{author}{Carlini, N.}, \bibinfo{author}{Tramer, F.},
+  \bibinfo{author}{Wallace, E.}, \bibinfo{author}{Jagielski, M.},
+  \bibinfo{author}{Herbert-Voss, A.}, \bibinfo{author}{Lee, K.},
+  \bibinfo{author}{Roberts, A.}, \bibinfo{author}{Brown, T.},
+  \bibinfo{author}{Song, D.}, \bibinfo{author}{Erlingsson, U.},
+  \bibinfo{author}{Oprea, A.}, \bibinfo{author}{Raffel, C.},
+  \bibinfo{year}{2021}.
+\newblock \bibinfo{title}{Extracting training data from large language models},
+  in: \bibinfo{booktitle}{{USENIX} Security Symposium}.
+\newblock \bibinfo{note}{arXiv:2012.07805}.
+%Type = Article
+\bibitem[{Carlini et~al.(2023)Carlini, Ippolito, Jagielski, Lee, Tram{\`e}r
+  and Zhang}]{carlini2023quantifying}
+\bibinfo{author}{Carlini, N.}, \bibinfo{author}{Ippolito, D.},
+  \bibinfo{author}{Jagielski, M.}, \bibinfo{author}{Lee, K.},
+  \bibinfo{author}{Tram{\`e}r, F.}, \bibinfo{author}{Zhang, C.},
+  \bibinfo{year}{2023}.
+\newblock \bibinfo{title}{Quantifying memorization across neural language
+  models}, in: \bibinfo{booktitle}{International Conference on Learning
+  Representations (ICLR)}.
+\newblock \bibinfo{note}{arXiv:2202.07646}.
+%Type = Inproceedings
+\bibitem[{Charton and Kempe(2024)}]{charton2024repeated}
+\bibinfo{author}{Charton, F.}, \bibinfo{author}{Kempe, J.},
+  \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{Emergent properties with repeated examples}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2410.07041}.
+%Type = Article
+\newblock \doi{10.48550/arXiv.2410.07041}
+\bibitem[{Chen et~al.(2026)Chen, Zhang, Bai, Hu and Wang}]{chen2026augment}
+\bibinfo{author}{Chen, M.K.}, \bibinfo{author}{Zhang, X.},
+  \bibinfo{author}{Bai, F.}, \bibinfo{author}{Hu, Z.},
+  \bibinfo{author}{Wang, Z.}, \bibinfo{year}{2026}.
+\newblock \bibinfo{title}{Demystifying training-time augmentation for
+  data-constrained language model pretraining}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2606.16246}.
+%Type = Article
+\newblock \doi{10.48550/arXiv.2606.16246}
+\bibitem[{Feldman(2020)}]{feldman2020longtail}
+\bibinfo{author}{Feldman, V.}, \bibinfo{year}{2020}.
+\newblock \bibinfo{title}{Does learning require memorization? {A} short tale
+  about a long tail}.
+\newblock \bibinfo{journal}{Proceedings of the {ACM} Symposium on Theory of
+  Computing ({STOC})} \DOIprefix\doi{10.1145/3357713.3384290}.
+%Type = Article
+\bibitem[{Hernandez et~al.(2022)Hernandez, Brown, Conerly, {DasSarma}, Drain,
+  {El-Showk}, Elhage, {Hatfield-Dodds}, Henighan, Hume, Johnston, Mann, Olah,
+  Olsson, Amodei, Joseph, Kaplan and McCandlish}]{hernandez2022repeateddata}
+\bibinfo{author}{Hernandez, D.}, \bibinfo{author}{Brown, T.},
+  \bibinfo{author}{Conerly, T.}, \bibinfo{author}{{DasSarma}, N.},
+  \bibinfo{author}{Drain, D.}, \bibinfo{author}{{El-Showk}, S.},
+  \bibinfo{author}{Elhage, N.}, \bibinfo{author}{{Hatfield-Dodds}, Z.},
+  \bibinfo{author}{Henighan, T.}, \bibinfo{author}{Hume, T.},
+  \bibinfo{author}{Johnston, S.}, \bibinfo{author}{Mann, B.},
+  \bibinfo{author}{Olah, C.}, \bibinfo{author}{Olsson, C.},
+  \bibinfo{author}{Amodei, D.}, \bibinfo{author}{Joseph, N.},
+  \bibinfo{author}{Kaplan, J.}, \bibinfo{author}{McCandlish, S.},
+  \bibinfo{year}{2022}.
+\newblock \bibinfo{title}{Scaling laws and interpretability of learning from
+  repeated data}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2205.10487}.
+%Type = Article
+\newblock \doi{10.48550/arXiv.2205.10487}
+\bibitem[{Hoffmann et~al.(2022)Hoffmann, Borgeaud, Mensch, Buchatskaya, Cai,
+  Rutherford, de~Las~Casas, Hendricks, Welbl, Clark, Hennigan, Noland,
+  Millican, van~den Driessche, Damoc, Guy, Osindero, Simonyan, Elsen, Rae,
+  Vinyals and Sifre}]{hoffmann2022chinchilla}
+\bibinfo{author}{Hoffmann, J.}, \bibinfo{author}{Borgeaud, S.},
+  \bibinfo{author}{Mensch, A.}, \bibinfo{author}{Buchatskaya, E.},
+  \bibinfo{author}{Cai, T.}, \bibinfo{author}{Rutherford, E.},
+  \bibinfo{author}{de~Las~Casas, D.}, \bibinfo{author}{Hendricks, L.A.},
+  \bibinfo{author}{Welbl, J.}, \bibinfo{author}{Clark, A.},
+  \bibinfo{author}{Hennigan, T.}, \bibinfo{author}{Noland, E.},
+  \bibinfo{author}{Millican, K.}, \bibinfo{author}{van~den Driessche, G.},
+  \bibinfo{author}{Damoc, B.}, \bibinfo{author}{Guy, A.},
+  \bibinfo{author}{Osindero, S.}, \bibinfo{author}{Simonyan, K.},
+  \bibinfo{author}{Elsen, E.}, \bibinfo{author}{Rae, J.W.},
+  \bibinfo{author}{Vinyals, O.}, \bibinfo{author}{Sifre, L.},
+  \bibinfo{year}{2022}.
+\newblock \bibinfo{title}{Training compute-optimal large language models}.
+\newblock \bibinfo{journal}{Advances in Neural Information Processing Systems (NeurIPS)}. \bibinfo{note}{arXiv:2203.15556}.
+%Type = Article
+\newblock \doi{10.48550/arXiv.2203.15556}
+%Type = Misc
+\bibitem[{Jordan et~al.(2024)Jordan, Jin, Boza, You, Cesista, Newhouse and
+  Bernstein}]{jordan2024muon}
+\bibinfo{author}{Jordan, K.}, \bibinfo{author}{Jin, Y.},
+  \bibinfo{author}{Boza, V.}, \bibinfo{author}{You, J.},
+  \bibinfo{author}{Cesista, F.}, \bibinfo{author}{Newhouse, L.},
+  \bibinfo{author}{Bernstein, J.}, \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{Muon: An optimizer for hidden layers in neural
+  networks}.
+\newblock \bibinfo{howpublished}{Blog post,
+  \url{https://kellerjordan.github.io/posts/muon/}}.
+\bibitem[{Kaplan et~al.(2020)Kaplan, McCandlish, Henighan, Brown, Chess, Child,
+  Gray, Radford, Wu and Amodei}]{kaplan2020scalinglaws}
+\bibinfo{author}{Kaplan, J.}, \bibinfo{author}{McCandlish, S.},
+  \bibinfo{author}{Henighan, T.}, \bibinfo{author}{Brown, T.B.},
+  \bibinfo{author}{Chess, B.}, \bibinfo{author}{Child, R.},
+  \bibinfo{author}{Gray, S.}, \bibinfo{author}{Radford, A.},
+  \bibinfo{author}{Wu, J.}, \bibinfo{author}{Amodei, D.}, \bibinfo{year}{2020}.
+\newblock \bibinfo{title}{Scaling laws for neural language models}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2001.08361}.
+%Type = Inproceedings
+\newblock \doi{10.48550/arXiv.2001.08361}
+\bibitem[{Liu et~al.(2023)Liu, Michaud and Tegmark}]{liu2023omnigrok}
+\bibinfo{author}{Liu, Z.}, \bibinfo{author}{Michaud, E.J.},
+  \bibinfo{author}{Tegmark, M.}, \bibinfo{year}{2023}.
+\newblock \bibinfo{title}{Omnigrok: Grokking beyond algorithmic data}, in:
+  \bibinfo{booktitle}{International Conference on Learning Representations
+  (ICLR)}.
+\newblock \bibinfo{note}{arXiv:2210.01117}.
+%Type = Inproceedings
+\newblock \doi{10.48550/arXiv.2210.01117}
+\bibitem[{Lovelace et~al.(2026)Lovelace, Belardi, Kundurthy, Sudhakar and
+  Weinberger}]{lovelace2026prescriptive}
+\bibinfo{author}{Lovelace, J.}, \bibinfo{author}{Belardi, C.},
+  \bibinfo{author}{Kundurthy, S.}, \bibinfo{author}{Sudhakar, S.},
+  \bibinfo{author}{Weinberger, K.Q.}, \bibinfo{year}{2026}.
+\newblock \bibinfo{title}{Prescriptive scaling laws for data constrained
+  training}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2605.01640}.
+\newblock \doi{10.48550/arXiv.2605.01640}
+%Type = Article
+\bibitem[{Morris et~al.(2025)Morris, Sitawarin, Guo, Kokhlikyan, Suh, Rush,
+  Chaudhuri and Mahloujifar}]{morris2025capacity}
+\bibinfo{author}{Morris, J.X.}, \bibinfo{author}{Sitawarin, C.},
+  \bibinfo{author}{Guo, C.}, \bibinfo{author}{Kokhlikyan, N.},
+  \bibinfo{author}{Suh, G.E.}, \bibinfo{author}{Rush, A.M.},
+  \bibinfo{author}{Chaudhuri, K.}, \bibinfo{author}{Mahloujifar, S.},
+  \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{How much do language models memorize?}
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2505.24832}.
+\newblock \doi{10.48550/arXiv.2505.24832}
+%Type = Article
+\bibitem[{Muennighoff et~al.(2023)Muennighoff, Rush, Barak, {Le Scao}, Tazi,
+  Piktus, Pyysalo, Wolf and Raffel}]{muennighoff2023scaling}
+\bibinfo{author}{Muennighoff, N.}, \bibinfo{author}{Rush, A.M.},
+  \bibinfo{author}{Barak, B.}, \bibinfo{author}{{Le Scao}, T.},
+  \bibinfo{author}{Tazi, N.}, \bibinfo{author}{Piktus, A.},
+  \bibinfo{author}{Pyysalo, S.}, \bibinfo{author}{Wolf, T.},
+  \bibinfo{author}{Raffel, C.A.}, \bibinfo{year}{2023}.
+\newblock \bibinfo{title}{Scaling data-constrained language models}, in:
+  \bibinfo{booktitle}{Advances in Neural Information Processing Systems
+  (NeurIPS)}.
+\newblock \bibinfo{note}{arXiv:2305.16264}.
+%Type = Article
+\newblock \doi{10.52202/075280-2191}
+%Type = Inproceedings
+\bibitem[{Nakkiran et~al.(2020)Nakkiran, Kaplun, Bansal, Yang, Barak and
+  Sutskever}]{nakkiran2020double}
+\bibinfo{author}{Nakkiran, P.}, \bibinfo{author}{Kaplun, G.},
+  \bibinfo{author}{Bansal, Y.}, \bibinfo{author}{Yang, T.},
+  \bibinfo{author}{Barak, B.}, \bibinfo{author}{Sutskever, I.},
+  \bibinfo{year}{2020}.
+\newblock \bibinfo{title}{Deep double descent: Where bigger models and more
+  data hurt}, in: \bibinfo{booktitle}{International Conference on Learning
+  Representations ({ICLR})}.
+\newblock \bibinfo{note}{arXiv:1912.02292}.
+\newblock \doi{10.48550/arXiv.1912.02292}
+%Type = Article
+\bibitem[{Oneto et~al.(2026)Oneto, Ridella, Minisi, Coraddu and
+  Anguita}]{neucom2026grokking}
+\bibinfo{author}{Oneto, L.}, \bibinfo{author}{Ridella, S.},
+  \bibinfo{author}{Minisi, S.}, \bibinfo{author}{Coraddu, A.},
+  \bibinfo{author}{Anguita, D.}, \bibinfo{year}{2026}.
+\newblock \bibinfo{title}{Reconciling grokking with statistical learning theory
+  through the lens of norm- and stability-based generalization bounds}.
+\newblock \bibinfo{journal}{Neurocomputing}
+  \DOIprefix\doi{10.1016/j.neucom.2026.132826}.
+%Type = Article
+\bibitem[{Ortega and Masegosa(2026)}]{neucom2026sgdbias}
+\bibinfo{author}{Ortega, L.A.}, \bibinfo{author}{Masegosa, A.R.},
+  \bibinfo{year}{2026}.
+\newblock \bibinfo{title}{A large deviation theory analysis on the implicit bias
+  of {SGD}}.
+\newblock \bibinfo{journal}{Neurocomputing}
+  \DOIprefix\doi{10.1016/j.neucom.2026.132960}.
+%Type = Article
+\bibitem[{Park et~al.(2025)Park, Kim and Kim}]{park2025kagrokking}
+\bibinfo{author}{Park, Y.}, \bibinfo{author}{Kim, M.}, \bibinfo{author}{Kim, Y.},
+  \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{Acceleration of grokking in learning arithmetic
+  operations via {Kolmogorov--Arnold} representation}.
+\newblock \bibinfo{journal}{Neurocomputing}
+  \DOIprefix\doi{10.1016/j.neucom.2025.130347}.
+%Type = Article
+\bibitem[{Power et~al.(2022)Power, Burda, Edwards, Babuschkin and
+  Misra}]{power2022grokking}
+\bibinfo{author}{Power, A.}, \bibinfo{author}{Burda, Y.},
+  \bibinfo{author}{Edwards, H.}, \bibinfo{author}{Babuschkin, I.},
+  \bibinfo{author}{Misra, V.}, \bibinfo{year}{2022}.
+\newblock \bibinfo{title}{Grokking: Generalization beyond overfitting on small
+  algorithmic datasets}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2201.02177}.
+%Type = Inproceedings
+\newblock \doi{10.48550/arXiv.2201.02177}
+\bibitem[{Sedova et~al.(2026)Sedova, Seto, Schluter and
+  Ablin}]{sedova2026mixture}
+\bibinfo{author}{Sedova, A.}, \bibinfo{author}{Seto, S.},
+  \bibinfo{author}{Schluter, N.}, \bibinfo{author}{Ablin, P.},
+  \bibinfo{year}{2026}.
+\newblock \bibinfo{title}{Scaling laws for mixture pretraining under data
+  constraints}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2605.12715}.
+\newblock \doi{10.48550/arXiv.2605.12715}
+%Type = Article
+\bibitem[{Sorscher et~al.(2022)Sorscher, Geirhos, Shekhar, Ganguli and
+  Morcos}]{sorscher2022beyond}
+\bibinfo{author}{Sorscher, B.}, \bibinfo{author}{Geirhos, R.},
+  \bibinfo{author}{Shekhar, S.}, \bibinfo{author}{Ganguli, S.},
+  \bibinfo{author}{Morcos, A.S.}, \bibinfo{year}{2022}.
+\newblock \bibinfo{title}{Beyond neural scaling laws: Beating power law scaling
+  via data pruning}, in: \bibinfo{booktitle}{Advances in Neural Information
+  Processing Systems (NeurIPS)}.
+\newblock \bibinfo{note}{arXiv:2206.14486}.
+%Type = Article
+\bibitem[{Taylor et~al.(2022)Taylor, Kardas, Cucurull, Scialom, Hartshorn,
+  Saravia, Poulton, Kerkez and Stojnic}]{taylor2022galactica}
+\bibinfo{author}{Taylor, R.}, \bibinfo{author}{Kardas, M.},
+  \bibinfo{author}{Cucurull, G.}, \bibinfo{author}{Scialom, T.},
+  \bibinfo{author}{Hartshorn, A.}, \bibinfo{author}{Saravia, E.},
+  \bibinfo{author}{Poulton, A.}, \bibinfo{author}{Kerkez, V.},
+  \bibinfo{author}{Stojnic, R.}, \bibinfo{year}{2022}.
+\newblock \bibinfo{title}{Galactica: A large language model for science}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2211.09085}.
+%Type = Inproceedings
+\newblock \doi{10.48550/arXiv.2211.09085}
+\bibitem[{Tirumala et~al.(2022)Tirumala, Markosyan, Zettlemoyer and
+  Aghajanyan}]{tirumala2022memorization}
+\bibinfo{author}{Tirumala, K.}, \bibinfo{author}{Markosyan, A.H.},
+  \bibinfo{author}{Zettlemoyer, L.}, \bibinfo{author}{Aghajanyan, A.},
+  \bibinfo{year}{2022}.
+\newblock \bibinfo{title}{Memorization without overfitting: Analyzing the
+  training dynamics of large language models}, in: \bibinfo{booktitle}{Advances
+  in Neural Information Processing Systems (NeurIPS)}.
+\newblock \bibinfo{note}{arXiv:2205.10770}.
+%Type = Article
+\bibitem[{Wortsman et~al.(2024)Wortsman, Liu, Xiao, Everett, Alemi, Adlam,
+  Co-Reyes, Gur, Kumar, Novak, Pennington, Sohl-Dickstein, Xu, Lee, Gilmer and
+  Kornblith}]{wortsman2023smallscale}
+\bibinfo{author}{Wortsman, M.}, \bibinfo{author}{Liu, P.J.},
+  \bibinfo{author}{Xiao, L.}, \bibinfo{author}{Everett, K.},
+  \bibinfo{author}{Alemi, A.}, \bibinfo{author}{Adlam, B.},
+  \bibinfo{author}{Co-Reyes, J.D.}, \bibinfo{author}{Gur, I.},
+  \bibinfo{author}{Kumar, A.}, \bibinfo{author}{Novak, R.},
+  \bibinfo{author}{Pennington, J.}, \bibinfo{author}{Sohl-Dickstein, J.},
+  \bibinfo{author}{Xu, K.}, \bibinfo{author}{Lee, J.},
+  \bibinfo{author}{Gilmer, J.}, \bibinfo{author}{Kornblith, S.},
+  \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{Small-scale proxies for large-scale transformer
+  training instabilities}.
+\newblock \bibinfo{journal}{International Conference on Learning
+  Representations (ICLR)}. \bibinfo{note}{arXiv:2309.14322}.
+\newblock \doi{10.48550/arXiv.2309.14322}
+\bibitem[{Xue et~al.(2023)Xue, Fu, Zhou, Zheng and You}]{xue2023repeat}
+\bibinfo{author}{Xue, F.}, \bibinfo{author}{Fu, Y.}, \bibinfo{author}{Zhou, W.},
+  \bibinfo{author}{Zheng, Z.}, \bibinfo{author}{You, Y.}, \bibinfo{year}{2023}.
+\newblock \bibinfo{title}{To repeat or not to repeat: Insights from scaling
+  {LLM} under token-crisis}, in: \bibinfo{booktitle}{Advances in Neural
+  Information Processing Systems (NeurIPS)}.
+\newblock \bibinfo{note}{arXiv:2305.13230}.
+%Type = Inproceedings
+\bibitem[{Yan et~al.(2025)Yan, Wen, Li, Luo, Chen and Lyu}]{yan2025repeatmore}
+\bibinfo{author}{Yan, T.}, \bibinfo{author}{Wen, H.}, \bibinfo{author}{Li, B.},
+  \bibinfo{author}{Luo, K.}, \bibinfo{author}{Chen, W.},
+  \bibinfo{author}{Lyu, K.}, \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{Larger datasets can be repeated more: A theoretical
+  analysis of multi-epoch scaling in linear regression}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2511.13421}.
+\newblock \doi{10.48550/arXiv.2511.13421}
+\end{thebibliography}
+
+\end{document}

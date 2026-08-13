@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Free-repetition field guide — Plate I · The Band</title>
+  <link rel="stylesheet" href="field-guide.css">
+  <script src="figures.js" defer></script>
+</head>
+<body>
+  <article class="field-guide" data-ia="field-guide" data-layout="field-guide">
+    <nav class="chapter-list" aria-label="Chapters">
+      <p class="spine-mark">E1</p>
+      <p class="spine-title">Field guide</p>
+      <ol>
+        <li class="is-current"><a href="#band"><span class="plate-no">I</span> Band</a></li>
+        <li><a href="#onset"><span class="plate-no">II</span> Onset</a></li>
+        <li><a href="#capacity"><span class="plate-no">III</span> Capacity</a></li>
+        <li><a href="#exposure"><span class="plate-no">IV</span> Exposure</a></li>
+        <li><a href="#scale"><span class="plate-no">V</span> Scale</a></li>
+        <li><a href="#reproduce"><span class="plate-no">VI</span> Reproduce</a></li>
+      </ol>
+      <p class="spine-foot">4–10 epoch stratum</p>
+    </nav>
+
+    <div class="folio">
+      <div class="screen-band">
+        <header class="masthead">
+          <p class="running">Plate I · The Band · PeterPonyu/free-repetition-band</p>
+          <h1>Free-repetition <em>field guide</em></h1>
+          <p class="lede">Repeating training data is nearly free for four to ten epochs. The band is a memorization-onset stratum, not a capacity–entropy artifact.</p>
+        </header>
+
+        <div class="opening">
+          <figure class="stratum-plate epoch-band-plate" id="band" aria-labelledby="stratum-caption">
+            <svg class="core" viewBox="0 0 220 640" role="img" aria-label="Vertical epoch core from 1 at the base to 40 at the top, with the free-repetition band highlighted between 4 and 10.">
+              <defs>
+                <linearGradient id="decay" x1="0" y1="1" x2="0" y2="0">
+                  <stop offset="0%" stop-color="#C4A35A"/>
+                  <stop offset="55%" stop-color="#A87848"/>
+                  <stop offset="100%" stop-color="#8B6B3D"/>
+                </linearGradient>
+                <pattern id="grain" width="4" height="4" patternUnits="userSpaceOnUse">
+                  <rect width="4" height="4" fill="#5F7A52" fill-opacity="0.12"/>
+                  <rect width="1" height="4" fill="#3E5C45" fill-opacity="0.18"/>
+                </pattern>
+              </defs>
+              <rect x="48" y="24" width="72" height="592" rx="2" fill="#D9CBA8" stroke="#8B6B3D" stroke-width="1.25"/>
+              <rect class="stratum-fill decay-bed" x="48" y="24" width="72" height="455.4" fill="url(#decay)"/>
+              <rect class="stratum-fill free-bed" x="48" y="479" width="72" height="91.5" fill="#5F7A52"/>
+              <rect x="48" y="479" width="72" height="91.5" fill="url(#grain)"/>
+              <text x="84" y="534" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-size="13" fill="#EDE4CF">free</text>
+              <rect x="48" y="570.5" width="72" height="45.5" fill="#EDE4CF"/>
+              <rect x="48" y="24" width="72" height="592" fill="none" stroke="#2C2416" stroke-width="1.4"/>
+              <g stroke="#2C2416" stroke-width="0.75" opacity="0.55">
+                <line x1="48" y1="479" x2="120" y2="479"/>
+                <line x1="48" y1="570.5" x2="120" y2="570.5"/>
+              </g>
+              <g font-family="Atkinson Hyperlegible, sans-serif" fill="#2C2416" font-size="11">
+                <text x="128" y="36">40</text>
+                <text x="128" y="488">10</text>
+                <text x="128" y="532" font-weight="700" fill="#3E5C45">4–10 free</text>
+                <text x="128" y="580">4</text>
+                <text x="128" y="612">1</text>
+              </g>
+              <g font-family="Fraunces, serif" font-style="italic" fill="#8B6B3D" font-size="10">
+                <text x="128" y="220">decay</text>
+                <text x="128" y="236">negative returns</text>
+                <text x="128" y="600">unique-data floor</text>
+              </g>
+            </svg>
+            <figcaption id="stratum-caption">
+              Vertical epoch core. Sage unit is the free-repetition band (R<sub>free</sub> 4–10). Ochre beds above mark collapse. Pointer: <code>summaries/E1_scale_band.json</code> via <code>papers/FIGURE-INDEX.json</code>.
+            </figcaption>
+          </figure>
+
+          <section class="species-plate diagnosis" aria-label="Plate I diagnosis">
+            <p class="plate-kicker">Plate I · Band</p>
+            <h2><span class="latin">R<sub>free</sub></span> 4–10</h2>
+            <dl class="field-notes">
+              <div>
+                <dt>Range</dt>
+                <dd>Four to ten epochs across the core capacity × entropy grid. Does not move ~100× with the capacity–entropy ratio.</dd>
+              </div>
+              <div>
+                <dt>Census</dt>
+                <dd>218 runs · 20M-token budget · five capacities (2.5M–57M) · three entropies.</dd>
+              </div>
+              <div>
+                <dt>Diagnosis</dt>
+                <dd>Memorization onset bounds the band. Linear artifact account falsified; logarithmic reading not excluded at this resolution.</dd>
+              </div>
+              <div>
+                <dt>Field marks</dt>
+                <dd>WikiText-103: R<sub>free</sub>=4 (5/5 seeds, 3/3 draws). Source-code contracts to 2, returns to 4 after near-duplicate removal.</dd>
+              </div>
+              <div>
+                <dt>Material</dt>
+                <dd>
+                  <code>E1_scale_band</code> · <code>E1_repeat</code> · <code>E1_capxl</code>
+                  · rebuild <code>papers/figs/PIPELINE.md</code>
+                </dd>
+              </div>
+            </dl>
+          </section>
+        </div>
+
+        <section class="species-plate peek" aria-label="Plate II peek">
+          <p class="plate-kicker">Plate II · Onset — continues below</p>
+          <p class="peek-body">Copied-canary memorization coincides with decay onset in 8/9 cells. An exposure-matched control scopes the ordering to the probe convention; the band itself is invariant. Data: <code>summaries/E1_repeat.json</code>.</p>
+        </section>
+
+        <footer class="warehouse screen-colophon">
+          <p>
+            Concept DOI <a href="https://doi.org/10.5281/zenodo.21020378">10.5281/zenodo.21020378</a>
+            · <a href="https://github.com/PeterPonyu/free-repetition-band">github.com/PeterPonyu/free-repetition-band</a>
+            · MIT (code) / CC BY 4.0 (data and figures)
+          </p>
+        </footer>
+      </div>
+
+      <section class="species-plate chapter-plate" id="onset" aria-label="Plate II Onset">
+        <p class="plate-kicker">Plate II · Onset</p>
+        <h2>Memorization onset</h2>
+        <p>Copied-canary memorization coincides with decay onset in 8/9 cells of the core grid. The remaining cell (small/low) has decay at n=20 and memory at n=10. Summary: <code>figs/summaries/E1_repeat.json</code> via <code>papers/FIGURE-INDEX.json</code> or copied <code>data/figures.json</code>.</p>
+        <dl class="field-notes">
+          <div>
+            <dt>Probe</dt>
+            <dd>Canary gap threshold 0.10 nats; excess-loss free threshold 0.05 nats.</dd>
+          </div>
+          <div>
+            <dt>Ordering</dt>
+            <dd>Memory onset leads or coincides with decay; it does not lag once the fine grid is counted.</dd>
+          </div>
+          <div>
+            <dt>Material</dt>
+            <dd><code>E1_repeat</code> · rebuild via <code>papers/figs/PIPELINE.md</code></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="species-plate chapter-plate" id="capacity" aria-label="Plate III Capacity">
+        <p class="plate-kicker">Plate III · Capacity</p>
+        <h2>Capacity–entropy</h2>
+        <p>The xl/xxl extension stretches capacity from 2.5M to 57M parameters. The free band does not track the capacity–entropy ratio. Summary: <code>figs/summaries/E1_capxl.json</code>.</p>
+        <dl class="field-notes">
+          <div>
+            <dt>Span</dt>
+            <dd>Five capacities (2.5M–57M) · three entropies · fixed 20M-token budget.</dd>
+          </div>
+          <div>
+            <dt>Verdict</dt>
+            <dd>Linear artifact account predicts a ~100× shift; the band stays in 4–10.</dd>
+          </div>
+          <div>
+            <dt>Material</dt>
+            <dd><code>E1_capxl</code> · <code>E1_grid</code> · <code>papers/figs/PIPELINE.md</code></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="species-plate chapter-plate" id="exposure" aria-label="Plate IV Exposure">
+        <p class="plate-kicker">Plate IV · Exposure</p>
+        <h2>Band invariance</h2>
+        <p>An exposure-matched control (plant rate 4 vs 1) shows that coincidence of memorization and decay onsets is an artifact of the oversampled probe convention. R<sub>free</sub> itself is identical in 9/9 cells. Summary: <code>figs/summaries/E1_exposure_control.json</code>.</p>
+        <dl class="field-notes">
+          <div>
+            <dt>Control</dt>
+            <dd>324-run E1-C battery on the same 3×3 grid.</dd>
+          </div>
+          <div>
+            <dt>Band</dt>
+            <dd>R<sub>free</sub> does not move when the canary is downsampled to match unique-token exposure.</dd>
+          </div>
+          <div>
+            <dt>Material</dt>
+            <dd><code>E1_exposure_control</code> · <code>E1_repeat</code> · <code>papers/figs/PIPELINE.md</code></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="species-plate chapter-plate" id="scale" aria-label="Plate V Scale">
+        <p class="plate-kicker">Plate V · Scale</p>
+        <h2>Landscape and real bytes</h2>
+        <p>The 4-epoch floor of Muennighoff et al. reappears as a lower bound. WikiText-103 gives R<sub>free</sub>=4 across five seeds. Optional preview: <code>figs/previews/E1_scale_band.svg</code>. Numeric SSOT: <code>figs/summaries/E1_scale_band.json</code>.</p>
+        <dl class="field-notes">
+          <div>
+            <dt>Synthetic</dt>
+            <dd>Core grid 4–10; xl/xxl row stays at 4.</dd>
+          </div>
+          <div>
+            <dt>Real bytes</dt>
+            <dd>WikiText-103 R<sub>free</sub>=4 (5/5 seeds, 3/3 draws). Source-code contracts, then returns to 4 after near-duplicate removal.</dd>
+          </div>
+          <div>
+            <dt>Material</dt>
+            <dd><code>E1_scale_band</code> · <code>E1_scale</code> · <code>papers/FIGURE-INDEX.json</code></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="species-plate chapter-plate" id="reproduce" aria-label="Plate VI Reproduce">
+        <p class="plate-kicker">Plate VI · Reproduce</p>
+        <h2>Warehouse and pipeline</h2>
+        <p>This field guide reads <code>papers/FIGURE-INDEX.json</code> (copied to <code>data/figures.json</code> at build). It does not host journal PDFs. Rebuild figures with the R → TikZ/PDF pipeline.</p>
+        <dl class="field-notes">
+          <div>
+            <dt>Clone</dt>
+            <dd><a href="https://github.com/PeterPonyu/free-repetition-band">https://github.com/PeterPonyu/free-repetition-band</a></dd>
+          </div>
+          <div>
+            <dt>Pipeline</dt>
+            <dd><code>papers/figs/PIPELINE.md</code> · generators in <code>papers/GENERATORS.md</code></dd>
+          </div>
+          <div>
+            <dt>Index</dt>
+            <dd><code>papers/FIGURE-INDEX.json</code> · plates <code>E1_scale_band</code> / <code>E1_repeat</code> / <code>E1_capxl</code></dd>
+          </div>
+          <div>
+            <dt>Zenodo</dt>
+            <dd>Concept <a href="https://doi.org/10.5281/zenodo.21020378">10.5281/zenodo.21020378</a></dd>
+          </div>
+          <div>
+            <dt>License</dt>
+            <dd>MIT (code) / CC BY 4.0 (data and figures)</dd>
+          </div>
+        </dl>
+        <p id="index-status" class="index-status">loading FIGURE-INDEX…</p>
+      </section>
+
+      <footer class="warehouse">
+        <p>
+          Concept DOI <a href="https://doi.org/10.5281/zenodo.21020378">10.5281/zenodo.21020378</a>
+          · <a href="https://github.com/PeterPonyu/free-repetition-band">github.com/PeterPonyu/free-repetition-band</a>
+          · MIT (code) / CC BY 4.0 (data and figures)
+        </p>
+      </footer>
+    </div>
+  </article>
+</body>
+</html>

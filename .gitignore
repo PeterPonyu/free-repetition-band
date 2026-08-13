@@ -17,3 +17,10 @@ free-repetition-band-v*.tar.gz
 .env.*
 credentials*
 *.pem
+
+# compiled figure tiers (rebuild via papers/figs/PIPELINE.md)
+papers/figs/tex/
+papers/figs/vec/
+
+# local Pages artifact
+_site/

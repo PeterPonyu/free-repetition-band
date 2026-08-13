@@ -1,0 +1,35 @@
+# Paper E1 layout overrides — text-width-aware schema (2026-08-05).
+# Same mechanism as Paper C: folded (a)..(d) tags, left-aligned, wrapped to
+# title_wrap_width characters. Tune per figure after visual inspection.
+
+_default:
+  plot_margin: [8, 10, 8, 10]   # top, right, bottom, left (pt)
+  panel_spacing: 16              # gutter between panels (pt)
+  title_wrap_width: 38           # chars per title line before wrapping
+
+# Example override:
+# E1_repeat:
+#   title_wrap_width: 32
+#   legend_position: bottom
+
+E1_scale:
+  # 3-facet panel (a) + side legends squeeze panel width like C_ownership_localize
+  title_wrap_width: 30
+  # The 8-entry seed/corpus-draw legend column narrows the facets to ~0.35in.
+  # Put collected guides in the gap between 2x2 rows so the figure body fills
+  # the available width instead of reserving a side column.
+  legend_layout: row-gap
+  legend_position: bottom
+  legend_height: 0.20
+
+E1_within_run:
+  # (c) title ran into (d) tag at default width
+  title_wrap_width: 30
+
+E1_grid:
+  # Two collected guides squeeze panels and leave uneven whitespace when kept
+  # outside the grid. Put them in the inter-row band like E1_scale.
+  title_wrap_width: 30
+  legend_layout: row-gap
+  legend_position: bottom
+  legend_height: 0.20
