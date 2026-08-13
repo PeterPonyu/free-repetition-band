@@ -1,0 +1,7 @@
+% figpreamble.tex — warehouse pointer glue (GitHub paper/ tree).
+% Compiled figs/tex and figs/vec are build products (gitignored). Never
+% \includegraphics a committed PDF sitting beside this file.
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,fit,calc,shapes.geometric}
+\graphicspath{{figs/vec/}}
+\newcommand{\figtikz}[2][\linewidth]{\resizebox{#1}{!}{\input{figs/tex/#2.tex}}}

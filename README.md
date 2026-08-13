@@ -1,6 +1,7 @@
 # A 4-10 epoch free-repetition band — code & data
 
 Reproducibility archive: **experiment code and per-run result logs only**.
+Public remote: https://github.com/PeterPonyu/free-repetition-band
 Manuscript and write-up/derivation documents are intentionally **not** included.
 
 ## Contents

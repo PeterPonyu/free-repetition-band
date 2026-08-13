@@ -1,0 +1,60 @@
+/* E1 field-guide tokens — paper-local; not a shared portal-theme package. */
+:root {
+  --parchment: #f4efe3;
+  --sage: #5f6f52;
+  --ochre: #b0854a;
+  --ink: #2a241c;
+  --display: "Fraunces", "Palatino Linotype", serif;
+  --body: "Atkinson Hyperlegible", "Source Sans 3", sans-serif;
+}
+
+html {
+  background: var(--parchment);
+  color: var(--ink);
+}
+
+body {
+  margin: 0;
+  font-family: var(--body);
+}
+
+.field-guide {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 4rem;
+}
+
+.plate-head h1,
+.field-guide h2 {
+  font-family: var(--display);
+  font-weight: 600;
+}
+
+.kicker {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sage);
+  font-size: 0.75rem;
+}
+
+.chapters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  border-top: 2px solid var(--ochre);
+  border-bottom: 1px solid var(--sage);
+  padding: 0.75rem 0;
+  margin: 1.5rem 0 2rem;
+}
+
+.chapters a {
+  color: var(--sage);
+  text-decoration: none;
+}
+
+footer {
+  margin-top: 3rem;
+  border-top: 1px solid var(--ochre);
+  padding-top: 1rem;
+  font-size: 0.9rem;
+}

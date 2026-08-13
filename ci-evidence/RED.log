@@ -1,0 +1,63 @@
+.FF.FFF..FFFFFF..F.FFF.FFFFFF.FFFFFFFFF                                  [100%]
+=================================== FAILURES ===================================
+/home/zeyufu/Desktop/dl-research/.omx/artifacts/visual-ralph/paper-E1/github/tests/test_citation.py:23: AssertionError: assert '10.5281/zenodo.21020379' == '10.5281/zenodo.21020378'
+/home/zeyufu/Desktop/dl-research/.omx/artifacts/visual-ralph/paper-E1/github/tests/test_citation.py:30: AssertionError: assert '10.5281/zenodo.21020379' in set()
+/home/zeyufu/Desktop/dl-research/.omx/artifacts/visual-ralph/paper-E1/github/tests/test_figure_contract.py:32: AssertionError: paper/FIGURE-INDEX.json must exist
+/home/zeyufu/Desktop/dl-research/.omx/artifacts/visual-ralph/paper-E1/github/tests/test_figure_contract.py:32: AssertionError: paper/FIGURE-INDEX.json must exist
+/home/zeyufu/Desktop/dl-research/.omx/artifacts/visual-ralph/paper-E1/github/tests/test_figure_contract.py:32: AssertionError: paper/FIGURE-INDEX.json must exist
+/home/zeyufu/Desktop/dl-research/.omx/artifacts/visual-ralph/paper-E1/github/tests/test_figure_contract.py:74: AssertionError: paper/main.tex must exist
+/home/zeyufu/miniconda3/lib/python3.13/pathlib/_local.py:537: FileNotFoundError: [Errno 2] No such file or directory: '/home/zeyufu/Desktop/dl-research/.omx/artifacts/visual-ralph/paper-E1/github/paper/main.tex'
+/home/zeyufu/miniconda3/lib/python3.13/pathlib/_local.py:537: FileNotFoundError: [Errno 2] No such file or directory: '/home/zeyufu/Desktop/dl-research/.omx/artifacts/visual-ralph/paper-E1/github/paper/main.tex'
+/home/zeyufu/miniconda3/lib/python3.13/pathlib/_local.py:537: FileNotFoundError: [Errno 2] No such file or directory: '/home/zeyufu/Desktop/dl-research/.omx/artifacts/visual-ralph/paper-E1/github/paper/main.tex'
+/home/zeyufu/Desktop/dl-research/.omx/artifacts/visual-ralph/paper-E1/github/tests/test_figure_contract.py:32: AssertionError: paper/FIGURE-INDEX.json must exist
+/home/zeyufu/Desktop/dl-research/.omx/artifacts/visual-ralph/paper-E1/github/tests/test_figure_contract.py:116: AssertionError: assert 'figs/tex/' in '*.pt\n*.pth\n*.ckpt\n*.npy\n*.npz\n__pycache__/\n*.pyc\n.omc/\n.omx/\n.ruff_cache/\n.DS_Store\n\n# confidential / local artifacts\n*.tar.gz\nfree-repetition-band-v*.tar.gz\n.env\n.env.*\ncredentials*\n*.pem\n'
+/home/zeyufu/miniconda3/lib/python3.13/pathlib/_local.py:537: FileNotFoundError: [Errno 2] No such file or directory: '/home/zeyufu/Desktop/dl-research/.omx/artifacts/visual-ralph/paper-E1/github/portal/index.html'
+/home/zeyufu/Desktop/dl-research/.omx/artifacts/visual-ralph/paper-E1/github/tests/test_integration.py:14: AssertionError: portal/build.sh must exist
+/home/zeyufu/miniconda3/lib/python3.13/pathlib/_local.py:537: FileNotFoundError: [Errno 2] No such file or directory: '/home/zeyufu/Desktop/dl-research/.omx/artifacts/visual-ralph/paper-E1/github/portal/build.sh'
+/home/zeyufu/miniconda3/lib/python3.13/subprocess.py:577: subprocess.CalledProcessError: Command '['bash', '/home/zeyufu/Desktop/dl-research/.omx/artifacts/visual-ralph/paper-E1/github/portal/build.sh']' returned non-zero exit status 127.
+/home/zeyufu/miniconda3/lib/python3.13/pathlib/_local.py:537: FileNotFoundError: [Errno 2] No such file or directory: '/home/zeyufu/Desktop/dl-research/.omx/artifacts/visual-ralph/paper-E1/github/portal/index.html'
+/home/zeyufu/Desktop/dl-research/.omx/artifacts/visual-ralph/paper-E1/github/tests/test_portal.py:13: AssertionError: portal/ must exist
+/home/zeyufu/miniconda3/lib/python3.13/pathlib/_local.py:537: FileNotFoundError: [Errno 2] No such file or directory: '/home/zeyufu/Desktop/dl-research/.omx/artifacts/visual-ralph/paper-E1/github/portal/index.html'
+/home/zeyufu/miniconda3/lib/python3.13/pathlib/_local.py:537: FileNotFoundError: [Errno 2] No such file or directory: '/home/zeyufu/Desktop/dl-research/.omx/artifacts/visual-ralph/paper-E1/github/portal/index.html'
+/home/zeyufu/Desktop/dl-research/.omx/artifacts/visual-ralph/paper-E1/github/tests/test_portal.py:13: AssertionError: portal/ must exist
+/home/zeyufu/miniconda3/lib/python3.13/pathlib/_local.py:537: FileNotFoundError: [Errno 2] No such file or directory: '/home/zeyufu/Desktop/dl-research/.omx/artifacts/visual-ralph/paper-E1/github/portal/index.html'
+/home/zeyufu/Desktop/dl-research/.omx/artifacts/visual-ralph/paper-E1/github/tests/test_portal.py:13: AssertionError: portal/ must exist
+/home/zeyufu/Desktop/dl-research/.omx/artifacts/visual-ralph/paper-E1/github/tests/test_workflows.py:12: AssertionError: .github/workflows/pages.yml must exist
+/home/zeyufu/miniconda3/lib/python3.13/pathlib/_local.py:537: FileNotFoundError: [Errno 2] No such file or directory: '/home/zeyufu/Desktop/dl-research/.omx/artifacts/visual-ralph/paper-E1/github/.github/workflows/pages.yml'
+/home/zeyufu/Desktop/dl-research/.omx/artifacts/visual-ralph/paper-E1/github/tests/test_workflows.py:12: AssertionError: .github/workflows/pages.yml must exist
+/home/zeyufu/Desktop/dl-research/.omx/artifacts/visual-ralph/paper-E1/github/tests/test_workflows.py:12: AssertionError: .github/workflows/pages.yml must exist
+/home/zeyufu/miniconda3/lib/python3.13/pathlib/_local.py:537: FileNotFoundError: [Errno 2] No such file or directory: '/home/zeyufu/Desktop/dl-research/.omx/artifacts/visual-ralph/paper-E1/github/.github/workflows/ci.yml'
+/home/zeyufu/miniconda3/lib/python3.13/pathlib/_local.py:537: FileNotFoundError: [Errno 2] No such file or directory: '/home/zeyufu/Desktop/dl-research/.omx/artifacts/visual-ralph/paper-E1/github/.github/workflows/ci.yml'
+/home/zeyufu/Desktop/dl-research/.omx/artifacts/visual-ralph/paper-E1/github/tests/test_workflows.py:12: AssertionError: .github/workflows/visual-pixel.yml must exist
+/home/zeyufu/Desktop/dl-research/.omx/artifacts/visual-ralph/paper-E1/github/tests/test_workflows.py:83: AssertionError: assert False
+=========================== short test summary info ============================
+FAILED tests/test_citation.py::test_citation_cff_doi_is_manuscript_concept - ...
+FAILED tests/test_citation.py::test_citation_cff_lists_version_doi_under_identifiers
+FAILED tests/test_figure_contract.py::test_figure_index_validates_against_schema
+FAILED tests/test_figure_contract.py::test_every_index_id_is_manifest_or_documented_schematic
+FAILED tests/test_figure_contract.py::test_index_includes_every_manifest_artifact
+FAILED tests/test_figure_contract.py::test_pointer_tex_does_not_mention_previews
+FAILED tests/test_figure_contract.py::test_pointer_tex_does_not_include_peerj_figure_pdfs
+FAILED tests/test_figure_contract.py::test_pointer_tex_uses_figtikz_or_preamble_routed_names
+FAILED tests/test_figure_contract.py::test_pointer_tex_does_not_includegraphics_same_directory_pdf
+FAILED tests/test_figure_contract.py::test_every_manifest_summary_json_is_committed
+FAILED tests/test_figure_contract.py::test_gitignore_excludes_compiled_tex_and_vec_tiers
+FAILED tests/test_independence.py::test_portal_does_not_present_a_five_paper_suite
+FAILED tests/test_integration.py::test_portal_build_script_is_executable - As...
+FAILED tests/test_integration.py::test_portal_build_script_validates_index_and_does_not_run_latexmk
+FAILED tests/test_integration.py::test_portal_build_copies_portal_to_site_without_experiments
+FAILED tests/test_portal.py::test_portal_index_uses_field_guide_landmark - Fi...
+FAILED tests/test_portal.py::test_portal_declares_fraunces_and_atkinson_hyperlegible
+FAILED tests/test_portal.py::test_portal_nav_includes_band_onset_capacity - F...
+FAILED tests/test_portal.py::test_portal_nav_is_not_instrument_or_console_chrome
+FAILED tests/test_portal.py::test_portal_has_no_emoji - AssertionError: porta...
+FAILED tests/test_portal.py::test_portal_footer_lists_concept_doi_github_and_dual_license
+FAILED tests/test_portal.py::test_portal_consumes_figure_index_not_peerj_figure_paths
+FAILED tests/test_workflows.py::test_pages_workflow_declares_pages_write_permission
+FAILED tests/test_workflows.py::test_pages_workflow_declares_github_pages_environment
+FAILED tests/test_workflows.py::test_pages_workflow_path_filters_are_portal_and_paper_contracts_only
+FAILED tests/test_workflows.py::test_pages_deploy_job_is_gated_so_pages_is_not_enabled
+FAILED tests/test_workflows.py::test_required_ci_workflow_runs_pytest - FileN...
+FAILED tests/test_workflows.py::test_required_ci_workflow_does_not_deploy_pages
+FAILED tests/test_workflows.py::test_visual_pixel_workflow_is_gated_until_reference_approved
+FAILED tests/test_workflows.py::test_no_workflow_runs_latexmk_or_uploads_figure_pdfs

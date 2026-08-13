@@ -17,3 +17,12 @@ free-repetition-band-v*.tar.gz
 .env.*
 credentials*
 *.pem
+
+# compiled figure tiers (pointer contract: never commit tex/vec PDFs)
+figs/tex/
+figs/vec/
+paper/figs/tex/
+paper/figs/vec/
+
+# portal build output
+_site/

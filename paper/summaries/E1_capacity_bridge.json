@@ -1,0 +1,37 @@
+{
+  "artifact": "E1_capacity_bridge",
+  "layout": "balanced-2x2",
+  "panel_count": 4,
+  "panels": [
+    {
+      "id": "a",
+      "question": "How do threshold conventions change the bridge?",
+      "sources": [
+        "experiments/results/figures-deepcheck/e1_capacity_bridge_summary.json"
+      ]
+    },
+    {
+      "id": "b",
+      "question": "How variable is the bridge across seeds?",
+      "sources": [
+        "experiments/results/figures-deepcheck/e1_capacity_bridge_summary.json"
+      ]
+    },
+    {
+      "id": "c",
+      "question": "Do both conventions support the same verdict?",
+      "sources": [
+        "experiments/results/figures-deepcheck/e1_capacity_bridge_summary.json"
+      ]
+    },
+    {
+      "id": "d",
+      "question": "Does a fresh-budget control preserve the bridge?",
+      "sources": [
+        "experiments/results/figures-deepcheck/e1_capacity_bridge_summary.json"
+      ]
+    }
+  ],
+  "exception_reason": null,
+  "generated_from_manifest": "papers/figs/figure_manifest.yaml"
+}
