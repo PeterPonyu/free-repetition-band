@@ -13,8 +13,9 @@ LAB_SCHEMA = Path("/home/zeyufu/Desktop/dl-research/.omx/plans/figure-index.sche
 CANONICAL_TEX = Path("/home/zeyufu/Desktop/dl-research/papers/E1/main.tex")
 WAREHOUSE_TEX = REPO_ROOT / "papers" / "E1" / "main.tex"
 PORTAL_DIR = REPO_ROOT / "portal"
-PORTAL_INDEX = PORTAL_DIR / "index.html"
+PORTAL_INDEX = PORTAL_DIR / "app" / "page.tsx"
 WORKFLOWS_DIR = REPO_ROOT / ".github" / "workflows"
+SKIP_DIR_NAMES = {".next", "node_modules", "out", "public"}
 
 CONCEPT_DOI = "10.5281/zenodo.21020378"
 VERSION_DOI = "10.5281/zenodo.21020379"
@@ -51,19 +52,50 @@ FORBIDDEN_C_NAV = ("Probes", "Staircase", "Subspace")
 FORBIDDEN_E2 = ("three-pane", "detector-console", "JetBrains Mono")
 FORBIDDEN_E2_NAV = ("Nomogram", "BIG-Bench", "Preflight")
 
+SOURCE_SUFFIXES = {".html", ".css", ".js", ".mjs", ".ts", ".tsx", ".svg"}
+
 
 @pytest.fixture
 def repo_root() -> Path:
     return REPO_ROOT
 
 
-def portal_corpus() -> str:
+def portal_source_files() -> list[Path]:
     assert PORTAL_DIR.is_dir(), f"missing portal at {PORTAL_DIR}"
-    chunks: list[str] = []
+    files: list[Path] = []
     for path in sorted(PORTAL_DIR.rglob("*")):
-        if path.suffix.lower() in {".html", ".css", ".js", ".svg"}:
-            chunks.append(path.read_text(encoding="utf-8", errors="replace"))
-    assert chunks, f"no HTML/CSS/JS under {PORTAL_DIR}"
+        if not path.is_file():
+            continue
+        if any(part in SKIP_DIR_NAMES for part in path.parts):
+            continue
+        if path.suffix.lower() in SOURCE_SUFFIXES:
+            files.append(path)
+    return files
+
+
+def portal_corpus() -> str:
+    chunks = [
+        path.read_text(encoding="utf-8", errors="replace")
+        for path in portal_source_files()
+    ]
+    assert chunks, f"no portal source under {PORTAL_DIR}"
+    return "\n".join(chunks)
+
+
+EXPORT_TEXT_SUFFIXES = {".html", ".js", ".css", ".json", ".svg", ".txt", ".xml"}
+
+
+def export_corpus() -> str:
+    out = REPO_ROOT / "out"
+    assert out.is_dir(), "missing Next.js export at out/"
+    chunks: list[str] = []
+    for path in sorted(out.rglob("*")):
+        if not path.is_file():
+            continue
+        if path.suffix.lower() not in EXPORT_TEXT_SUFFIXES:
+            continue
+        chunks.append(path.read_text(encoding="utf-8", errors="replace"))
+    assert chunks, "no text files in out/"
     return "\n".join(chunks)
 
 

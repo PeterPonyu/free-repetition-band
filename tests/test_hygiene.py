@@ -5,7 +5,7 @@ from __future__ import annotations
 import subprocess
 from pathlib import Path
 
-from conftest import PORTAL_DIR, REPO_ROOT, WAREHOUSE_TEX
+from conftest import PORTAL_DIR, REPO_ROOT, WAREHOUSE_TEX, portal_corpus
 
 LAB = Path("/home/zeyufu/Desktop/dl-research")
 
@@ -16,7 +16,7 @@ def test_readme_cites_github() -> None:
 
 
 def test_no_compiled_manuscript_in_portal_or_site() -> None:
-    for root in (PORTAL_DIR, REPO_ROOT / "_site"):
+    for root in (PORTAL_DIR, REPO_ROOT / "_site", REPO_ROOT / "out"):
         if not root.exists():
             continue
         pdfs = list(root.rglob("*.pdf"))
@@ -31,7 +31,7 @@ def test_pointer_tex_is_full_manuscript() -> None:
 
 
 def test_no_suite_chrome_across_five_papers() -> None:
-    html = (PORTAL_DIR / "index.html").read_text(encoding="utf-8")
+    html = portal_corpus()
     assert "muon-norm-cap-grokking" not in html
     assert "grokking-clock" not in html
     assert "architecture-staircase" not in html

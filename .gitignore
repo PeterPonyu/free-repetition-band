@@ -22,5 +22,10 @@ credentials*
 papers/figs/tex/
 papers/figs/vec/
 
-# local Pages artifact
+# local Pages artifact / Next.js export
 _site/
+out/
+portal/node_modules/
+portal/.next/
+portal/out/
+portal/public/data/

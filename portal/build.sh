@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
-# Validate FIGURE-INDEX then copy portal/ → _site/. No LaTeX.
+# Validate FIGURE-INDEX, then Next.js static export to out/. No LaTeX.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
 python3 - <<'PY'
 import json
+import shutil
 import subprocess
 from pathlib import Path
 
@@ -24,28 +25,55 @@ tracked = subprocess.run(
 ).stdout.splitlines()
 if tracked:
     raise SystemExit(f"refuse: committed PDFs under papers/: {tracked}")
-print("INDEX valid; no papers/**/*.pdf")
+
+# Door copy: ids + summary filenames only. No captions, venue PDFs, or findings.
+door = {
+    "paper_id": index["paper_id"],
+    "github": index["github"],
+    "zenodo_concept_doi": index["zenodo_concept_doi"],
+    "pipeline": index["pipeline"],
+    "figures": [
+        {"id": fig["id"], "summary": fig.get("summary")}
+        for fig in index["figures"]
+    ],
+}
+public = root / "portal/public/data"
+if public.exists():
+    shutil.rmtree(public)
+public.mkdir(parents=True, exist_ok=True)
+payload = json.dumps(door, indent=2) + "\n"
+(public / "figures.json").write_text(payload, encoding="utf-8")
+(public / "FIGURE-INDEX.json").write_text(payload, encoding="utf-8")
+print("INDEX valid; public data is pointer-only; no papers/**/*.pdf")
 PY
 
-rm -rf _site
-mkdir -p _site/data/figs
-cp -a portal/. _site/
-cp papers/FIGURE-INDEX.json _site/data/figures.json
-cp papers/FIGURE-INDEX.json _site/data/FIGURE-INDEX.json
-if [[ -d papers/figs/summaries ]]; then
-  mkdir -p _site/data/figs/summaries
-  cp -a papers/figs/summaries/. _site/data/figs/summaries/
-fi
-if [[ -d papers/figs/previews ]]; then
-  mkdir -p _site/data/figs/previews
-  cp -a papers/figs/previews/. _site/data/figs/previews/
-fi
-if [[ -e _site/experiments || -e _site/.omc ]]; then
-  echo "I4: experiments or .omc leaked into _site" >&2
+(
+  cd portal
+  if [[ -f package-lock.json ]]; then
+    npm ci
+  else
+    npm install
+  fi
+  npm run build
+)
+
+rm -rf out _site
+cp -a portal/out/. out/
+cp -a portal/out/. _site/
+
+if [[ -e out/experiments || -e out/.omc ]]; then
+  echo "I4: experiments or .omc leaked into out/" >&2
   exit 1
 fi
-if find _site -iname '*.pdf' | grep -q .; then
-  echo "U5: PDFs leaked into _site" >&2
+if find out -iname '*.pdf' | grep -q .; then
+  echo "U5: PDFs leaked into out/" >&2
   exit 1
 fi
-echo "built _site/ from portal/ + FIGURE-INDEX"
+test -f out/index.html
+test -d out/onset
+test -f out/data/figures.json
+if [[ -d out/data/figs ]]; then
+  echo "U-leak: warehouse summaries/previews copied into out/data/figs" >&2
+  exit 1
+fi
+echo "exported out/ from Next.js (basePath /free-repetition-band)"

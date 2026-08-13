@@ -22,11 +22,16 @@ standard datasets (MNIST / WikiText) which are not bundled.
 
 Figure rebuild: see `papers/figs/PIPELINE.md` and `papers/GENERATORS.md`. Compiled `papers/figs/tex/` and `papers/figs/vec/` are gitignored.
 
-Local portal preview:
+Local portal preview (Next.js static export, basePath `/free-repetition-band`):
 
 ```bash
 bash portal/build.sh
-python3 -m http.server -d _site 8000
+python3 -m http.server -d out 8000
+# open http://127.0.0.1:8000/  only after copying out/ under a /free-repetition-band/ prefix
+mkdir -p /tmp/frb-pages/free-repetition-band
+cp -a out/. /tmp/frb-pages/free-repetition-band/
+python3 -m http.server -d /tmp/frb-pages 8000
+# http://127.0.0.1:8000/free-repetition-band/
 ```
 
 ## Family/optimizer/capacity extensions (v1.5, 2026-07)

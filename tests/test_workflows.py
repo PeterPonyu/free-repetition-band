@@ -56,6 +56,8 @@ def test_pages_triggers_main_only_with_path_filter() -> None:
     joined = " ".join(paths)
     assert "portal/**" in joined
     assert "papers/FIGURE-INDEX.json" in joined
+    pages_text = workflow_path("pages.yml").read_text(encoding="utf-8")
+    assert "path: out" in pages_text
     assert "papers/figs/summaries/**" in joined
     assert "papers/figs/previews/**" in joined
     assert ".github/workflows/pages.yml" in joined

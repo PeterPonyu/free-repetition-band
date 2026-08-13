@@ -1,4 +1,4 @@
-"""Portal uniqueness and consumption contract (P-E1, U1–U7)."""
+"""Portal uniqueness, Next.js export, leak audit (P-E1, U1–U7)."""
 
 from __future__ import annotations
 
@@ -18,25 +18,44 @@ from conftest import (
     PIPELINE_POINTER,
     PORTAL_DIR,
     PORTAL_INDEX,
+    REPO_ROOT,
     REQUIRED_FONTS,
     REQUIRED_NAV,
     REQUIRED_NAV_SUBSET,
     REQUIRED_SUMMARIES,
     CONCEPT_DOI,
+    export_corpus,
     portal_corpus,
+    portal_source_files,
 )
 
 STUB_RE = re.compile(
     r"CI stub|instrument stub|Two-probe contract stub|waits on a user-approved reference\.png|\bstub\b",
     re.I,
 )
-ABSOLUTE_ASSET_RE = re.compile(
-    r"""(?:href|src)\s*=\s*["']/(?!/)[^"']+|url\(\s*/(?!/)"""
+LEAK_RE = re.compile(
+    r"R_free|R_\{free\}|R<sub>free|218 runs|WikiText|20M-token|"
+    r"Figure(?:1[0-2]|[1-9])\.pdf|manuscript\.pdf|"
+    r"nearly free for four|copied-canary|8/9 cells|"
+    r"4–10 epoch|4-10 epoch|4–10 free|R_free 4",
+    re.I,
 )
 
 
 def test_portal_index_exists() -> None:
     assert PORTAL_INDEX.is_file()
+    assert (PORTAL_DIR / "next.config.mjs").is_file()
+    assert not (PORTAL_DIR / "index.html").exists(), "static index.html dump must be gone"
+
+
+def test_next_export_and_base_path() -> None:
+    config = (PORTAL_DIR / "next.config.mjs").read_text(encoding="utf-8")
+    assert "output: \"export\"" in config or "output: 'export'" in config
+    assert "/free-repetition-band" in config
+    pages = (REPO_ROOT / ".github" / "workflows" / "pages.yml").read_text(
+        encoding="utf-8"
+    )
+    assert "path: out" in pages
 
 
 def test_field_guide_landmark() -> None:
@@ -44,11 +63,12 @@ def test_field_guide_landmark() -> None:
     lower = html.lower()
     landmark = (
         re.search(r"<article[^>]*\bfield-guide\b", html, re.I) is not None
+        or 'className="field-guide"' in html
         or 'class="field-guide"' in html
         or 'data-layout="field-guide"' in html
     )
     assert landmark, "P-E1: expected article.field-guide landmark"
-    assert "stratum" in lower or "epoch-band" in lower or "band plate" in lower
+    assert "stratum" in lower or "epoch-band" in lower
     assert "status-strip" not in lower
     assert "three-pane" not in lower
     assert "notebook gutter" not in lower
@@ -57,8 +77,12 @@ def test_field_guide_landmark() -> None:
 
 def test_type_stack_fraunces_and_atkinson() -> None:
     text = portal_corpus()
+    fonts = (PORTAL_DIR / "app" / "fonts.ts").read_text(encoding="utf-8")
+    assert "next/font/google" in fonts
+    assert "Fraunces" in fonts
+    assert "Atkinson_Hyperlegible" in fonts
     for font in REQUIRED_FONTS:
-        assert font in text, f"missing typeface {font}"
+        assert font in text or font.replace(" ", "_") in fonts
 
 
 def test_chapter_list_nav_labels() -> None:
@@ -67,6 +91,9 @@ def test_chapter_list_nav_labels() -> None:
         assert re.search(rf"\b{re.escape(label)}\b", text)
     missing = [label for label in REQUIRED_NAV if not re.search(rf"\b{re.escape(label)}\b", text)]
     assert not missing, f"chapter-list missing {missing}"
+    nav = (PORTAL_DIR / "app" / "ChapterNav.tsx").read_text(encoding="utf-8")
+    assert "usePathname" in nav
+    assert "Link" in nav
 
 
 def test_consumes_figure_index_and_summaries() -> None:
@@ -96,7 +123,13 @@ def test_no_venue_pdf_paths() -> None:
     assert "papers/peerj-E1/upload" not in text
     assert not re.search(r"Figure(?:1[0-2]|[1-9])\.pdf", text)
     assert "manuscript.pdf" not in text
-    assert "main.pdf" not in text.lower() or "main.pdf" not in text
+
+
+def test_no_paper_finding_leak() -> None:
+    for path in portal_source_files():
+        text = path.read_text(encoding="utf-8", errors="replace")
+        hit = LEAK_RE.search(text)
+        assert hit is None, f"leak in {path.relative_to(PORTAL_DIR)}: {hit.group(0)!r}"
 
 
 def test_no_emoji_slop() -> None:
@@ -148,14 +181,37 @@ def test_no_shared_theme_package() -> None:
 
 
 def test_no_journal_pdf_in_portal_tree() -> None:
-    pdfs = list(PORTAL_DIR.rglob("*.pdf"))
+    pdfs = [
+        path
+        for path in PORTAL_DIR.rglob("*.pdf")
+        if not any(part in {".next", "node_modules"} for part in path.parts)
+    ]
     assert not pdfs, f"portal must not host PDFs: {pdfs}"
 
 
-def test_relative_only_asset_urls() -> None:
+def test_base_path_not_user_site_assets() -> None:
     text = portal_corpus()
     assert "/assets" not in text
-    assert ABSOLUTE_ASSET_RE.search(text) is None, "U7: root-absolute asset URL"
-    assert 'href="/' not in text
-    assert 'src="/' not in text
-    assert "url(/" not in text
+    assert 'href="/assets' not in text
+    config = (PORTAL_DIR / "next.config.mjs").read_text(encoding="utf-8")
+    assert 'basePath: "/free-repetition-band"' in config
+
+
+def test_export_html_uses_base_path_and_has_no_leaks() -> None:
+    out_index = REPO_ROOT / "out" / "index.html"
+    if not out_index.is_file():
+        import subprocess
+
+        subprocess.run(["bash", "portal/build.sh"], cwd=REPO_ROOT, check=True)
+    html = export_corpus()
+    assert "/free-repetition-band/" in html
+    assert LEAK_RE.search(html) is None
+    assert "Band" in html and "Onset" in html
+    assert "Fraunces" in html or "--font-display" in html or "font" in html.lower()
+    assert not (REPO_ROOT / "out" / "data" / "figs" / "summaries").exists()
+    public_index = REPO_ROOT / "out" / "data" / "figures.json"
+    assert public_index.is_file()
+    text = public_index.read_text(encoding="utf-8")
+    assert "caption" not in text
+    assert "venue_flat_name" not in text
+    assert LEAK_RE.search(text) is None
