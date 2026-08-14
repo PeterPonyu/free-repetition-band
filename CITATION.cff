@@ -1,6 +1,5 @@
 cff-version: 1.2.0
-title: >-
-  Code and data for: A 4-10 epoch free-repetition band: a 1000x-smaller-scale test of the data-repetition value-decay law
+title: "Code and data for: A 4-10 epoch free-repetition band: a 1000x-smaller-scale test of the data-repetition value-decay law"
 message: If you use this code or data, please cite this archive and the manuscript.
 type: dataset
 authors:
@@ -19,4 +18,9 @@ keywords:
 license: MIT
 version: 1.0.0
 date-released: '2026-06-29'
-doi: 10.5281/zenodo.21020379
+doi: 10.5281/zenodo.21020378
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.21020379
+    description: This version
+url: 'https://github.com/PeterPonyu/free-repetition-band'

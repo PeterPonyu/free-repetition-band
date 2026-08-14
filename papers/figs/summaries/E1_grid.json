@@ -1,0 +1,37 @@
+{
+  "artifact": "E1_grid",
+  "layout": "balanced-2x2",
+  "panel_count": 4,
+  "panels": [
+    {
+      "id": "a",
+      "question": "What excess-loss curves occur over the nine-cell grid?",
+      "sources": [
+        "experiments/results/figures-013/repeat_verdicts.json"
+      ]
+    },
+    {
+      "id": "b",
+      "question": "What free count occurs in each cell?",
+      "sources": [
+        "experiments/results/figures-013/crossings_verdicts.json"
+      ]
+    },
+    {
+      "id": "c",
+      "question": "What is the nominal-axis onset ordering?",
+      "sources": [
+        "experiments/results/figures-013/crossings_verdicts.json"
+      ]
+    },
+    {
+      "id": "d",
+      "question": "How do entropy and capacity interact?",
+      "sources": [
+        "experiments/results/figures-013/repeat_verdicts.json"
+      ]
+    }
+  ],
+  "exception_reason": null,
+  "generated_from_manifest": "papers/figs/figure_manifest.yaml"
+}

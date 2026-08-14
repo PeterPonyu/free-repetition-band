@@ -1,0 +1,202 @@
+{
+  "paper_id": "E1",
+  "github": "PeterPonyu/free-repetition-band",
+  "zenodo_concept_doi": "10.5281/zenodo.21020378",
+  "pipeline": "figs/PIPELINE.md",
+  "figures": [
+    {
+      "id": "E1_landscape",
+      "label": "fig:landscape",
+      "generator": "figs/make_E1_landscape.py",
+      "summary": null,
+      "preview_svg": null,
+      "tex_build": "figs/tex/E1_landscape.tex",
+      "vec_build": "figs/vec/E1_landscape.pdf",
+      "caption": "The free-repetition count R_free across model scale.",
+      "caption_panels": null,
+      "venue_flat_name": "Figure1.pdf"
+    },
+    {
+      "id": "E1_scheme",
+      "label": "fig:scheme",
+      "generator": "figs/figpreamble.tex",
+      "summary": null,
+      "preview_svg": null,
+      "tex_build": "figs/tex/E1_scheme.tex",
+      "vec_build": "figs/vec/E1_scheme.pdf",
+      "caption": "Study design and headline finding.",
+      "caption_panels": null,
+      "venue_flat_name": "Figure2.pdf"
+    },
+    {
+      "id": "E1_repeat",
+      "label": "fig:repeat",
+      "generator": "figs/make_E1_figs_r.R",
+      "summary": "figs/summaries/E1_repeat.json",
+      "preview_svg": null,
+      "tex_build": "figs/tex/E1_repeat.tex",
+      "vec_build": "figs/vec/E1_repeat.pdf",
+      "caption": "Repetition value-decay across the small- and medium-capacity by entropy cells.",
+      "caption_panels": [
+        "value decay",
+        "cell response",
+        "seed variation",
+        "band edges"
+      ],
+      "venue_flat_name": "Figure3.pdf"
+    },
+    {
+      "id": "E1_large_completion",
+      "label": "fig:large-completion",
+      "generator": "figs/make_E1_new_figs_r.R",
+      "summary": "figs/summaries/E1_large_completion.json",
+      "preview_svg": null,
+      "tex_build": "figs/tex/E1_large_completion.tex",
+      "vec_build": "figs/vec/E1_large_completion.pdf",
+      "caption": "Completed large-capacity row at a 20M-token budget.",
+      "caption_panels": [
+        "large-row trajectories",
+        "seed onsets",
+        "free count",
+        "budget-entropy boundary"
+      ],
+      "venue_flat_name": "Figure4.pdf"
+    },
+    {
+      "id": "E1_capxl",
+      "label": "fig:capxl",
+      "generator": "figs/make_E1_new_figs_r.R",
+      "summary": "figs/summaries/E1_capxl.json",
+      "preview_svg": null,
+      "tex_build": "figs/tex/E1_capxl.tex",
+      "vec_build": "figs/vec/E1_capxl.pdf",
+      "caption": "The xl/xxl capacity extension; the free band stays capacity-invariant.",
+      "caption_panels": [
+        "xl-xxl curves",
+        "capacity invariance",
+        "canary lead",
+        "endpoint sensitivity"
+      ],
+      "venue_flat_name": "Figure5.pdf"
+    },
+    {
+      "id": "E1_grid",
+      "label": "fig:grid",
+      "generator": "figs/make_E1_figs_r.R",
+      "summary": "figs/summaries/E1_grid.json",
+      "preview_svg": null,
+      "tex_build": "figs/tex/E1_grid.tex",
+      "vec_build": "figs/vec/E1_grid.pdf",
+      "caption": "Full capacity by entropy sweep of the free-repetition band.",
+      "caption_panels": [
+        "nine-cell curves",
+        "per-cell free count",
+        "nominal ordering",
+        "entropy-capacity interaction"
+      ],
+      "venue_flat_name": "Figure6.pdf"
+    },
+    {
+      "id": "E1_scale",
+      "label": "fig:e1scale",
+      "generator": "figs/make_E1_figs_r.R",
+      "summary": "figs/summaries/E1_scale.json",
+      "preview_svg": null,
+      "tex_build": "figs/tex/E1_scale.tex",
+      "vec_build": "figs/vec/E1_scale.pdf",
+      "caption": "Excess validation loss versus epoch count on real bytes.",
+      "caption_panels": [
+        "real-byte loss",
+        "real-text onset",
+        "seed spread",
+        "transfer boundary"
+      ],
+      "venue_flat_name": "Figure7.pdf"
+    },
+    {
+      "id": "E1_scale_band",
+      "label": "fig:scale-band",
+      "generator": "figs/make_E1_new_figs_r.R",
+      "summary": "figs/summaries/E1_scale_band.json",
+      "preview_svg": "figs/previews/E1_scale_band.svg",
+      "tex_build": "figs/tex/E1_scale_band.tex",
+      "vec_build": "figs/vec/E1_scale_band.pdf",
+      "caption": "Free-repetition count versus model size, with real-byte overlays.",
+      "caption_panels": [
+        "capacity band",
+        "entropy stratification",
+        "real-data overlays",
+        "PCFG comparison"
+      ],
+      "venue_flat_name": "Figure8.pdf"
+    },
+    {
+      "id": "E1_capacity_bridge",
+      "label": "fig:capacity-bridge",
+      "generator": "figs/make_evidence_figures_r.R",
+      "summary": "figs/summaries/E1_capacity_bridge.json",
+      "preview_svg": null,
+      "tex_build": "figs/tex/E1_capacity_bridge.tex",
+      "vec_build": "figs/vec/E1_capacity_bridge.pdf",
+      "caption": "Capacity-bridge check of the free-repetition band under two threshold conventions.",
+      "caption_panels": [
+        "threshold conventions",
+        "seed bridge",
+        "two-convention verdict",
+        "fresh-budget control"
+      ],
+      "venue_flat_name": "Figure10.pdf"
+    },
+    {
+      "id": "E1_case",
+      "label": "fig:case",
+      "generator": "figs/make_E1_figs_r.R",
+      "summary": "figs/summaries/E1_case.json",
+      "preview_svg": null,
+      "tex_build": "figs/tex/E1_case.tex",
+      "vec_build": "figs/vec/E1_case.pdf",
+      "caption": "Case study for the med/med cell.",
+      "caption_panels": [
+        "boundary trajectory",
+        "canary gap",
+        "onset comparison",
+        "exposure-matched control"
+      ],
+      "venue_flat_name": "Figure11.pdf"
+    },
+    {
+      "id": "E1_within_run",
+      "label": "fig:within-run",
+      "generator": "figs/make_E1_new_figs_r.R",
+      "summary": "figs/summaries/E1_within_run.json",
+      "preview_svg": null,
+      "tex_build": "figs/tex/E1_within_run.tex",
+      "vec_build": "figs/vec/E1_within_run.pdf",
+      "caption": "Within-run signatures of the free band.",
+      "caption_panels": [
+        "reuse schedule",
+        "validation loss",
+        "repeated exposure",
+        "within-run boundary"
+      ],
+      "venue_flat_name": "Figure12.pdf"
+    },
+    {
+      "id": "E1_exposure_control",
+      "label": "fig:exposure-control",
+      "generator": "figs/make_E1_exposure_control_r.R",
+      "summary": "figs/summaries/E1_exposure_control.json",
+      "preview_svg": null,
+      "tex_build": "figs/tex/E1_exposure_control.tex",
+      "vec_build": "figs/vec/E1_exposure_control.pdf",
+      "caption": "Exposure-matched control: the band itself is invariant to the probe convention.",
+      "caption_panels": [
+        "plant-rate comparison",
+        "nominal ordering",
+        "exposure ordering",
+        "band invariance"
+      ],
+      "venue_flat_name": null
+    }
+  ]
+}
