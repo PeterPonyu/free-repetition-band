@@ -97,9 +97,10 @@ code {
 .spine-mark {
   margin: 0;
   font-family: var(--display);
-  font-weight: 700;
-  font-size: 15px;
-  letter-spacing: 0.12em;
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: 0.04em;
+  line-height: 1.15;
 }
 
 .spine-title {
@@ -123,12 +124,13 @@ code {
   color: var(--parchment);
   text-decoration: none;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 10px;
   align-items: baseline;
   font-size: 14px;
   line-height: 1.25;
   letter-spacing: 0.02em;
+  white-space: nowrap;
 }
 
 .chapter-list a:hover,
@@ -184,7 +186,7 @@ code {
   margin: 0 0 8px;
   font-family: var(--display);
   font-optical-sizing: auto;
-  font-size: 48px;
+  font-size: 56px;
   font-weight: 600;
   line-height: 0.92;
   letter-spacing: -0.025em;

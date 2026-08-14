@@ -6,7 +6,7 @@ export const CHAPTERS = [
   { href: "/capacity/", id: "capacity", roman: "III", label: "Capacity" },
   { href: "/exposure/", id: "exposure", roman: "IV", label: "Exposure" },
   { href: "/scale/", id: "scale", roman: "V", label: "Scale" },
-  { href: "/reproduce/", id: "reproduce", roman: "VI", label: "Reproduce-as-rebuild" },
+  { href: "/reproduce/", id: "reproduce", roman: "VI", label: "Reproduce" },
 ] as const;
 
 export const ZENODO = "10.5281/zenodo.21020378";
