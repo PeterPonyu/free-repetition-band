@@ -34,8 +34,14 @@ PIPELINE_POINTER = "papers/figs/PIPELINE.md"
 REQUIRED_FONTS = ("Fraunces", "Atkinson Hyperlegible")
 REQUIRED_NAV = ("Band", "Onset", "Capacity", "Exposure", "Scale", "Reproduce-as-rebuild")
 REQUIRED_NAV_SUBSET = ("Band", "Onset", "Capacity")
-REQUIRED_SUMMARIES = ("E1_scale_band", "E1_repeat", "E1_capxl")
-INDEX_HINTS = ("data/figures.json",)
+SCIENCE_CHAPTERS = ("band", "onset", "capacity", "exposure", "scale")
+SCIENCE_ASKS = (
+    "How does the free band vary with capacity?",
+    "How does repeated-data value decay?",
+    "Is the free band capacity-invariant?",
+    "Does the free band remain invariant?",
+    "How does loss behave on real bytes?",
+)
 YAML_OR_SCHEMATIC = {
     "E1_landscape",
     "E1_scheme",

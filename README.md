@@ -1,46 +1,37 @@
-# A 4-10 epoch free-repetition band — code, data, and field guide
+# Free-repetition band — epoch stratum field
 
-Warehouse: [`https://github.com/PeterPonyu/free-repetition-band`](https://github.com/PeterPonyu/free-repetition-band).
-Concept DOI: [10.5281/zenodo.21020378](https://doi.org/10.5281/zenodo.21020378).
+**Live door:** https://peterponyu.github.io/free-repetition-band/
 
-Reproducibility archive for the free-repetition paper: experiment code, per-run result logs, pointer manuscript, and a geologic field-guide portal. Compiled journal PDFs are not included.
+The free-repetition band is an epoch stratum: a free unit between the unique-data floor and the overburden of diminishing returns. The door walks Band, Onset, Capacity, Exposure, and Scale, then rebuild from committed runners and per-run logs.
+
+Clone: https://github.com/PeterPonyu/free-repetition-band  
+Concept DOI: [10.5281/zenodo.21020378](https://doi.org/10.5281/zenodo.21020378)
 
 ## Contents
 - `experiments/<study>/` — runner / analysis code per sub-experiment.
-- `experiments/results/` — per-run logs (JSON/JSONL) behind every reported number.
-- `papers/E1/main.tex` — full canonical pointer manuscript (`\input{../figs/figpreamble.tex}`).
-- `papers/figs/` — E1 generators, `figpreamble.tex`, and JSON summaries. Rebuild via `papers/figs/PIPELINE.md`.
-- `papers/FIGURE-INDEX.json` — portal figure contract (papers/-relative paths).
-- `portal/` — long-scroll field guide (Band / Onset / Capacity / Exposure / Scale / Reproduce).
+- `experiments/results/` — per-run logs (JSON/JSONL) behind every recorded number.
+- `portal/` — long-scroll field guide (Band / Onset / Capacity / Exposure / Scale / Reproduce-as-rebuild).
 
 ## Reproducing
 The committed per-run logs are the recorded outputs. To re-run a study from
 scratch (GPU recommended): `python experiments/<study>/run_*.py`. Runs are seeded
 (seed lists appear in result-log filenames). Dependencies: Python 3.11+, PyTorch,
-numpy. All inputs are synthetic and fully specified in the code, except large
-standard datasets (MNIST / WikiText) which are not bundled.
+numpy. Inputs are specified in the runners; large standard corpora are not bundled.
 
-Figure rebuild: see `papers/figs/PIPELINE.md` and `papers/GENERATORS.md`. Compiled `papers/figs/tex/` and `papers/figs/vec/` are gitignored.
-
-Local portal preview (Next.js static export, basePath `/free-repetition-band`):
+Local door preview (Next.js static export, basePath `/free-repetition-band`):
 
 ```bash
 bash portal/build.sh
-python3 -m http.server -d out 8000
-# open http://127.0.0.1:8000/  only after copying out/ under a /free-repetition-band/ prefix
 mkdir -p /tmp/frb-pages/free-repetition-band
 cp -a out/. /tmp/frb-pages/free-repetition-band/
 python3 -m http.server -d /tmp/frb-pages 8000
 # http://127.0.0.1:8000/free-repetition-band/
 ```
 
-## Family/optimizer/capacity extensions (v1.5, 2026-07)
-- `experiments/repeated_data/run_20260708_pcfg.py` + `experiments/results/repeated_data_pcfg/` (54 runs):
-  PCFG corpus family sweep (R_free=20 at all three capacities).
-- `experiments/repeated_data/run_20260708_muon_rfree.py` + `experiments/results/repeated_data_muon/` (36 runs):
-  Muon optimizer-swap arm.
-- `experiments/repeated_data/run_20260708_capacity_xl.py` + `experiments/results/repeated_data_capxl/` (44 runs):
-  xl (29.9M) / xxl (57.1M) capacity extension to a ~23x span; `model.py` gains the xl/xxl presets.
+## Family, optimizer, and capacity extensions
+- PCFG corpus-family sweep (`experiments/repeated_data/run_20260708_pcfg.py`).
+- Optimizer-swap arm (`experiments/repeated_data/run_20260708_muon_rfree.py`).
+- Width extension across a wide capacity span (`experiments/repeated_data/run_20260708_capacity_xl.py`).
 
 ## License
 Code: MIT (`LICENSE`). Result logs and figures: CC BY 4.0. See `CITATION.cff`.

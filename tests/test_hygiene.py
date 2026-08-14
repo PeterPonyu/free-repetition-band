@@ -13,9 +13,31 @@ _LAB_ROOT = os.environ.get("E1_LAB_ROOT", "")
 LAB = Path(_LAB_ROOT) if _LAB_ROOT else None
 
 
+README_CHROME = (
+    "manuscript",
+    "journal",
+    "PeerJ",
+    "FIGURE-INDEX",
+    "PIPELINE",
+    "warehouse",
+    "WikiText",
+    "R_free",
+    "star this",
+    "stars",
+)
+
+
 def test_readme_cites_github() -> None:
     readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
     assert "https://github.com/PeterPonyu/free-repetition-band" in readme
+    assert "https://peterponyu.github.io/free-repetition-band/" in readme
+    head = readme.split("## ", 1)[0]
+    assert "peterponyu.github.io/free-repetition-band" in head
+    lower = readme.lower()
+    for token in README_CHROME:
+        assert token.lower() not in lower, f"README leak: {token}"
+    assert "paper" not in lower
+    assert "stars" not in lower
 
 
 def test_no_compiled_manuscript_in_portal_or_site() -> None:

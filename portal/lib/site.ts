@@ -9,13 +9,5 @@ export const CHAPTERS = [
   { href: "/reproduce/", id: "reproduce", roman: "VI", label: "Reproduce-as-rebuild" },
 ] as const;
 
-export const MATERIALS = {
-  figuresJson: "data/figures.json",
-  scaleBand: "E1_scale_band",
-  repeat: "E1_repeat",
-  capxl: "E1_capxl",
-  exposure: "E1_exposure_control",
-} as const;
-
 export const ZENODO = "10.5281/zenodo.21020378";
 export const GITHUB = "https://github.com/PeterPonyu/free-repetition-band";

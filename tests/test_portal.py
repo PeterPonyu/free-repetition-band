@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import re
 
 from conftest import (
@@ -14,14 +15,14 @@ from conftest import (
     FORBIDDEN_E2,
     FORBIDDEN_E2_NAV,
     GITHUB_URL,
-    INDEX_HINTS,
     PORTAL_DIR,
     PORTAL_INDEX,
     REPO_ROOT,
     REQUIRED_FONTS,
     REQUIRED_NAV,
     REQUIRED_NAV_SUBSET,
-    REQUIRED_SUMMARIES,
+    SCIENCE_ASKS,
+    SCIENCE_CHAPTERS,
     CONCEPT_DOI,
     export_corpus,
     portal_corpus,
@@ -43,6 +44,11 @@ CHROME_RE = re.compile(
     r"\bdocuments?\b|\bpapers?\b|\bjournals?\b|\bmanuscripts?\b|"
     r"\bsubmissions?\b|PeerJ|Figure(?:1[0-2]|[1-9])(?:\.pdf)?|"
     r"main\.tex|FIGURE-INDEX|\bPIPELINE\b|\bwarehouse\b",
+    re.I,
+)
+CODE_RE = re.compile(
+    r"\bE1_|\bE1\b|FIGURE-INDEX|PIPELINE\.md|figs/summaries|"
+    r"papers/E1|venue_flat_name",
     re.I,
 )
 
@@ -110,11 +116,22 @@ def test_chapter_list_nav_labels() -> None:
     assert "Link" in nav
 
 
-def test_consumes_figure_index_and_summaries() -> None:
-    text = portal_corpus()
-    assert any(hint in text for hint in INDEX_HINTS)
-    for name in REQUIRED_SUMMARIES:
-        assert name in text, f"portal must cite {name}"
+def test_renders_stratum_science() -> None:
+    science = (PORTAL_DIR / "lib" / "science.ts").read_text(encoding="utf-8")
+    assert "bedFor" in science
+    assert "figures.json" in science
+    payload = json.loads((PORTAL_DIR / "public" / "data" / "figures.json").read_text(encoding="utf-8"))
+    beds = payload.get("beds") or []
+    chapters = {bed["chapter"] for bed in beds}
+    assert set(SCIENCE_CHAPTERS) <= chapters
+    for bed in beds:
+        blob = json.dumps(bed)
+        assert bed.get("asks"), f"missing asks for {bed.get('chapter')}"
+        assert CODE_RE.search(blob) is None, f"code leak in bed {bed.get('chapter')}"
+        assert "caption" not in bed
+        assert "summary" not in bed
+    for ask in SCIENCE_ASKS:
+        assert any(ask in (bed.get("asks") or []) for bed in beds), ask
 
 
 def test_points_at_zenodo_and_github() -> None:
@@ -131,6 +148,10 @@ def test_no_document_chrome() -> None:
         hit = CHROME_RE.search(text)
         assert hit is None, (
             f"chrome in {path.relative_to(PORTAL_DIR)}: {hit.group(0)!r}"
+        )
+        code = CODE_RE.search(text)
+        assert code is None, (
+            f"code name in {path.relative_to(PORTAL_DIR)}: {code.group(0)!r}"
         )
 
 
@@ -238,10 +259,15 @@ def test_export_html_uses_base_path_and_has_no_leaks() -> None:
         for path in sorted((REPO_ROOT / "out").rglob("*.html"))
     )
     assert CHROME_RE.search(html_copy) is None, "export HTML still has venue chrome"
+    assert CODE_RE.search(html_copy) is None, "export HTML still has code names"
+    for ask in SCIENCE_ASKS:
+        assert ask in html_copy, f"export missing science ask: {ask}"
     assert not (REPO_ROOT / "out" / "data" / "figs" / "summaries").exists()
     public_index = REPO_ROOT / "out" / "data" / "figures.json"
     assert public_index.is_file()
     text = public_index.read_text(encoding="utf-8")
     assert "caption" not in text
     assert "venue_flat_name" not in text
+    assert "E1_" not in text
     assert LEAK_RE.search(text) is None
+    assert CODE_RE.search(text) is None
