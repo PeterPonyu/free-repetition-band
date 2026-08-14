@@ -78,11 +78,20 @@ def test_field_guide_landmark() -> None:
 def test_type_stack_fraunces_and_atkinson() -> None:
     text = portal_corpus()
     fonts = (PORTAL_DIR / "app" / "fonts.ts").read_text(encoding="utf-8")
-    assert "next/font/google" in fonts
-    assert "Fraunces" in fonts
-    assert "Atkinson_Hyperlegible" in fonts
+    # C8: self-hosted woff2 via next/font/local; the build must never fetch fonts.
+    assert "next/font/local" in fonts
+    assert "next/font/google" not in fonts
+    assert "--font-display" in fonts
+    assert "--font-body" in fonts
     for font in REQUIRED_FONTS:
-        assert font in text or font.replace(" ", "_") in fonts
+        slug = font.lower().replace(" ", "-")
+        assert slug in fonts.lower() or font in text
+    fonts_dir = PORTAL_DIR / "app" / "fonts"
+    woff2 = sorted(fonts_dir.glob("*.woff2"))
+    assert woff2, "C8: committed woff2 files required"
+    for src in re.findall(r'path:\s*"./fonts/([^"]+)"', fonts):
+        assert (fonts_dir / src).is_file(), f"C8: missing font file {src}"
+    assert list(fonts_dir.glob("OFL-*.txt")), "C8: OFL license text required"
 
 
 def test_chapter_list_nav_labels() -> None:

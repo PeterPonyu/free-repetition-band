@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
 import pytest
@@ -9,8 +10,15 @@ import pytest
 REPO_ROOT = Path(__file__).resolve().parents[1]
 INDEX_PATH = REPO_ROOT / "papers" / "FIGURE-INDEX.json"
 SCHEMA_PATH = REPO_ROOT / "papers" / "FIGURE-INDEX.schema.json"
-LAB_SCHEMA = Path("/home/zeyufu/Desktop/dl-research/.omx/plans/figure-index.schema.json")
-CANONICAL_TEX = Path("/home/zeyufu/Desktop/dl-research/papers/E1/main.tex")
+# Optional lab-tree cross-checks. Set E1_LAB_ROOT locally to diff against the
+# canonical lab manuscripts; unset on CI runners, where these checks skip.
+_LAB_ROOT = os.environ.get("E1_LAB_ROOT", "")
+LAB_SCHEMA = (
+    Path(_LAB_ROOT) / ".omx" / "plans" / "figure-index.schema.json"
+    if _LAB_ROOT
+    else None
+)
+CANONICAL_TEX = Path(_LAB_ROOT) / "papers" / "E1" / "main.tex" if _LAB_ROOT else None
 WAREHOUSE_TEX = REPO_ROOT / "papers" / "E1" / "main.tex"
 PORTAL_DIR = REPO_ROOT / "portal"
 PORTAL_INDEX = PORTAL_DIR / "app" / "page.tsx"

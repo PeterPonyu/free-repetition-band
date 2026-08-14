@@ -2,12 +2,15 @@
 
 from __future__ import annotations
 
+import os
 import subprocess
 from pathlib import Path
 
 from conftest import PORTAL_DIR, REPO_ROOT, WAREHOUSE_TEX, portal_corpus
 
-LAB = Path("/home/zeyufu/Desktop/dl-research")
+# Optional lab-tree guard: set E1_LAB_ROOT locally; unset on CI runners.
+_LAB_ROOT = os.environ.get("E1_LAB_ROOT", "")
+LAB = Path(_LAB_ROOT) if _LAB_ROOT else None
 
 
 def test_readme_cites_github() -> None:
@@ -39,7 +42,7 @@ def test_no_suite_chrome_across_five_papers() -> None:
 
 
 def test_lab_papers_tree_untouched() -> None:
-    if not (LAB / ".git").is_dir():
+    if LAB is None or not (LAB / ".git").is_dir():
         return
     proc = subprocess.run(
         ["git", "diff", "--", "papers/"],

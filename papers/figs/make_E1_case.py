@@ -2,9 +2,11 @@
 Render E1_case.png — case study figure for paper E1.
 Cell: med/med (medium capacity, medium entropy) from results/figures-013/repeat_verdicts.json.
 Two subplots: (left) excess val loss vs n, (right) canary gap vs n.
-Source file: /home/zeyufu/Desktop/dl-research/experiments/results/figures-013/repeat_verdicts.json
+Source file: experiments/results/figures-013/repeat_verdicts.json (repo-relative)
 """
 import json
+from pathlib import Path
+
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -68,6 +70,6 @@ ax2.set_ylabel("Canary memorization gap", fontsize=11)
 ax2.set_title("(b)", loc="left", fontsize=10)
 ax2.legend(fontsize=8.5, loc="upper left")
 
-plt.savefig("/home/zeyufu/Desktop/dl-research/papers/figs/E1_case.png",
-            dpi=180, bbox_inches="tight")
-print("Saved E1_case.png")
+out_path = Path(__file__).resolve().parent / "E1_case.png"
+plt.savefig(out_path, dpi=180, bbox_inches="tight")
+print(f"Saved {out_path.name}")

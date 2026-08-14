@@ -36,7 +36,7 @@ def test_figure_index_schema_file_exists() -> None:
 
 
 def test_schema_is_byte_identical_to_lab_ssot() -> None:
-    if not LAB_SCHEMA.is_file():
+    if LAB_SCHEMA is None or not LAB_SCHEMA.is_file():
         return
     assert SCHEMA_PATH.read_bytes() == LAB_SCHEMA.read_bytes(), (
         "F1: warehouse FIGURE-INDEX.schema.json must match lab SSOT"
@@ -136,7 +136,7 @@ def test_warehouse_tex_is_full_canonical_not_a_stub() -> None:
     assert "pointer-only" not in text.lower()
     assert r"\graphicspath{{./}}" not in text
     assert "figpreamble severed by build_submission_figs.py" not in text
-    if CANONICAL_TEX.is_file():
+    if CANONICAL_TEX is not None and CANONICAL_TEX.is_file():
         canonical = CANONICAL_TEX.read_text(encoding="utf-8")
         stripped = [
             line
