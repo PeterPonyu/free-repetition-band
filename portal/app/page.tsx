@@ -1,9 +1,12 @@
+import { BedField } from "./BedField";
 import { FieldFooter } from "./FieldFooter";
 import { FieldGuide } from "./FieldGuide";
 import { StratumPlate } from "./StratumPlate";
-import { MATERIALS } from "../lib/site";
+import { bedFor } from "../lib/science";
 
 export default function BandPage() {
+  const onset = bedFor("onset");
+
   return (
     <FieldGuide>
       <div className="screen-band">
@@ -23,30 +26,15 @@ export default function BandPage() {
           <section className="species-plate diagnosis" aria-label="Band">
             <p className="plate-kicker">Band</p>
             <h2>Stratum</h2>
-            <dl className="field-notes">
-              <div>
-                <dt>Object</dt>
-                <dd>Opening bed of the epoch field.</dd>
-              </div>
-              <div>
-                <dt>Material</dt>
-                <dd>
-                  <code>{MATERIALS.scaleBand}</code>
-                </dd>
-              </div>
-              <div>
-                <dt>Next</dt>
-                <dd>Onset — memorization coincidence.</dd>
-              </div>
-            </dl>
+            <BedField chapter="band" />
           </section>
         </div>
 
         <section className="species-plate peek" aria-label="Onset peek">
           <p className="plate-kicker">Onset — next stratum</p>
           <p className="peek-body">
-            Memorization onset asks when the free unit first appears as a
-            coincident bed. Material: <code>{MATERIALS.repeat}</code>.
+            {onset?.asks[0] ??
+              "Memorization onset asks when the free unit first appears as a coincident bed."}
           </p>
         </section>
 

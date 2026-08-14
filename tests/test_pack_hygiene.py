@@ -51,7 +51,9 @@ def test_build_resolves_site_data_paths() -> None:
     assert (site / "data" / "figures.json").is_file()
     assert not (site / "data" / "figs").exists()
     public = (site / "data" / "figures.json").read_text(encoding="utf-8")
-    assert "E1_scale_band" in public
+    assert '"chapter": "band"' in public
+    assert "How does the free band vary with capacity?" in public
+    assert "E1_" not in public
     assert "caption" not in public
     assert "venue_flat_name" not in public
     assert "R_free" not in public
@@ -61,6 +63,8 @@ def test_build_resolves_site_data_paths() -> None:
     html = (site / "index.html").read_text(encoding="utf-8")
     assert "manuscript.pdf" not in html
     assert "/free-repetition-band/" in html
+    assert "How does the free band vary with capacity?" in html
+    assert "E1_scale_band" not in html
 
 
 def test_workdir_pack_omits_portal_site_github() -> None:

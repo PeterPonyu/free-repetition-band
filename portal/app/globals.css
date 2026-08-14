@@ -312,6 +312,57 @@ code {
   color: var(--ink);
 }
 
+.bed-field {
+  margin-top: 4px;
+}
+
+.layer-list,
+.ask-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.layer-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+}
+
+.layer-list li {
+  font-size: 13px;
+  color: var(--moss);
+  letter-spacing: 0.01em;
+}
+
+.layer-list li::before {
+  content: "· ";
+  color: var(--clay);
+}
+
+.ask-list {
+  margin-top: 14px;
+  border-top: 1px solid var(--hair);
+  counter-reset: ask;
+}
+
+.ask-list li {
+  counter-increment: ask;
+  display: grid;
+  grid-template-columns: 1.6rem 1fr;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--hair);
+  color: var(--ink);
+}
+
+.ask-list li::before {
+  content: counter(ask, lower-alpha);
+  font-family: var(--display);
+  font-style: italic;
+  color: var(--clay);
+}
+
 .index-status {
   margin-top: 16px;
   font-size: 13px;

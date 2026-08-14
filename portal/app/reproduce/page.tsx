@@ -1,13 +1,8 @@
-import figures from "../../public/data/figures.json";
 import { StratumChapter } from "../StratumChapter";
-import { GITHUB, MATERIALS, ZENODO } from "../../lib/site";
+import { bedCount } from "../../lib/science";
+import { GITHUB, ZENODO } from "../../lib/site";
 
-type StratumIndex = {
-  figures?: { id: string }[];
-};
-
-const index = figures as StratumIndex;
-const bedCount = (index.figures || []).length;
+const beds = bedCount();
 
 export default function ReproducePage() {
   return (
@@ -24,13 +19,6 @@ export default function ReproducePage() {
           </dd>
         </div>
         <div>
-          <dt>Materials</dt>
-          <dd>
-            <code>{MATERIALS.scaleBand}</code> / <code>{MATERIALS.repeat}</code>{" "}
-            / <code>{MATERIALS.capxl}</code>
-          </dd>
-        </div>
-        <div>
           <dt>Deposit</dt>
           <dd>
             Concept <a href={`https://doi.org/${ZENODO}`}>{ZENODO}</a>
@@ -42,8 +30,8 @@ export default function ReproducePage() {
         </div>
       </dl>
       <p className="index-status">
-        {bedCount
-          ? `stratum index ready · ${bedCount} beds`
+        {beds
+          ? `stratum index ready · ${beds} beds`
           : "stratum index missing — rebuild from the clone"}
       </p>
     </StratumChapter>
