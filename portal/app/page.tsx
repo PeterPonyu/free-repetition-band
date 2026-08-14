@@ -11,9 +11,9 @@ export default function BandPage() {
     <FieldGuide>
       <div className="screen-band">
         <header className="masthead">
-          <p className="running">Band · free-repetition · epoch stratum</p>
+          <p className="running">Plate I · Band · PeterPonyu/free-repetition-band</p>
           <h1>
-            Free-repetition <em>band</em>
+            Free-repetition <em>field guide</em>
           </h1>
           <p className="lede">
             The free-repetition band is an epoch stratum: a free unit between
@@ -31,7 +31,7 @@ export default function BandPage() {
         </div>
 
         <section className="species-plate peek" aria-label="Onset peek">
-          <p className="plate-kicker">Onset — next stratum</p>
+          <p className="plate-kicker">Plate II · Onset — continues below</p>
           <p className="peek-body">
             {onset?.asks[0] ??
               "Memorization onset asks when the free unit first appears as a coincident bed."}

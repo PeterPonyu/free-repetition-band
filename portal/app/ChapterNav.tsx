@@ -16,8 +16,8 @@ export function ChapterNav() {
   const pathname = usePathname();
   return (
     <nav className="chapter-list" aria-label="Strata">
-      <p className="spine-mark">FRB</p>
-      <p className="spine-title">Stratum field</p>
+      <p className="spine-mark">Field guide</p>
+      <p className="spine-title">free-repetition</p>
       <ol>
         {CHAPTERS.map((chapter) => (
           <li
@@ -30,7 +30,7 @@ export function ChapterNav() {
           </li>
         ))}
       </ol>
-      <p className="spine-foot">epoch field</p>
+      <p className="spine-foot">epoch stratum</p>
     </nav>
   );
 }
