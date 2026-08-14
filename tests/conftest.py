@@ -32,10 +32,10 @@ GITHUB_URL = f"https://github.com/{GITHUB_REPO}"
 PIPELINE_POINTER = "papers/figs/PIPELINE.md"
 
 REQUIRED_FONTS = ("Fraunces", "Atkinson Hyperlegible")
-REQUIRED_NAV = ("Band", "Onset", "Capacity", "Exposure", "Scale", "Reproduce")
+REQUIRED_NAV = ("Band", "Onset", "Capacity", "Exposure", "Scale", "Reproduce-as-rebuild")
 REQUIRED_NAV_SUBSET = ("Band", "Onset", "Capacity")
 REQUIRED_SUMMARIES = ("E1_scale_band", "E1_repeat", "E1_capxl")
-INDEX_HINTS = ("FIGURE-INDEX.json", "data/figures.json")
+INDEX_HINTS = ("data/figures.json",)
 YAML_OR_SCHEMATIC = {
     "E1_landscape",
     "E1_scheme",

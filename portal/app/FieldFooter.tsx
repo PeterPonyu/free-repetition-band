@@ -1,8 +1,8 @@
 import { GITHUB, ZENODO } from "../lib/site";
 
-export function WarehouseFooter() {
+export function FieldFooter() {
   return (
-    <footer className="warehouse">
+    <footer className="provenance">
       <p>
         Concept DOI{" "}
         <a href={`https://doi.org/${ZENODO}`}>{ZENODO}</a>
