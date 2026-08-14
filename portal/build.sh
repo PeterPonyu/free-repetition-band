@@ -28,10 +28,8 @@ if tracked:
 
 # Door copy: ids + summary filenames only. No captions, venue PDFs, or findings.
 door = {
-    "paper_id": index["paper_id"],
     "github": index["github"],
     "zenodo_concept_doi": index["zenodo_concept_doi"],
-    "pipeline": index["pipeline"],
     "figures": [
         {"id": fig["id"], "summary": fig.get("summary")}
         for fig in index["figures"]
@@ -43,7 +41,6 @@ if public.exists():
 public.mkdir(parents=True, exist_ok=True)
 payload = json.dumps(door, indent=2) + "\n"
 (public / "figures.json").write_text(payload, encoding="utf-8")
-(public / "FIGURE-INDEX.json").write_text(payload, encoding="utf-8")
 print("INDEX valid; public data is pointer-only; no papers/**/*.pdf")
 PY
 

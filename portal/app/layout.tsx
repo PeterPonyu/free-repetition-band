@@ -4,9 +4,9 @@ import { atkinson, fraunces } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Field guide — PeterPonyu/free-repetition-band",
+  title: "Free-repetition band — epoch stratum field",
   description:
-    "Warehouse door: chapter structure and figure-index pointers. No journal PDFs.",
+    "Epoch stratum field for the free-repetition band: Band, Onset, Capacity, Exposure, Scale, Reproduce-as-rebuild.",
 };
 
 export default function RootLayout({

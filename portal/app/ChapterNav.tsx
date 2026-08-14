@@ -15,9 +15,9 @@ function isCurrent(pathname: string, href: string): boolean {
 export function ChapterNav() {
   const pathname = usePathname();
   return (
-    <nav className="chapter-list" aria-label="Chapters">
-      <p className="spine-mark">E1</p>
-      <p className="spine-title">Field guide</p>
+    <nav className="chapter-list" aria-label="Strata">
+      <p className="spine-mark">FRB</p>
+      <p className="spine-title">Stratum field</p>
       <ol>
         {CHAPTERS.map((chapter) => (
           <li
@@ -30,7 +30,7 @@ export function ChapterNav() {
           </li>
         ))}
       </ol>
-      <p className="spine-foot">chapter list</p>
+      <p className="spine-foot">epoch field</p>
     </nav>
   );
 }

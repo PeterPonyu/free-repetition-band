@@ -6,19 +6,15 @@ export const CHAPTERS = [
   { href: "/capacity/", id: "capacity", roman: "III", label: "Capacity" },
   { href: "/exposure/", id: "exposure", roman: "IV", label: "Exposure" },
   { href: "/scale/", id: "scale", roman: "V", label: "Scale" },
-  { href: "/reproduce/", id: "reproduce", roman: "VI", label: "Reproduce" },
+  { href: "/reproduce/", id: "reproduce", roman: "VI", label: "Reproduce-as-rebuild" },
 ] as const;
 
-export const POINTERS = {
-  index: "papers/FIGURE-INDEX.json",
+export const MATERIALS = {
   figuresJson: "data/figures.json",
-  pipeline: "papers/figs/PIPELINE.md",
   scaleBand: "E1_scale_band",
   repeat: "E1_repeat",
   capxl: "E1_capxl",
-  scaleBandJson: "figs/summaries/E1_scale_band.json",
-  repeatJson: "figs/summaries/E1_repeat.json",
-  capxlJson: "figs/summaries/E1_capxl.json",
+  exposure: "E1_exposure_control",
 } as const;
 
 export const ZENODO = "10.5281/zenodo.21020378";

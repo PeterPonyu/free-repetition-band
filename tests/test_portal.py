@@ -15,7 +15,6 @@ from conftest import (
     FORBIDDEN_E2_NAV,
     GITHUB_URL,
     INDEX_HINTS,
-    PIPELINE_POINTER,
     PORTAL_DIR,
     PORTAL_INDEX,
     REPO_ROOT,
@@ -38,6 +37,12 @@ LEAK_RE = re.compile(
     r"Figure(?:1[0-2]|[1-9])\.pdf|manuscript\.pdf|"
     r"nearly free for four|copied-canary|8/9 cells|"
     r"4–10 epoch|4-10 epoch|4–10 free|R_free 4",
+    re.I,
+)
+CHROME_RE = re.compile(
+    r"\bdocuments?\b|\bpapers?\b|\bjournals?\b|\bmanuscripts?\b|"
+    r"\bsubmissions?\b|PeerJ|Figure(?:1[0-2]|[1-9])(?:\.pdf)?|"
+    r"main\.tex|FIGURE-INDEX|\bPIPELINE\b|\bwarehouse\b",
     re.I,
 )
 
@@ -112,11 +117,21 @@ def test_consumes_figure_index_and_summaries() -> None:
         assert name in text, f"portal must cite {name}"
 
 
-def test_points_at_zenodo_pipeline_github() -> None:
+def test_points_at_zenodo_and_github() -> None:
     text = portal_corpus()
     assert CONCEPT_DOI in text
-    assert PIPELINE_POINTER in text or "PIPELINE.md" in text
     assert GITHUB_URL in text
+    assert "Reproduce-as-rebuild" in text
+
+
+def test_no_document_chrome() -> None:
+    """Visible door copy is the scientific object, not venue chrome."""
+    for path in portal_source_files():
+        text = path.read_text(encoding="utf-8", errors="replace")
+        hit = CHROME_RE.search(text)
+        assert hit is None, (
+            f"chrome in {path.relative_to(PORTAL_DIR)}: {hit.group(0)!r}"
+        )
 
 
 def test_footer_license_doi_github() -> None:
@@ -216,7 +231,13 @@ def test_export_html_uses_base_path_and_has_no_leaks() -> None:
     assert "/free-repetition-band/" in html
     assert LEAK_RE.search(html) is None
     assert "Band" in html and "Onset" in html
+    assert "Reproduce-as-rebuild" in html
     assert "Fraunces" in html or "--font-display" in html or "font" in html.lower()
+    html_copy = "\n".join(
+        path.read_text(encoding="utf-8", errors="replace")
+        for path in sorted((REPO_ROOT / "out").rglob("*.html"))
+    )
+    assert CHROME_RE.search(html_copy) is None, "export HTML still has venue chrome"
     assert not (REPO_ROOT / "out" / "data" / "figs" / "summaries").exists()
     public_index = REPO_ROOT / "out" / "data" / "figures.json"
     assert public_index.is_file()

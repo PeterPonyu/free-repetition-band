@@ -123,9 +123,11 @@ code {
   color: var(--parchment);
   text-decoration: none;
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   align-items: baseline;
   font-size: 14px;
+  line-height: 1.25;
   letter-spacing: 0.02em;
 }
 
@@ -316,7 +318,7 @@ code {
   color: var(--mute);
 }
 
-.warehouse {
+.provenance {
   margin-top: 10px;
   padding-top: 8px;
   border-top: 1px solid var(--clay);
@@ -325,7 +327,7 @@ code {
   letter-spacing: 0.01em;
 }
 
-.warehouse p {
+.provenance p {
   margin: 0;
 }
 

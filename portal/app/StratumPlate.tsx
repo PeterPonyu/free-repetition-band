@@ -1,5 +1,3 @@
-import { POINTERS } from "../lib/site";
-
 export function StratumPlate() {
   return (
     <figure
@@ -11,7 +9,7 @@ export function StratumPlate() {
         className="core"
         viewBox="0 0 220 640"
         role="img"
-        aria-label="Vertical geologic core: overburden, unit, and floor. Structure only."
+        aria-label="Vertical epoch core: overburden, free-repetition band, and unique-data floor."
       >
         <defs>
           <linearGradient id="decay" x1="0" y1="1" x2="0" y2="0">
@@ -65,7 +63,7 @@ export function StratumPlate() {
           fontSize="13"
           fill="#EDE4CF"
         >
-          unit
+          band
         </text>
         <rect x="48" y="570.5" width="72" height="45.5" fill="#EDE4CF" />
         <rect
@@ -90,7 +88,7 @@ export function StratumPlate() {
             overburden
           </text>
           <text x="128" y="532" fontWeight="700" fill="#3E5C45">
-            unit
+            band
           </text>
           <text x="128" y="600" fill="#8B6B3D">
             floor
@@ -98,9 +96,8 @@ export function StratumPlate() {
         </g>
       </svg>
       <figcaption id="stratum-caption">
-        Vertical stratum plate. Pointer:{" "}
-        <code>{POINTERS.scaleBandJson}</code> via{" "}
-        <code>{POINTERS.index}</code>.
+        Vertical epoch core. Sage bed is the free-repetition band. Ochre
+        overburden above; unique-data floor below.
       </figcaption>
     </figure>
   );
