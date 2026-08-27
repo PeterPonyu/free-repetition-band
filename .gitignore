@@ -39,3 +39,27 @@ portal/node_modules/
 portal/.next/
 portal/out/
 portal/public/data/
+
+# --- security-audit-20260820 ---
+.cursor/
+.claude/
+.codex/
+.gpt/
+.agent/
+.aider*
+.continue/
+.windsurf/
+.omc/state/
+.omx/state/
+.env
+.env.*
+!.env.example
+secrets.env
+credentials.json
+*.pem
+*.key
+id_rsa*
+.netrc
+spermdata/
+**/harmonized_donor_samples.csv
+**/donor_exposure*.csv

@@ -1,8 +1,8 @@
-# Free-repetition band — epoch stratum field
+# Free-repetition band
 
-**Live door:** https://peterponyu.github.io/free-repetition-band/
+Project page: https://peterponyu.github.io/free-repetition-band/
 
-The free-repetition band is an epoch stratum: a free unit between the unique-data floor and the overburden of diminishing returns. The door walks Band, Onset, Capacity, Exposure, and Scale, then rebuild from committed runners and per-run logs.
+The free-repetition band is treated here as an epoch stratum between a unique-data floor and diminishing-returns overburden. The site walks Band, Onset, Capacity, Exposure, and Scale, then rebuild from committed runners and per-run logs.
 
 Clone: https://github.com/PeterPonyu/free-repetition-band  
 Concept DOI: [10.5281/zenodo.21020378](https://doi.org/10.5281/zenodo.21020378)
