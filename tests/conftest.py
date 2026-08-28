@@ -26,7 +26,7 @@ WORKFLOWS_DIR = REPO_ROOT / ".github" / "workflows"
 SKIP_DIR_NAMES = {".next", "node_modules", "out", "public"}
 
 CONCEPT_DOI = "10.5281/zenodo.21020378"
-VERSION_DOI = "10.5281/zenodo.21020379"
+VERSION_DOI = "10.5281/zenodo.21737381"
 GITHUB_REPO = "PeterPonyu/free-repetition-band"
 GITHUB_URL = f"https://github.com/{GITHUB_REPO}"
 PIPELINE_POINTER = "papers/figs/PIPELINE.md"
