@@ -1,6 +1,7 @@
 # BOX-4 runbook — S-E1 (real-text repetition band) + C-G3 (activation patching) — 2026-07-17
 
-Box: `ssh -p 25814 root@connect.cqa1.seetacloud.com`, autodl-container-fbe943823b-a076e2a8,
+Box: rented AutoDL container (SSH endpoint and container id omitted; the host and
+port are recycled to other tenants after the instance is released),
 2x RTX 4080 SUPER 32GB, torch 2.8.0+cu128 (base env + pip pyarrow), /root/autodl-tmp 100G.
 Everything lives under `/root/autodl-tmp/dlr/`. Source plan:
 `revision-plan-2026-0716.md` (S-E1 + C-G3); evidence notes
