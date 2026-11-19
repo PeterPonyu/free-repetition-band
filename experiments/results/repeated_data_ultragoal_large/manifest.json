@@ -1,0 +1,246 @@
+{
+  "story": "G006-e1-repeated-data-large-capacity-u-la",
+  "budget": 20000000,
+  "cells": [
+    {
+      "capacity": "large",
+      "entropy_level": "med",
+      "unique_tokens": 500000,
+      "n_epochs": 40,
+      "seed": 0,
+      "name": "large_med_U0p5M_E40_s0"
+    },
+    {
+      "capacity": "large",
+      "entropy_level": "med",
+      "unique_tokens": 500000,
+      "n_epochs": 40,
+      "seed": 1,
+      "name": "large_med_U0p5M_E40_s1"
+    },
+    {
+      "capacity": "large",
+      "entropy_level": "med",
+      "unique_tokens": 500000,
+      "n_epochs": 40,
+      "seed": 2,
+      "name": "large_med_U0p5M_E40_s2"
+    },
+    {
+      "capacity": "large",
+      "entropy_level": "med",
+      "unique_tokens": 1000000,
+      "n_epochs": 20,
+      "seed": 0,
+      "name": "large_med_U1M_E20_s0"
+    },
+    {
+      "capacity": "large",
+      "entropy_level": "med",
+      "unique_tokens": 1000000,
+      "n_epochs": 20,
+      "seed": 1,
+      "name": "large_med_U1M_E20_s1"
+    },
+    {
+      "capacity": "large",
+      "entropy_level": "med",
+      "unique_tokens": 1000000,
+      "n_epochs": 20,
+      "seed": 2,
+      "name": "large_med_U1M_E20_s2"
+    },
+    {
+      "capacity": "large",
+      "entropy_level": "med",
+      "unique_tokens": 2000000,
+      "n_epochs": 10,
+      "seed": 0,
+      "name": "large_med_U2M_E10_s0"
+    },
+    {
+      "capacity": "large",
+      "entropy_level": "med",
+      "unique_tokens": 2000000,
+      "n_epochs": 10,
+      "seed": 1,
+      "name": "large_med_U2M_E10_s1"
+    },
+    {
+      "capacity": "large",
+      "entropy_level": "med",
+      "unique_tokens": 2000000,
+      "n_epochs": 10,
+      "seed": 2,
+      "name": "large_med_U2M_E10_s2"
+    },
+    {
+      "capacity": "large",
+      "entropy_level": "med",
+      "unique_tokens": 5000000,
+      "n_epochs": 4,
+      "seed": 0,
+      "name": "large_med_U5M_E4_s0"
+    },
+    {
+      "capacity": "large",
+      "entropy_level": "med",
+      "unique_tokens": 5000000,
+      "n_epochs": 4,
+      "seed": 1,
+      "name": "large_med_U5M_E4_s1"
+    },
+    {
+      "capacity": "large",
+      "entropy_level": "med",
+      "unique_tokens": 5000000,
+      "n_epochs": 4,
+      "seed": 2,
+      "name": "large_med_U5M_E4_s2"
+    },
+    {
+      "capacity": "large",
+      "entropy_level": "med",
+      "unique_tokens": 10000000,
+      "n_epochs": 2,
+      "seed": 0,
+      "name": "large_med_U10M_E2_s0"
+    },
+    {
+      "capacity": "large",
+      "entropy_level": "med",
+      "unique_tokens": 10000000,
+      "n_epochs": 2,
+      "seed": 1,
+      "name": "large_med_U10M_E2_s1"
+    },
+    {
+      "capacity": "large",
+      "entropy_level": "med",
+      "unique_tokens": 10000000,
+      "n_epochs": 2,
+      "seed": 2,
+      "name": "large_med_U10M_E2_s2"
+    },
+    {
+      "capacity": "large",
+      "entropy_level": "med",
+      "unique_tokens": 20000000,
+      "n_epochs": 1,
+      "seed": 0,
+      "name": "large_med_U20M_E1_s0"
+    },
+    {
+      "capacity": "large",
+      "entropy_level": "med",
+      "unique_tokens": 20000000,
+      "n_epochs": 1,
+      "seed": 1,
+      "name": "large_med_U20M_E1_s1"
+    },
+    {
+      "capacity": "large",
+      "entropy_level": "med",
+      "unique_tokens": 20000000,
+      "n_epochs": 1,
+      "seed": 2,
+      "name": "large_med_U20M_E1_s2"
+    },
+    {
+      "capacity": "large",
+      "entropy_level": "low",
+      "unique_tokens": 1000000,
+      "n_epochs": 20,
+      "seed": 0,
+      "name": "large_low_U1M_E20_s0"
+    },
+    {
+      "capacity": "large",
+      "entropy_level": "low",
+      "unique_tokens": 1000000,
+      "n_epochs": 20,
+      "seed": 1,
+      "name": "large_low_U1M_E20_s1"
+    },
+    {
+      "capacity": "large",
+      "entropy_level": "low",
+      "unique_tokens": 1000000,
+      "n_epochs": 20,
+      "seed": 2,
+      "name": "large_low_U1M_E20_s2"
+    },
+    {
+      "capacity": "large",
+      "entropy_level": "low",
+      "unique_tokens": 10000000,
+      "n_epochs": 2,
+      "seed": 0,
+      "name": "large_low_U10M_E2_s0"
+    },
+    {
+      "capacity": "large",
+      "entropy_level": "low",
+      "unique_tokens": 10000000,
+      "n_epochs": 2,
+      "seed": 1,
+      "name": "large_low_U10M_E2_s1"
+    },
+    {
+      "capacity": "large",
+      "entropy_level": "low",
+      "unique_tokens": 10000000,
+      "n_epochs": 2,
+      "seed": 2,
+      "name": "large_low_U10M_E2_s2"
+    },
+    {
+      "capacity": "large",
+      "entropy_level": "high",
+      "unique_tokens": 1000000,
+      "n_epochs": 20,
+      "seed": 0,
+      "name": "large_high_U1M_E20_s0"
+    },
+    {
+      "capacity": "large",
+      "entropy_level": "high",
+      "unique_tokens": 1000000,
+      "n_epochs": 20,
+      "seed": 1,
+      "name": "large_high_U1M_E20_s1"
+    },
+    {
+      "capacity": "large",
+      "entropy_level": "high",
+      "unique_tokens": 1000000,
+      "n_epochs": 20,
+      "seed": 2,
+      "name": "large_high_U1M_E20_s2"
+    },
+    {
+      "capacity": "large",
+      "entropy_level": "high",
+      "unique_tokens": 10000000,
+      "n_epochs": 2,
+      "seed": 0,
+      "name": "large_high_U10M_E2_s0"
+    },
+    {
+      "capacity": "large",
+      "entropy_level": "high",
+      "unique_tokens": 10000000,
+      "n_epochs": 2,
+      "seed": 1,
+      "name": "large_high_U10M_E2_s1"
+    },
+    {
+      "capacity": "large",
+      "entropy_level": "high",
+      "unique_tokens": 10000000,
+      "n_epochs": 2,
+      "seed": 2,
+      "name": "large_high_U10M_E2_s2"
+    }
+  ]
+}

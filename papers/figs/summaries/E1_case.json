@@ -1,0 +1,37 @@
+{
+  "artifact": "E1_case",
+  "layout": "balanced-2x2",
+  "panel_count": 4,
+  "panels": [
+    {
+      "id": "a",
+      "question": "What trajectory represents a boundary cell?",
+      "sources": [
+        "experiments/results/repeated_data/small_low_U10M_E2_s0.jsonl"
+      ]
+    },
+    {
+      "id": "b",
+      "question": "How does the canary gap evolve?",
+      "sources": [
+        "experiments/results/repeated_data/small_low_U10M_E2_s0.jsonl"
+      ]
+    },
+    {
+      "id": "c",
+      "question": "How do decay and memory onsets compare?",
+      "sources": [
+        "experiments/results/figures-013/crossings_verdicts.json"
+      ]
+    },
+    {
+      "id": "d",
+      "question": "Does the exposure-matched control preserve the band on this cell?",
+      "sources": [
+        "experiments/revision2026/gpu2026/e1c/e1c_verdict.json"
+      ]
+    }
+  ],
+  "exception_reason": null,
+  "generated_from_manifest": "papers/figs/figure_manifest.yaml"
+}

@@ -1,0 +1,108 @@
+"""Figure-pointer contract (test-spec F1–F9, F6b) for free-repetition-band."""
+
+from __future__ import annotations
+
+import json
+import re
+import subprocess
+
+import jsonschema
+
+from conftest import (
+    INDEX_PATH,
+    REPO_ROOT,
+    SCHEMA_PATH,
+    YAML_OR_SCHEMATIC,
+)
+
+SCHEMATIC_IDS = {"E1_landscape", "E1_scheme"}
+
+
+def _index() -> dict:
+    assert INDEX_PATH.is_file(), f"F1: missing {INDEX_PATH}"
+    return json.loads(INDEX_PATH.read_text(encoding="utf-8"))
+
+
+def test_figure_index_exists() -> None:
+    assert INDEX_PATH.is_file()
+
+
+def test_figure_index_schema_file_exists() -> None:
+    assert SCHEMA_PATH.is_file(), f"F1: schema missing at {SCHEMA_PATH}"
+
+
+def test_schema_paper_id_is_enum_not_const() -> None:
+    schema = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
+    paper_id = schema["properties"]["paper_id"]
+    assert "const" not in paper_id
+    assert set(paper_id["enum"]) == {"E1"}
+
+
+def test_figure_index_validates_against_schema() -> None:
+    schema = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
+    jsonschema.validate(instance=_index(), schema=schema)
+
+
+def test_index_identifies_paper_e1_warehouse() -> None:
+    data = _index()
+    assert data["paper_id"] == "E1"
+    assert data["github"] == "PeterPonyu/free-repetition-band"
+    assert data["zenodo_concept_doi"] == "10.5281/zenodo.21020378"
+    assert data["pipeline"].startswith("figs/")
+
+
+def test_index_ids_are_yaml_or_schematic() -> None:
+    data = _index()
+    for fig in data["figures"]:
+        fig_id = fig["id"]
+        assert fig_id in YAML_OR_SCHEMATIC, f"F2: unknown id {fig_id}"
+        generator = fig.get("generator")
+        if generator:
+            assert generator.startswith("figs/"), f"F9: generator must be papers/-relative: {generator}"
+            gen_path = REPO_ROOT / "papers" / generator
+            assert gen_path.is_file(), f"F2: generator missing for {fig_id}: {gen_path}"
+        elif fig_id in SCHEMATIC_IDS:
+            raise AssertionError(f"F2: schematic {fig_id} needs a generator pointer")
+
+
+def test_index_path_grammar_is_papers_relative() -> None:
+    data = _index()
+    for fig in data["figures"]:
+        for key in ("generator", "summary", "preview_svg", "tex_build", "vec_build"):
+            value = fig.get(key)
+            if value is None:
+                continue
+            assert value.startswith("figs/"), f"F9: {fig['id']}.{key}={value!r} must start with figs/"
+            assert not value.startswith("summaries/"), f"F9: mixed base in {fig['id']}.{key}"
+
+
+def test_summaries_and_previews_resolve_or_are_null() -> None:
+    data = _index()
+    missing: list[str] = []
+    for fig in data["figures"]:
+        for key in ("summary", "preview_svg"):
+            value = fig.get(key)
+            if not value:
+                continue
+            path = REPO_ROOT / "papers" / value
+            if not path.is_file():
+                missing.append(f"{fig['id']}.{key}: {value}")
+    assert not missing, f"F7/F9: declared paths missing: {missing}"
+
+
+def test_no_pdfs_are_committed_under_papers() -> None:
+    proc = subprocess.run(
+        ["git", "ls-files", "papers/**/*.pdf"],
+        cwd=REPO_ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    tracked = [line for line in proc.stdout.splitlines() if line.strip()]
+    assert not tracked, f"F4: committed PDFs are forbidden: {tracked}"
+
+
+def test_gitignore_excludes_compiled_figure_tiers() -> None:
+    gitignore = (REPO_ROOT / ".gitignore").read_text(encoding="utf-8")
+    assert "papers/figs/tex/" in gitignore or "figs/tex/" in gitignore
+    assert "papers/figs/vec/" in gitignore or "figs/vec/" in gitignore

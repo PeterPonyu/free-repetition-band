@@ -1,0 +1,37 @@
+{
+  "artifact": "E1_large_completion",
+  "layout": "balanced-2x2",
+  "panel_count": 4,
+  "panels": [
+    {
+      "id": "a",
+      "question": "What loss trajectories complete the large row?",
+      "sources": [
+        "experiments/results/repeated_data_ultragoal_large/large_low_U10M_E2_s0.jsonl"
+      ]
+    },
+    {
+      "id": "b",
+      "question": "How variable is large-row onset across seeds?",
+      "sources": [
+        "experiments/results/repeated_data_ultragoal_large/large_med_U10M_E2_s0.jsonl"
+      ]
+    },
+    {
+      "id": "c",
+      "question": "What free-repetition count is supported at large capacity?",
+      "sources": [
+        "experiments/results/figures-013/repeat_verdicts.json"
+      ]
+    },
+    {
+      "id": "d",
+      "question": "How do entropy and budget bound the large-row result?",
+      "sources": [
+        "experiments/results/figures-013/crossings_verdicts.json"
+      ]
+    }
+  ],
+  "exception_reason": null,
+  "generated_from_manifest": "papers/figs/figure_manifest.yaml"
+}

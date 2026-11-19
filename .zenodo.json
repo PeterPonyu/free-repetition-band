@@ -1,0 +1,20 @@
+{
+  "title": "A 4-10 epoch free-repetition band: a 1000x-smaller-scale test of the data-repetition value-decay law",
+  "description": "Code and result logs for a small-scale test of the data-repetition free-epoch band. Code is MIT; result logs CC-BY-4.0. Figure/manuscript sources not included; large standard datasets not bundled.",
+  "upload_type": "dataset",
+  "access_right": "open",
+  "license": "MIT",
+  "creators": [
+    {
+      "name": "Fu, Zeyu",
+      "orcid": "0009-0001-8329-0108",
+      "affiliation": "Army Medical University, Chongqing, China"
+    }
+  ],
+  "keywords": [
+    "data repetition",
+    "scaling laws",
+    "language models",
+    "reproducibility"
+  ]
+}

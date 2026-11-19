@@ -1,0 +1,383 @@
+{
+ "budget": 20000000,
+ "free_eps_nats": 0.05,
+ "canary_eps": 0.1,
+ "p1_R_free_all_cells": [
+  10,
+  10,
+  4,
+  4,
+  4,
+  4,
+  4,
+  4,
+  4
+ ],
+ "p1_R_free_range": [
+  4,
+  10
+ ],
+ "p2_R_free_by_entropy": {
+  "low": [
+   4,
+   10
+  ],
+  "med": [
+   4,
+   10
+  ],
+  "high": [
+   4
+  ]
+ },
+ "p2_R_free_by_capacity": {
+  "small": [
+   4,
+   10
+  ],
+  "med": [
+   4
+  ],
+  "large": [
+   4
+  ]
+ },
+ "p3_onset_pairs": [
+  {
+   "cell": "small/low",
+   "decay_onset": 20,
+   "mem_onset": 10
+  },
+  {
+   "cell": "small/med",
+   "decay_onset": 20,
+   "mem_onset": 20
+  },
+  {
+   "cell": "small/high",
+   "decay_onset": 10,
+   "mem_onset": 10
+  },
+  {
+   "cell": "med/low",
+   "decay_onset": 10,
+   "mem_onset": 10
+  },
+  {
+   "cell": "med/med",
+   "decay_onset": 10,
+   "mem_onset": 10
+  },
+  {
+   "cell": "med/high",
+   "decay_onset": 10,
+   "mem_onset": 10
+  },
+  {
+   "cell": "large/low",
+   "decay_onset": 10,
+   "mem_onset": 10
+  },
+  {
+   "cell": "large/med",
+   "decay_onset": 10,
+   "mem_onset": 10
+  },
+  {
+   "cell": "large/high",
+   "decay_onset": 10,
+   "mem_onset": 10
+  }
+ ],
+ "p3_n_coincide": "8/9",
+ "cells": {
+  "small/low": {
+   "n_points": [
+    1,
+    2,
+    4,
+    10,
+    20,
+    40
+   ],
+   "fresh_val": 0.405301533639431,
+   "excess": {
+    "1": 0.0,
+    "2": 0.0051,
+    "4": 0.0125,
+    "10": 0.0498,
+    "20": 0.2198,
+    "40": 0.8163
+   },
+   "canary": {
+    "1": 0.0325,
+    "2": 0.0237,
+    "4": 0.0501,
+    "10": 0.1561,
+    "20": 0.3961,
+    "40": 0.9348
+   },
+   "R_free_epochs": 10,
+   "decay_onset": 20,
+   "mem_onset": 10,
+   "onset_coincide": false,
+   "coverage_full": true
+  },
+  "small/med": {
+   "n_points": [
+    1,
+    2,
+    4,
+    10,
+    20,
+    40
+   ],
+   "fresh_val": 1.7654701322317123,
+   "excess": {
+    "1": 0.0,
+    "2": 0.0041,
+    "4": 0.013,
+    "10": 0.0498,
+    "20": 0.3884,
+    "40": 3.1799
+   },
+   "canary": {
+    "1": -0.0251,
+    "2": 0.0314,
+    "4": 0.0363,
+    "10": 0.0729,
+    "20": 0.3963,
+    "40": 1.619
+   },
+   "R_free_epochs": 10,
+   "decay_onset": 20,
+   "mem_onset": 20,
+   "onset_coincide": true,
+   "coverage_full": true
+  },
+  "small/high": {
+   "n_points": [
+    1,
+    2,
+    4,
+    10,
+    20,
+    40
+   ],
+   "fresh_val": 4.108553409576416,
+   "excess": {
+    "1": 0.0,
+    "2": -0.0008,
+    "4": 0.0069,
+    "10": 0.09,
+    "20": 0.7216,
+    "40": 4.7744
+   },
+   "canary": {
+    "1": -0.013,
+    "2": -0.0138,
+    "4": 0.0007,
+    "10": 0.2236,
+    "20": 1.063,
+    "40": 2.8461
+   },
+   "R_free_epochs": 4,
+   "decay_onset": 10,
+   "mem_onset": 10,
+   "onset_coincide": true,
+   "coverage_full": true
+  },
+  "med/low": {
+   "n_points": [
+    1,
+    2,
+    4,
+    10,
+    20,
+    40
+   ],
+   "fresh_val": 0.38137776404619217,
+   "excess": {
+    "1": 0.0,
+    "2": 0.0074,
+    "4": 0.0092,
+    "10": 0.0776,
+    "20": 0.4738,
+    "40": 0.9627
+   },
+   "canary": {
+    "1": 0.0211,
+    "2": 0.0265,
+    "4": 0.0448,
+    "10": 0.174,
+    "20": 0.5723,
+    "40": 1.0235
+   },
+   "R_free_epochs": 4,
+   "decay_onset": 10,
+   "mem_onset": 10,
+   "onset_coincide": true,
+   "coverage_full": true
+  },
+  "med/med": {
+   "n_points": [
+    1,
+    2,
+    4,
+    10,
+    20,
+    40
+   ],
+   "fresh_val": 1.7641469091176987,
+   "excess": {
+    "1": 0.0,
+    "2": 0.0033,
+    "4": 0.0141,
+    "10": 0.1358,
+    "20": 1.6454,
+    "40": 3.9072
+   },
+   "canary": {
+    "1": -0.0262,
+    "2": 0.0306,
+    "4": 0.0463,
+    "10": 0.1619,
+    "20": 0.9736,
+    "40": 2.1923
+   },
+   "R_free_epochs": 4,
+   "decay_onset": 10,
+   "mem_onset": 10,
+   "onset_coincide": true,
+   "coverage_full": true
+  },
+  "med/high": {
+   "n_points": [
+    1,
+    2,
+    4,
+    10,
+    20,
+    40
+   ],
+   "fresh_val": 4.101560115814209,
+   "excess": {
+    "1": 0.0,
+    "2": -0.0024,
+    "4": 0.0147,
+    "10": 0.2816,
+    "20": 2.4319,
+    "40": 7.8553
+   },
+   "canary": {
+    "1": -0.0148,
+    "2": -0.0066,
+    "4": 0.0195,
+    "10": 0.5012,
+    "20": 2.2187,
+    "40": 5.1801
+   },
+   "R_free_epochs": 4,
+   "decay_onset": 10,
+   "mem_onset": 10,
+   "onset_coincide": true,
+   "coverage_full": true
+  },
+  "large/low": {
+   "n_points": [
+    1,
+    2,
+    4,
+    10,
+    20,
+    40
+   ],
+   "fresh_val": 0.37198975682258606,
+   "excess": {
+    "1": 0.0,
+    "2": 0.0044,
+    "4": 0.003,
+    "10": 0.0879,
+    "20": 0.521,
+    "40": 0.9686
+   },
+   "canary": {
+    "1": 0.0222,
+    "2": 0.0229,
+    "4": 0.0375,
+    "10": 0.1669,
+    "20": 0.7147,
+    "40": 1.1158
+   },
+   "R_free_epochs": 4,
+   "decay_onset": 10,
+   "mem_onset": 10,
+   "onset_coincide": true,
+   "coverage_full": true
+  },
+  "large/med": {
+   "n_points": [
+    1,
+    2,
+    4,
+    10,
+    20,
+    40
+   ],
+   "fresh_val": 1.7633224576711655,
+   "excess": {
+    "1": 0.0,
+    "2": 0.0044,
+    "4": 0.0162,
+    "10": 0.2271,
+    "20": 2.4537,
+    "40": 3.9193
+   },
+   "canary": {
+    "1": -0.0248,
+    "2": 0.0338,
+    "4": 0.0508,
+    "10": 0.2676,
+    "20": 1.3932,
+    "40": 2.1636
+   },
+   "R_free_epochs": 4,
+   "decay_onset": 10,
+   "mem_onset": 10,
+   "onset_coincide": true,
+   "coverage_full": true
+  },
+  "large/high": {
+   "n_points": [
+    1,
+    2,
+    4,
+    10,
+    20,
+    40
+   ],
+   "fresh_val": 4.099107265472412,
+   "excess": {
+    "1": 0.0,
+    "2": -0.0016,
+    "4": 0.0188,
+    "10": 0.4922,
+    "20": 4.5574,
+    "40": 7.6713
+   },
+   "canary": {
+    "1": -0.0139,
+    "2": -0.003,
+    "4": 0.0549,
+    "10": 0.8128,
+    "20": 3.699,
+    "40": 6.0852
+   },
+   "R_free_epochs": 4,
+   "decay_onset": 10,
+   "mem_onset": 10,
+   "onset_coincide": true,
+   "coverage_full": true
+  }
+ }
+}

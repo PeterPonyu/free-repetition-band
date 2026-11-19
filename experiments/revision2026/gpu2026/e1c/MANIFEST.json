@@ -1,0 +1,4575 @@
+{
+ "arm": "e1c",
+ "written_utc": "2026-08-01T05:52:15+00:00",
+ "n_runs": 324,
+ "out_dir": "/root/dlr_gpu2026/experiments/revision2026/gpu2026/e1c",
+ "budget": 20000000,
+ "n_ladder": [
+  1,
+  2,
+  4,
+  10,
+  20,
+  40
+ ],
+ "plant_rates": [
+  1,
+  4
+ ],
+ "capacities": [
+  "small",
+  "med",
+  "large"
+ ],
+ "entropy_levels": [
+  "low",
+  "med",
+  "high"
+ ],
+ "seeds": [
+  201,
+  202,
+  203
+ ],
+ "generator": "markov",
+ "seq_len": 128,
+ "batch_size": 32,
+ "runs": [
+  {
+   "name": "e1c_small_low_r1_E1_s201",
+   "file": "e1c_small_low_r1_E1_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_low_r1_E1_s202",
+   "file": "e1c_small_low_r1_E1_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_low_r1_E1_s203",
+   "file": "e1c_small_low_r1_E1_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_low_r1_E2_s201",
+   "file": "e1c_small_low_r1_E2_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_low_r1_E2_s202",
+   "file": "e1c_small_low_r1_E2_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_low_r1_E2_s203",
+   "file": "e1c_small_low_r1_E2_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_low_r1_E4_s201",
+   "file": "e1c_small_low_r1_E4_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_low_r1_E4_s202",
+   "file": "e1c_small_low_r1_E4_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_low_r1_E4_s203",
+   "file": "e1c_small_low_r1_E4_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_low_r1_E10_s201",
+   "file": "e1c_small_low_r1_E10_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_low_r1_E10_s202",
+   "file": "e1c_small_low_r1_E10_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_low_r1_E10_s203",
+   "file": "e1c_small_low_r1_E10_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_low_r1_E20_s201",
+   "file": "e1c_small_low_r1_E20_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_low_r1_E20_s202",
+   "file": "e1c_small_low_r1_E20_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_low_r1_E20_s203",
+   "file": "e1c_small_low_r1_E20_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_low_r1_E40_s201",
+   "file": "e1c_small_low_r1_E40_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_low_r1_E40_s202",
+   "file": "e1c_small_low_r1_E40_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_low_r1_E40_s203",
+   "file": "e1c_small_low_r1_E40_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_low_r4_E1_s201",
+   "file": "e1c_small_low_r4_E1_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_low_r4_E1_s202",
+   "file": "e1c_small_low_r4_E1_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_low_r4_E1_s203",
+   "file": "e1c_small_low_r4_E1_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_low_r4_E2_s201",
+   "file": "e1c_small_low_r4_E2_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_low_r4_E2_s202",
+   "file": "e1c_small_low_r4_E2_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_low_r4_E2_s203",
+   "file": "e1c_small_low_r4_E2_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_low_r4_E4_s201",
+   "file": "e1c_small_low_r4_E4_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_low_r4_E4_s202",
+   "file": "e1c_small_low_r4_E4_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_low_r4_E4_s203",
+   "file": "e1c_small_low_r4_E4_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_low_r4_E10_s201",
+   "file": "e1c_small_low_r4_E10_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_low_r4_E10_s202",
+   "file": "e1c_small_low_r4_E10_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_low_r4_E10_s203",
+   "file": "e1c_small_low_r4_E10_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_low_r4_E20_s201",
+   "file": "e1c_small_low_r4_E20_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_low_r4_E20_s202",
+   "file": "e1c_small_low_r4_E20_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_low_r4_E20_s203",
+   "file": "e1c_small_low_r4_E20_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_low_r4_E40_s201",
+   "file": "e1c_small_low_r4_E40_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_low_r4_E40_s202",
+   "file": "e1c_small_low_r4_E40_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_low_r4_E40_s203",
+   "file": "e1c_small_low_r4_E40_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_med_r1_E1_s201",
+   "file": "e1c_small_med_r1_E1_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_med_r1_E1_s202",
+   "file": "e1c_small_med_r1_E1_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_med_r1_E1_s203",
+   "file": "e1c_small_med_r1_E1_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_med_r1_E2_s201",
+   "file": "e1c_small_med_r1_E2_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_med_r1_E2_s202",
+   "file": "e1c_small_med_r1_E2_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_med_r1_E2_s203",
+   "file": "e1c_small_med_r1_E2_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_med_r1_E4_s201",
+   "file": "e1c_small_med_r1_E4_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_med_r1_E4_s202",
+   "file": "e1c_small_med_r1_E4_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_med_r1_E4_s203",
+   "file": "e1c_small_med_r1_E4_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_med_r1_E10_s201",
+   "file": "e1c_small_med_r1_E10_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_med_r1_E10_s202",
+   "file": "e1c_small_med_r1_E10_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_med_r1_E10_s203",
+   "file": "e1c_small_med_r1_E10_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_med_r1_E20_s201",
+   "file": "e1c_small_med_r1_E20_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_med_r1_E20_s202",
+   "file": "e1c_small_med_r1_E20_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_med_r1_E20_s203",
+   "file": "e1c_small_med_r1_E20_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_med_r1_E40_s201",
+   "file": "e1c_small_med_r1_E40_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_med_r1_E40_s202",
+   "file": "e1c_small_med_r1_E40_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_med_r1_E40_s203",
+   "file": "e1c_small_med_r1_E40_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_med_r4_E1_s201",
+   "file": "e1c_small_med_r4_E1_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_med_r4_E1_s202",
+   "file": "e1c_small_med_r4_E1_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_med_r4_E1_s203",
+   "file": "e1c_small_med_r4_E1_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_med_r4_E2_s201",
+   "file": "e1c_small_med_r4_E2_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_med_r4_E2_s202",
+   "file": "e1c_small_med_r4_E2_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_med_r4_E2_s203",
+   "file": "e1c_small_med_r4_E2_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_med_r4_E4_s201",
+   "file": "e1c_small_med_r4_E4_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_med_r4_E4_s202",
+   "file": "e1c_small_med_r4_E4_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_med_r4_E4_s203",
+   "file": "e1c_small_med_r4_E4_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_med_r4_E10_s201",
+   "file": "e1c_small_med_r4_E10_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_med_r4_E10_s202",
+   "file": "e1c_small_med_r4_E10_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_med_r4_E10_s203",
+   "file": "e1c_small_med_r4_E10_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_med_r4_E20_s201",
+   "file": "e1c_small_med_r4_E20_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_med_r4_E20_s202",
+   "file": "e1c_small_med_r4_E20_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_med_r4_E20_s203",
+   "file": "e1c_small_med_r4_E20_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_med_r4_E40_s201",
+   "file": "e1c_small_med_r4_E40_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_med_r4_E40_s202",
+   "file": "e1c_small_med_r4_E40_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_med_r4_E40_s203",
+   "file": "e1c_small_med_r4_E40_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_high_r1_E1_s201",
+   "file": "e1c_small_high_r1_E1_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_high_r1_E1_s202",
+   "file": "e1c_small_high_r1_E1_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_high_r1_E1_s203",
+   "file": "e1c_small_high_r1_E1_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_high_r1_E2_s201",
+   "file": "e1c_small_high_r1_E2_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_high_r1_E2_s202",
+   "file": "e1c_small_high_r1_E2_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_high_r1_E2_s203",
+   "file": "e1c_small_high_r1_E2_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_high_r1_E4_s201",
+   "file": "e1c_small_high_r1_E4_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_high_r1_E4_s202",
+   "file": "e1c_small_high_r1_E4_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_high_r1_E4_s203",
+   "file": "e1c_small_high_r1_E4_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_high_r1_E10_s201",
+   "file": "e1c_small_high_r1_E10_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_high_r1_E10_s202",
+   "file": "e1c_small_high_r1_E10_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_high_r1_E10_s203",
+   "file": "e1c_small_high_r1_E10_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_high_r1_E20_s201",
+   "file": "e1c_small_high_r1_E20_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_high_r1_E20_s202",
+   "file": "e1c_small_high_r1_E20_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_high_r1_E20_s203",
+   "file": "e1c_small_high_r1_E20_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_high_r1_E40_s201",
+   "file": "e1c_small_high_r1_E40_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_high_r1_E40_s202",
+   "file": "e1c_small_high_r1_E40_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_high_r1_E40_s203",
+   "file": "e1c_small_high_r1_E40_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_high_r4_E1_s201",
+   "file": "e1c_small_high_r4_E1_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_high_r4_E1_s202",
+   "file": "e1c_small_high_r4_E1_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_high_r4_E1_s203",
+   "file": "e1c_small_high_r4_E1_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_high_r4_E2_s201",
+   "file": "e1c_small_high_r4_E2_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_high_r4_E2_s202",
+   "file": "e1c_small_high_r4_E2_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_high_r4_E2_s203",
+   "file": "e1c_small_high_r4_E2_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_high_r4_E4_s201",
+   "file": "e1c_small_high_r4_E4_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_high_r4_E4_s202",
+   "file": "e1c_small_high_r4_E4_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_high_r4_E4_s203",
+   "file": "e1c_small_high_r4_E4_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_high_r4_E10_s201",
+   "file": "e1c_small_high_r4_E10_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_high_r4_E10_s202",
+   "file": "e1c_small_high_r4_E10_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_high_r4_E10_s203",
+   "file": "e1c_small_high_r4_E10_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_high_r4_E20_s201",
+   "file": "e1c_small_high_r4_E20_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_high_r4_E20_s202",
+   "file": "e1c_small_high_r4_E20_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_high_r4_E20_s203",
+   "file": "e1c_small_high_r4_E20_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_small_high_r4_E40_s201",
+   "file": "e1c_small_high_r4_E40_s201.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_small_high_r4_E40_s202",
+   "file": "e1c_small_high_r4_E40_s202.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_small_high_r4_E40_s203",
+   "file": "e1c_small_high_r4_E40_s203.jsonl",
+   "config": {
+    "capacity": "small",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_low_r1_E1_s201",
+   "file": "e1c_med_low_r1_E1_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_low_r1_E1_s202",
+   "file": "e1c_med_low_r1_E1_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_low_r1_E1_s203",
+   "file": "e1c_med_low_r1_E1_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_low_r1_E2_s201",
+   "file": "e1c_med_low_r1_E2_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_low_r1_E2_s202",
+   "file": "e1c_med_low_r1_E2_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_low_r1_E2_s203",
+   "file": "e1c_med_low_r1_E2_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_low_r1_E4_s201",
+   "file": "e1c_med_low_r1_E4_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_low_r1_E4_s202",
+   "file": "e1c_med_low_r1_E4_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_low_r1_E4_s203",
+   "file": "e1c_med_low_r1_E4_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_low_r1_E10_s201",
+   "file": "e1c_med_low_r1_E10_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_low_r1_E10_s202",
+   "file": "e1c_med_low_r1_E10_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_low_r1_E10_s203",
+   "file": "e1c_med_low_r1_E10_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_low_r1_E20_s201",
+   "file": "e1c_med_low_r1_E20_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_low_r1_E20_s202",
+   "file": "e1c_med_low_r1_E20_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_low_r1_E20_s203",
+   "file": "e1c_med_low_r1_E20_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_low_r1_E40_s201",
+   "file": "e1c_med_low_r1_E40_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_low_r1_E40_s202",
+   "file": "e1c_med_low_r1_E40_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_low_r1_E40_s203",
+   "file": "e1c_med_low_r1_E40_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_low_r4_E1_s201",
+   "file": "e1c_med_low_r4_E1_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_low_r4_E1_s202",
+   "file": "e1c_med_low_r4_E1_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_low_r4_E1_s203",
+   "file": "e1c_med_low_r4_E1_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_low_r4_E2_s201",
+   "file": "e1c_med_low_r4_E2_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_low_r4_E2_s202",
+   "file": "e1c_med_low_r4_E2_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_low_r4_E2_s203",
+   "file": "e1c_med_low_r4_E2_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_low_r4_E4_s201",
+   "file": "e1c_med_low_r4_E4_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_low_r4_E4_s202",
+   "file": "e1c_med_low_r4_E4_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_low_r4_E4_s203",
+   "file": "e1c_med_low_r4_E4_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_low_r4_E10_s201",
+   "file": "e1c_med_low_r4_E10_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_low_r4_E10_s202",
+   "file": "e1c_med_low_r4_E10_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_low_r4_E10_s203",
+   "file": "e1c_med_low_r4_E10_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_low_r4_E20_s201",
+   "file": "e1c_med_low_r4_E20_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_low_r4_E20_s202",
+   "file": "e1c_med_low_r4_E20_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_low_r4_E20_s203",
+   "file": "e1c_med_low_r4_E20_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_low_r4_E40_s201",
+   "file": "e1c_med_low_r4_E40_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_low_r4_E40_s202",
+   "file": "e1c_med_low_r4_E40_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_low_r4_E40_s203",
+   "file": "e1c_med_low_r4_E40_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_med_r1_E1_s201",
+   "file": "e1c_med_med_r1_E1_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_med_r1_E1_s202",
+   "file": "e1c_med_med_r1_E1_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_med_r1_E1_s203",
+   "file": "e1c_med_med_r1_E1_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_med_r1_E2_s201",
+   "file": "e1c_med_med_r1_E2_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_med_r1_E2_s202",
+   "file": "e1c_med_med_r1_E2_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_med_r1_E2_s203",
+   "file": "e1c_med_med_r1_E2_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_med_r1_E4_s201",
+   "file": "e1c_med_med_r1_E4_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_med_r1_E4_s202",
+   "file": "e1c_med_med_r1_E4_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_med_r1_E4_s203",
+   "file": "e1c_med_med_r1_E4_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_med_r1_E10_s201",
+   "file": "e1c_med_med_r1_E10_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_med_r1_E10_s202",
+   "file": "e1c_med_med_r1_E10_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_med_r1_E10_s203",
+   "file": "e1c_med_med_r1_E10_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_med_r1_E20_s201",
+   "file": "e1c_med_med_r1_E20_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_med_r1_E20_s202",
+   "file": "e1c_med_med_r1_E20_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_med_r1_E20_s203",
+   "file": "e1c_med_med_r1_E20_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_med_r1_E40_s201",
+   "file": "e1c_med_med_r1_E40_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_med_r1_E40_s202",
+   "file": "e1c_med_med_r1_E40_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_med_r1_E40_s203",
+   "file": "e1c_med_med_r1_E40_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_med_r4_E1_s201",
+   "file": "e1c_med_med_r4_E1_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_med_r4_E1_s202",
+   "file": "e1c_med_med_r4_E1_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_med_r4_E1_s203",
+   "file": "e1c_med_med_r4_E1_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_med_r4_E2_s201",
+   "file": "e1c_med_med_r4_E2_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_med_r4_E2_s202",
+   "file": "e1c_med_med_r4_E2_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_med_r4_E2_s203",
+   "file": "e1c_med_med_r4_E2_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_med_r4_E4_s201",
+   "file": "e1c_med_med_r4_E4_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_med_r4_E4_s202",
+   "file": "e1c_med_med_r4_E4_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_med_r4_E4_s203",
+   "file": "e1c_med_med_r4_E4_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_med_r4_E10_s201",
+   "file": "e1c_med_med_r4_E10_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_med_r4_E10_s202",
+   "file": "e1c_med_med_r4_E10_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_med_r4_E10_s203",
+   "file": "e1c_med_med_r4_E10_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_med_r4_E20_s201",
+   "file": "e1c_med_med_r4_E20_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_med_r4_E20_s202",
+   "file": "e1c_med_med_r4_E20_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_med_r4_E20_s203",
+   "file": "e1c_med_med_r4_E20_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_med_r4_E40_s201",
+   "file": "e1c_med_med_r4_E40_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_med_r4_E40_s202",
+   "file": "e1c_med_med_r4_E40_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_med_r4_E40_s203",
+   "file": "e1c_med_med_r4_E40_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_high_r1_E1_s201",
+   "file": "e1c_med_high_r1_E1_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_high_r1_E1_s202",
+   "file": "e1c_med_high_r1_E1_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_high_r1_E1_s203",
+   "file": "e1c_med_high_r1_E1_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_high_r1_E2_s201",
+   "file": "e1c_med_high_r1_E2_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_high_r1_E2_s202",
+   "file": "e1c_med_high_r1_E2_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_high_r1_E2_s203",
+   "file": "e1c_med_high_r1_E2_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_high_r1_E4_s201",
+   "file": "e1c_med_high_r1_E4_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_high_r1_E4_s202",
+   "file": "e1c_med_high_r1_E4_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_high_r1_E4_s203",
+   "file": "e1c_med_high_r1_E4_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_high_r1_E10_s201",
+   "file": "e1c_med_high_r1_E10_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_high_r1_E10_s202",
+   "file": "e1c_med_high_r1_E10_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_high_r1_E10_s203",
+   "file": "e1c_med_high_r1_E10_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_high_r1_E20_s201",
+   "file": "e1c_med_high_r1_E20_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_high_r1_E20_s202",
+   "file": "e1c_med_high_r1_E20_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_high_r1_E20_s203",
+   "file": "e1c_med_high_r1_E20_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_high_r1_E40_s201",
+   "file": "e1c_med_high_r1_E40_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_high_r1_E40_s202",
+   "file": "e1c_med_high_r1_E40_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_high_r1_E40_s203",
+   "file": "e1c_med_high_r1_E40_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_high_r4_E1_s201",
+   "file": "e1c_med_high_r4_E1_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_high_r4_E1_s202",
+   "file": "e1c_med_high_r4_E1_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_high_r4_E1_s203",
+   "file": "e1c_med_high_r4_E1_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_high_r4_E2_s201",
+   "file": "e1c_med_high_r4_E2_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_high_r4_E2_s202",
+   "file": "e1c_med_high_r4_E2_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_high_r4_E2_s203",
+   "file": "e1c_med_high_r4_E2_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_high_r4_E4_s201",
+   "file": "e1c_med_high_r4_E4_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_high_r4_E4_s202",
+   "file": "e1c_med_high_r4_E4_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_high_r4_E4_s203",
+   "file": "e1c_med_high_r4_E4_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_high_r4_E10_s201",
+   "file": "e1c_med_high_r4_E10_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_high_r4_E10_s202",
+   "file": "e1c_med_high_r4_E10_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_high_r4_E10_s203",
+   "file": "e1c_med_high_r4_E10_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_high_r4_E20_s201",
+   "file": "e1c_med_high_r4_E20_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_high_r4_E20_s202",
+   "file": "e1c_med_high_r4_E20_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_high_r4_E20_s203",
+   "file": "e1c_med_high_r4_E20_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_med_high_r4_E40_s201",
+   "file": "e1c_med_high_r4_E40_s201.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_med_high_r4_E40_s202",
+   "file": "e1c_med_high_r4_E40_s202.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_med_high_r4_E40_s203",
+   "file": "e1c_med_high_r4_E40_s203.jsonl",
+   "config": {
+    "capacity": "med",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_low_r1_E1_s201",
+   "file": "e1c_large_low_r1_E1_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_low_r1_E1_s202",
+   "file": "e1c_large_low_r1_E1_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_low_r1_E1_s203",
+   "file": "e1c_large_low_r1_E1_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_low_r1_E2_s201",
+   "file": "e1c_large_low_r1_E2_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_low_r1_E2_s202",
+   "file": "e1c_large_low_r1_E2_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_low_r1_E2_s203",
+   "file": "e1c_large_low_r1_E2_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_low_r1_E4_s201",
+   "file": "e1c_large_low_r1_E4_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_low_r1_E4_s202",
+   "file": "e1c_large_low_r1_E4_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_low_r1_E4_s203",
+   "file": "e1c_large_low_r1_E4_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_low_r1_E10_s201",
+   "file": "e1c_large_low_r1_E10_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_low_r1_E10_s202",
+   "file": "e1c_large_low_r1_E10_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_low_r1_E10_s203",
+   "file": "e1c_large_low_r1_E10_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_low_r1_E20_s201",
+   "file": "e1c_large_low_r1_E20_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_low_r1_E20_s202",
+   "file": "e1c_large_low_r1_E20_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_low_r1_E20_s203",
+   "file": "e1c_large_low_r1_E20_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_low_r1_E40_s201",
+   "file": "e1c_large_low_r1_E40_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_low_r1_E40_s202",
+   "file": "e1c_large_low_r1_E40_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_low_r1_E40_s203",
+   "file": "e1c_large_low_r1_E40_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_low_r4_E1_s201",
+   "file": "e1c_large_low_r4_E1_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_low_r4_E1_s202",
+   "file": "e1c_large_low_r4_E1_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_low_r4_E1_s203",
+   "file": "e1c_large_low_r4_E1_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_low_r4_E2_s201",
+   "file": "e1c_large_low_r4_E2_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_low_r4_E2_s202",
+   "file": "e1c_large_low_r4_E2_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_low_r4_E2_s203",
+   "file": "e1c_large_low_r4_E2_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_low_r4_E4_s201",
+   "file": "e1c_large_low_r4_E4_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_low_r4_E4_s202",
+   "file": "e1c_large_low_r4_E4_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_low_r4_E4_s203",
+   "file": "e1c_large_low_r4_E4_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_low_r4_E10_s201",
+   "file": "e1c_large_low_r4_E10_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_low_r4_E10_s202",
+   "file": "e1c_large_low_r4_E10_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_low_r4_E10_s203",
+   "file": "e1c_large_low_r4_E10_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_low_r4_E20_s201",
+   "file": "e1c_large_low_r4_E20_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_low_r4_E20_s202",
+   "file": "e1c_large_low_r4_E20_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_low_r4_E20_s203",
+   "file": "e1c_large_low_r4_E20_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_low_r4_E40_s201",
+   "file": "e1c_large_low_r4_E40_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_low_r4_E40_s202",
+   "file": "e1c_large_low_r4_E40_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_low_r4_E40_s203",
+   "file": "e1c_large_low_r4_E40_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "low",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_med_r1_E1_s201",
+   "file": "e1c_large_med_r1_E1_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_med_r1_E1_s202",
+   "file": "e1c_large_med_r1_E1_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_med_r1_E1_s203",
+   "file": "e1c_large_med_r1_E1_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_med_r1_E2_s201",
+   "file": "e1c_large_med_r1_E2_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_med_r1_E2_s202",
+   "file": "e1c_large_med_r1_E2_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_med_r1_E2_s203",
+   "file": "e1c_large_med_r1_E2_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_med_r1_E4_s201",
+   "file": "e1c_large_med_r1_E4_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_med_r1_E4_s202",
+   "file": "e1c_large_med_r1_E4_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_med_r1_E4_s203",
+   "file": "e1c_large_med_r1_E4_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_med_r1_E10_s201",
+   "file": "e1c_large_med_r1_E10_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_med_r1_E10_s202",
+   "file": "e1c_large_med_r1_E10_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_med_r1_E10_s203",
+   "file": "e1c_large_med_r1_E10_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_med_r1_E20_s201",
+   "file": "e1c_large_med_r1_E20_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_med_r1_E20_s202",
+   "file": "e1c_large_med_r1_E20_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_med_r1_E20_s203",
+   "file": "e1c_large_med_r1_E20_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_med_r1_E40_s201",
+   "file": "e1c_large_med_r1_E40_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_med_r1_E40_s202",
+   "file": "e1c_large_med_r1_E40_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_med_r1_E40_s203",
+   "file": "e1c_large_med_r1_E40_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_med_r4_E1_s201",
+   "file": "e1c_large_med_r4_E1_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_med_r4_E1_s202",
+   "file": "e1c_large_med_r4_E1_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_med_r4_E1_s203",
+   "file": "e1c_large_med_r4_E1_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_med_r4_E2_s201",
+   "file": "e1c_large_med_r4_E2_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_med_r4_E2_s202",
+   "file": "e1c_large_med_r4_E2_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_med_r4_E2_s203",
+   "file": "e1c_large_med_r4_E2_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_med_r4_E4_s201",
+   "file": "e1c_large_med_r4_E4_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_med_r4_E4_s202",
+   "file": "e1c_large_med_r4_E4_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_med_r4_E4_s203",
+   "file": "e1c_large_med_r4_E4_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_med_r4_E10_s201",
+   "file": "e1c_large_med_r4_E10_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_med_r4_E10_s202",
+   "file": "e1c_large_med_r4_E10_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_med_r4_E10_s203",
+   "file": "e1c_large_med_r4_E10_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_med_r4_E20_s201",
+   "file": "e1c_large_med_r4_E20_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_med_r4_E20_s202",
+   "file": "e1c_large_med_r4_E20_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_med_r4_E20_s203",
+   "file": "e1c_large_med_r4_E20_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_med_r4_E40_s201",
+   "file": "e1c_large_med_r4_E40_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_med_r4_E40_s202",
+   "file": "e1c_large_med_r4_E40_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_med_r4_E40_s203",
+   "file": "e1c_large_med_r4_E40_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "med",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_high_r1_E1_s201",
+   "file": "e1c_large_high_r1_E1_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_high_r1_E1_s202",
+   "file": "e1c_large_high_r1_E1_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_high_r1_E1_s203",
+   "file": "e1c_large_high_r1_E1_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_high_r1_E2_s201",
+   "file": "e1c_large_high_r1_E2_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_high_r1_E2_s202",
+   "file": "e1c_large_high_r1_E2_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_high_r1_E2_s203",
+   "file": "e1c_large_high_r1_E2_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_high_r1_E4_s201",
+   "file": "e1c_large_high_r1_E4_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_high_r1_E4_s202",
+   "file": "e1c_large_high_r1_E4_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_high_r1_E4_s203",
+   "file": "e1c_large_high_r1_E4_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_high_r1_E10_s201",
+   "file": "e1c_large_high_r1_E10_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_high_r1_E10_s202",
+   "file": "e1c_large_high_r1_E10_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_high_r1_E10_s203",
+   "file": "e1c_large_high_r1_E10_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_high_r1_E20_s201",
+   "file": "e1c_large_high_r1_E20_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_high_r1_E20_s202",
+   "file": "e1c_large_high_r1_E20_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_high_r1_E20_s203",
+   "file": "e1c_large_high_r1_E20_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_high_r1_E40_s201",
+   "file": "e1c_large_high_r1_E40_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_high_r1_E40_s202",
+   "file": "e1c_large_high_r1_E40_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_high_r1_E40_s203",
+   "file": "e1c_large_high_r1_E40_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 1,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_high_r4_E1_s201",
+   "file": "e1c_large_high_r4_E1_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_high_r4_E1_s202",
+   "file": "e1c_large_high_r4_E1_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_high_r4_E1_s203",
+   "file": "e1c_large_high_r4_E1_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 20000000,
+    "n_epochs": 1,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_high_r4_E2_s201",
+   "file": "e1c_large_high_r4_E2_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_high_r4_E2_s202",
+   "file": "e1c_large_high_r4_E2_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_high_r4_E2_s203",
+   "file": "e1c_large_high_r4_E2_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 10000000,
+    "n_epochs": 2,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_high_r4_E4_s201",
+   "file": "e1c_large_high_r4_E4_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_high_r4_E4_s202",
+   "file": "e1c_large_high_r4_E4_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_high_r4_E4_s203",
+   "file": "e1c_large_high_r4_E4_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 5000000,
+    "n_epochs": 4,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_high_r4_E10_s201",
+   "file": "e1c_large_high_r4_E10_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_high_r4_E10_s202",
+   "file": "e1c_large_high_r4_E10_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_high_r4_E10_s203",
+   "file": "e1c_large_high_r4_E10_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 2000000,
+    "n_epochs": 10,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_high_r4_E20_s201",
+   "file": "e1c_large_high_r4_E20_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_high_r4_E20_s202",
+   "file": "e1c_large_high_r4_E20_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_high_r4_E20_s203",
+   "file": "e1c_large_high_r4_E20_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 1000000,
+    "n_epochs": 20,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  },
+  {
+   "name": "e1c_large_high_r4_E40_s201",
+   "file": "e1c_large_high_r4_E40_s201.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 201
+   }
+  },
+  {
+   "name": "e1c_large_high_r4_E40_s202",
+   "file": "e1c_large_high_r4_E40_s202.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 202
+   }
+  },
+  {
+   "name": "e1c_large_high_r4_E40_s203",
+   "file": "e1c_large_high_r4_E40_s203.jsonl",
+   "config": {
+    "capacity": "large",
+    "entropy_level": "high",
+    "generator": "markov",
+    "unique_tokens": 500000,
+    "n_epochs": 40,
+    "total_budget": 20000000,
+    "canary_repeats": 4,
+    "seed": 203
+   }
+  }
+ ]
+}

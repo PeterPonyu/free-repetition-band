@@ -1,0 +1,63 @@
+"""Freeze / independence / lab-tree guards (G2, Z1–Z5)."""
+
+from __future__ import annotations
+
+import os
+import subprocess
+from pathlib import Path
+
+from conftest import PORTAL_DIR, REPO_ROOT, portal_corpus
+
+# Optional lab-tree guard: set E1_LAB_ROOT locally; unset on CI runners.
+_LAB_ROOT = os.environ.get("E1_LAB_ROOT", "")
+LAB = Path(_LAB_ROOT) if _LAB_ROOT else None
+
+
+README_CHROME = (
+    "manuscript",
+    "journal",
+    "FIGURE-INDEX",
+    "PIPELINE",
+    "warehouse",
+    "WikiText",
+    "R_free",
+    "star this",
+    "stars",
+)
+
+
+def test_readme_cites_github() -> None:
+    readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
+    assert "https://github.com/PeterPonyu/free-repetition-band" in readme
+    assert "https://peterponyu.github.io/free-repetition-band/" in readme
+    head = readme.split("## ", 1)[0]
+    assert "peterponyu.github.io/free-repetition-band" in head
+    lower = readme.lower()
+    for token in README_CHROME:
+        assert token.lower() not in lower, f"README leak: {token}"
+    assert "paper" not in lower
+    assert "stars" not in lower
+
+
+def test_no_compiled_manuscript_in_portal_or_site() -> None:
+    for root in (PORTAL_DIR, REPO_ROOT / "_site", REPO_ROOT / "out"):
+        if not root.exists():
+            continue
+        pdfs = list(root.rglob("*.pdf"))
+        assert not pdfs
+        for name in ("main.pdf", "manuscript.pdf"):
+            assert not (root / name).is_file()
+
+
+def test_lab_papers_tree_untouched() -> None:
+    if LAB is None or not (LAB / ".git").is_dir():
+        return
+    proc = subprocess.run(
+        ["git", "diff", "--", "papers/"],
+        cwd=LAB,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert proc.returncode == 0
+    assert proc.stdout == "", proc.stdout

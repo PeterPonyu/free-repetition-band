@@ -1,0 +1,37 @@
+{
+  "artifact": "E1_scale",
+  "layout": "balanced-2x2",
+  "panel_count": 4,
+  "panels": [
+    {
+      "id": "a",
+      "question": "How does loss behave on real bytes?",
+      "sources": [
+        "experiments/results/repeated_data_realtext/med_b50M_s0.json"
+      ]
+    },
+    {
+      "id": "b",
+      "question": "Where does onset occur on real text?",
+      "sources": [
+        "experiments/results/repeated_data_realtext/med_b50M_s1.json"
+      ]
+    },
+    {
+      "id": "c",
+      "question": "How variable is the real-text result across seeds?",
+      "sources": [
+        "experiments/results/repeated_data_realtext/med_b50M_s2.json"
+      ]
+    },
+    {
+      "id": "d",
+      "question": "Where does synthetic-to-real transfer fail?",
+      "sources": [
+        "experiments/results/repeated_data_realtext_code/med_b50M_s0.json"
+      ]
+    }
+  ],
+  "exception_reason": null,
+  "generated_from_manifest": "papers/figs/figure_manifest.yaml"
+}

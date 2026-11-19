@@ -1,0 +1,128 @@
+{
+ "generated_utc": "2026-07-17T06:12:18Z",
+ "generator_script": "build_code_shards.py (stored alongside)",
+ "box": "BOX-4 (2x4080S) \u2014 adapted from BOX-1 build_prepped.py",
+ "format": "torch.save 1-D uint8 byte tensor; loader torch.load(p).long(); VAL_BYTES=2000000 tail; doc sep b'\\n\\n'; files document-disjoint",
+ "sources": {
+  "github_code_clean": [
+   {
+    "file": "train-00000-of-00880.parquet",
+    "bytes": 355122552,
+    "sha256": "c05e4cad93aac3f978a2385f8c055a10d247b107afd8bf9cb8c762f8403bdc0f"
+   },
+   {
+    "file": "train-00110-of-00880.parquet",
+    "bytes": 356887952,
+    "sha256": "9ed9db2e8c760a3c2e17bb697e9eadccff0968fd420ac5c01923f014e23b50f9"
+   },
+   {
+    "file": "train-00220-of-00880.parquet",
+    "bytes": 360204944,
+    "sha256": "17f15982ab4b61d1b7da7dea01c8e6cefe49094b01a6b97e402e0c5b0532dce9"
+   },
+   {
+    "file": "train-00330-of-00880.parquet",
+    "bytes": 353523143,
+    "sha256": "e03247d28557e0c15170f2a92174d559ef5f01285cfd87e8cde038601c8444b6"
+   },
+   {
+    "file": "train-00440-of-00880.parquet",
+    "bytes": 356987666,
+    "sha256": "3aaca76bb417d32ab815db38222c58447109fd53dae914adbe54a42acae9bcf3"
+   },
+   {
+    "file": "train-00550-of-00880.parquet",
+    "bytes": 353186835,
+    "sha256": "c327ca8a815c58a305a353cb46902268d322cfd4021289886833a4cf6e8cec12"
+   },
+   {
+    "file": "train-00660-of-00880.parquet",
+    "bytes": 354798487,
+    "sha256": "091ce8d7bbcd8269ec44832670f06e133193263fce354428a0a95d923c39e59c"
+   },
+   {
+    "file": "train-00770-of-00880.parquet",
+    "bytes": 353053552,
+    "sha256": "fbda19b7dde748298cb59d75c9f7caa5a4beb190d8c32b9dbfc46a94b6c93681"
+   }
+  ]
+ },
+ "artifacts": [
+  {
+   "file": "code_e1_b100M.pt",
+   "set": "s_e1_code",
+   "token_bytes": 103000000,
+   "disk_bytes": 103001619,
+   "dtype": "uint8",
+   "val_tail_bytes": 2000000,
+   "doc_range": [
+    0,
+    13943
+   ],
+   "source_files": [
+    "train-00000-of-00880.parquet"
+   ],
+   "last_doc_truncated_remainder_discarded": true,
+   "sha256": "e49527663f4408fc350882b4383692739eafd58032789831a9f170b9f1822a53",
+   "max_byte": 240,
+   "role": "S-E1 code unique corpus, budget=100M (xl cell)",
+   "budget_bytes": 100000000,
+   "canary_headroom_bytes": 1000000
+  },
+  {
+   "file": "code_e1_b200M.pt",
+   "set": "s_e1_code",
+   "token_bytes": 203000000,
+   "disk_bytes": 203001619,
+   "dtype": "uint8",
+   "val_tail_bytes": 2000000,
+   "doc_range": [
+    13944,
+    39536
+   ],
+   "source_files": [
+    "train-00000-of-00880.parquet"
+   ],
+   "last_doc_truncated_remainder_discarded": true,
+   "sha256": "7e2da4c9ed199be0dc6839e886a9d95ad7416513fd54b003b9d1238e13cde63d",
+   "max_byte": 244,
+   "role": "S-E1 code unique corpus, budget=200M (xxl cell)",
+   "budget_bytes": 200000000,
+   "canary_headroom_bytes": 1000000
+  },
+  {
+   "file": "code_e1_b400M.pt",
+   "set": "s_e1_code",
+   "token_bytes": 403000000,
+   "disk_bytes": 403001619,
+   "dtype": "uint8",
+   "val_tail_bytes": 2000000,
+   "doc_range": [
+    39537,
+    88247
+   ],
+   "source_files": [
+    "train-00000-of-00880.parquet"
+   ],
+   "last_doc_truncated_remainder_discarded": true,
+   "sha256": "df18f650a6ba88a4e30758b7d07e5728fc8fa29fbaf01e8f26c1e0706028ec45",
+   "max_byte": 244,
+   "role": "S-E1 code unique corpus, budget=400M (xxxl cell)",
+   "budget_bytes": 400000000,
+   "canary_headroom_bytes": 1000000
+  },
+  {
+   "file": "code_canary_bank.pt",
+   "set": "s_e1_code",
+   "token_bytes": null,
+   "disk_bytes": 52087,
+   "dtype": "int64",
+   "doc_range": [
+    88248,
+    88373
+   ],
+   "sha256": "e43cf1c8bab88600c88b4f809e3dcf781b9a3771909f5f5943cb7cc15d8e4b49",
+   "note": "canary bank dict; keys canaries_128/fresh_128/canaries_256/fresh_256 each [8,L]; seed=0"
+  }
+ ]
+}

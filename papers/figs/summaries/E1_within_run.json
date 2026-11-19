@@ -1,0 +1,37 @@
+{
+  "artifact": "E1_within_run",
+  "layout": "balanced-2x2",
+  "panel_count": 4,
+  "panels": [
+    {
+      "id": "a",
+      "question": "What reuse schedule is observed within a run?",
+      "sources": [
+        "experiments/results/repeated_data_ultragoal_large/large_med_U5M_E4_s0.jsonl"
+      ]
+    },
+    {
+      "id": "b",
+      "question": "How does validation loss change during reuse?",
+      "sources": [
+        "experiments/results/repeated_data_ultragoal_large/large_med_U5M_E4_s0.jsonl"
+      ]
+    },
+    {
+      "id": "c",
+      "question": "How much repeated-data exposure accumulates?",
+      "sources": [
+        "experiments/results/repeated_data_ultragoal_large/large_med_U5M_E4_s0.jsonl"
+      ]
+    },
+    {
+      "id": "d",
+      "question": "What within-run failure mode bounds the interpretation?",
+      "sources": [
+        "experiments/results/repeated_data_ultragoal_large/large_med_U5M_E4_s0.jsonl"
+      ]
+    }
+  ],
+  "exception_reason": null,
+  "generated_from_manifest": "papers/figs/figure_manifest.yaml"
+}

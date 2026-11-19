@@ -1,0 +1,10 @@
+sweep                  grid               R_free decay_on mem_on coincide
+code/xl/50             [1, 2, 4, 10, 16]       1        2      4    False
+code/xl/51             [1, 2, 4, 10, 16]       1        2      4    False
+code/xxl/50            [1, 2, 4, 10, 16]       2        4      4     True
+code/xxl/51            [1, 2, 4, 10, 16]       2        4      4     True
+fineweb/xl/50          [1, 2, 4, 6, 8, 10, 16]      8       10      4    False
+fineweb/xl/51          [1, 2, 4, 6, 8, 10, 16]      6        8      4    False
+fineweb/xxl/50         [1, 2, 4, 6, 8, 10, 16]      4        6      4    False
+fineweb/xxl/51         [1, 2, 4, 6, 8, 10, 16]      4        6      4    False
+wrote /root/autodl-tmp/dlr/stier/results/stier_e1_verdict.json

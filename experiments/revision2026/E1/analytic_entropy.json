@@ -1,0 +1,56 @@
+{
+ "low": {
+  "markov_order": 2,
+  "H_rate_nats": 0.31229801872420704,
+  "pair_iters": 4999,
+  "pair_delta": 3.772576658718532e-09,
+  "H_1ctx_nats": 4.376913542605208,
+  "window_floor_nats": 0.34430286536893934,
+  "H_mc_nats": 0.3125630633769897,
+  "H_rate_bits": 0.45055080289286215,
+  "model_floors_nats": {
+   "small": 0.4053,
+   "med": 0.3814,
+   "large": 0.372
+  },
+  "floor_minus_H": {
+   "small": 0.061,
+   "med": 0.0371,
+   "large": 0.0277
+  }
+ },
+ "med": {
+  "markov_order": 1,
+  "H_rate_nats": 1.7416765880056944,
+  "window_floor_nats": 1.7416765880056944,
+  "H_mc_nats": 1.7413614895582963,
+  "H_rate_bits": 2.5127081763482257,
+  "model_floors_nats": {
+   "small": 1.7655,
+   "med": 1.7641,
+   "large": 1.7633
+  },
+  "floor_minus_H": {
+   "small": 0.0238,
+   "med": 0.0224,
+   "large": 0.0216
+  }
+ },
+ "high": {
+  "markov_order": 1,
+  "H_rate_nats": 4.0384359054705214,
+  "window_floor_nats": 4.0384359054705214,
+  "H_mc_nats": 4.038439721720945,
+  "H_rate_bits": 5.826231453770252,
+  "model_floors_nats": {
+   "small": 4.1086,
+   "med": 4.1016,
+   "large": 4.0991
+  },
+  "floor_minus_H": {
+   "small": 0.0702,
+   "med": 0.0632,
+   "large": 0.0607
+  }
+ }
+}
