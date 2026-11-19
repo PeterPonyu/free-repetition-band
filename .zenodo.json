@@ -1,6 +1,6 @@
 {
-  "title": "A 4-10 epoch free-repetition band: a 1000x-smaller-scale test of the data-repetition value-decay law",
-  "description": "Code and result logs for a small-scale test of the data-repetition free-epoch band. Code is MIT; result logs CC-BY-4.0. Figure/manuscript sources not included; large standard datasets not bundled.",
+  "title": "Repeated data in small transformers: code and run records for measuring the repetition boundary",
+  "description": "Code and run records for measuring how many passes over the same data a small transformer language model can take before its held-out loss exceeds that of a matched fresh-data run of equal token budget. Code is MIT; run records are CC-BY-4.0.",
   "upload_type": "dataset",
   "access_right": "open",
   "license": "MIT",

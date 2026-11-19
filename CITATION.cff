@@ -1,6 +1,6 @@
 cff-version: 1.2.0
-title: "Code and data for: A 4-10 epoch free-repetition band: a 1000x-smaller-scale test of the data-repetition value-decay law"
-message: If you use this code or data, please cite this archive and the manuscript.
+title: "Repeated data in small transformers: code and run records for measuring the repetition boundary"
+message: If you use this code or data, please cite this archive.
 type: dataset
 authors:
   - given-names: Zeyu
@@ -9,18 +9,18 @@ authors:
     orcid: 'https://orcid.org/0009-0001-8329-0108'
     affiliation: 'Army Medical University, Chongqing, China'
 abstract: >-
-  Code and result logs for a small-scale test of the data-repetition free-epoch band.
+  Code and run records for measuring how many passes over the same data a small transformer language model can take before its held-out loss exceeds that of a matched fresh-data run of equal token budget.
 keywords:
   - data repetition
   - scaling laws
   - language models
   - reproducibility
 license: MIT
-version: 1.6.0
-date-released: '2026-08-01'
+version: 1.9.0
+date-released: '2026-11-19'
 doi: 10.5281/zenodo.21020378
 identifiers:
   - type: doi
-    value: 10.5281/zenodo.21737381
+    value: 10.5281/zenodo.24341844
     description: This version
 url: 'https://github.com/PeterPonyu/free-repetition-band'
